@@ -11,13 +11,13 @@ const Footer = () => {
     <div className="flex flex-col md:flex-row w-full justify-between items-center sm:text-center md:text-left  gap-10 md:gap-16 lg:gap-24">
       <div className="max-w-xs flex flex-col gap-6">
         <div className="flex sm:justify-center md:justify-start "> 
-        <Link href="/" > <Image
+        {/* <Link href="/" > <Image
           src="/Reknew-logo.png"
           alt="ReKnew logo"
          width={162}
         height={47}
          className="w-[162px]  h-[47px]"
-       /></Link>
+       /></Link> */}
         </div>
         <p className="text-sm text-gray-400 leading-[140%]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut aliqua.
