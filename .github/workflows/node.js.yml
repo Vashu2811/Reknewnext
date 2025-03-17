@@ -39,5 +39,5 @@ jobs:
       - name: Deploy Modified Files
         run: |
           aws s3 rm s3://reknew-nextjs/ --recursive;
-          aws s3 sync build/ s3://reknew-nextjs/;
+          aws s3 sync out/ s3://reknew-nextjs/;
           aws cloudfront create-invalidation --distribution-id E3RM7RTBI7DYLE --paths '/*';
