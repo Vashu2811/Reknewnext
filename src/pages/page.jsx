@@ -4,7 +4,7 @@ import sideImage from "../../public/images/AI-DrivenInsights.png";
 import healthcare from "../../public/images/Healthcare.png";
 import finance from "../../public/images/Finance & Banking.png";
 import ecommerce from "../../public/images/E-Commerce.png";
-import supply from "../../public/images/Supply.png";
+import supply from "../../public/images/Supply.webp";
 import bgfream from "../../public/images/bg-fream.png";
 import workflowImage from "../../public/images/Workflow.png";
 import dataIntegrationImage from "../../public/images/SmartDataIntegration.png";
@@ -405,54 +405,57 @@ export default function Home() {
         </div>
 
         {/* Industries We Serve */}
-
-        <div className="flex flex-col justify-center items-center px-4 py-6 md:px-8 lg:px-12 md:py-[100px]">
-          <div className="flex flex-col  max-w-7xl items-center">
+         <div className="text-white">
+          <div className="container mx-auto px-4 py-16 md:py-20 lg:py-[100px]">
             <div className="text-center">
               <h1 className="text-3xl md:text-[44px]  font-semibold mb-4">
-                Industries We <span className="backgroundImage">Serve</span>
+                Industries We{" "}
+                <span className="bg-gradient-text bg-clip-text text-transparent">
+                  Serve
+                </span>
               </h1>
               <p className="text-gray-300 font-medium max-w-4xl mx-auto">
                 We empower businesses across various industries to innovate,
                 scale, and thrive in the digital era.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-[52px] w-full">
-              {[
-                {
-                  src: healthcare,
-                  title: "Healthcare",
-                  items: [
-                    "AI-driven patient management and predictive diagnostics.",
-                    "Intelligent automation for administrative workflows.",
-                  ],
-                },
-                {
-                  src: finance,
-                  title: "Finance & Banking",
-                  items: [
-                    "Advanced fraud detection with AI-powered risk analysis.",
-                    "Automated customer insights and financial forecasting.",
-                  ],
-                },
-                {
-                  src: ecommerce,
-                  title: "Retail & E-Commerce",
-                  items: [
-                    "Personalized customer experiences with AI-driven advice.",
-                    "Demand forecasting and intelligent inventory management.",
-                  ],
-                },
-                {
-                  src: supply,
-                  title: "Supply Chain & Logistics",
-                  items: [
-                    "Route optimization and AI-powered logistics management.",
-                    "Predictive analytics for efficient supply chain operations.",
-                  ],
-                },
-              ].map(({ src, title, items }, index) => (
-                <div
+            <div className="flex justify-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-[52px]">
+                {[
+                  {
+                    src: healthcare,
+                    title: "Healthcare",
+                    items: [
+                      "AI-driven patient management and predictive diagnostics.",
+                      "Intelligent automation for administrative workflows.",
+                    ],
+                  },
+                  {
+                    src: finance,
+                    title: "Finance & Banking",
+                    items: [
+                      "Advanced fraud detection with AI-powered risk analysis.",
+                      "Automated customer insights and financial forecasting.",
+                    ],
+                  },
+                  {
+                    src: ecommerce,
+                    title: "Retail & E-Commerce",
+                    items: [
+                      "Personalized customer experiences with AI-driven advice.",
+                      "Demand forecasting and intelligent inventory management.",
+                    ],
+                  },
+                  {
+                    src: supply,
+                    title: "Supply Chain & Logistics",
+                    items: [
+                      "Route optimization and AI-powered logistics management.",
+                      "Predictive analytics for efficient supply chain operations.",
+                    ],
+                  },
+                ].map(({ src, title, items }, index) => (
+                  <div
                   key={index}
                   className="flex flex-col w-full relative gap-[12px] border border-[#23262F] rounded-[16px] shadow-[inset_0px_1px_1px_1px_#C7D3EA1F,inset_0px_24px_48px_1px_#C7D3EA0D]"
                 >
@@ -468,14 +471,14 @@ export default function Home() {
                     ></div>
                   </div>
                   <div className="flex justify-center mb-6 z-10">
-                    <Image
-                      src={src}
-                      alt={title}
-                      loading="lazy"
-                      className="w-40 h-40 p-1"
-                    />
-                  </div>
-                  <div className="flex flex-col z-10  h-fit gap-[16px] pt-[24px] pr-[24px] pb-[32px] pl-[24px] bg-[rgba(16,17,20,0.52)]">
+                      <Image
+                        src={src}
+                        alt={title}
+                        loading="lazy"
+                        className="w-40 h-40 p-1"
+                      />
+                    </div>
+                    <div className="flex flex-col z-10  h-fit gap-[16px] pt-[24px] pr-[24px] pb-[32px] pl-[24px] bg-[rgba(16,17,20,0.52)]">
                     <h2 className="font-semibold text-xl lg:text-2xl leading-[140%] tracking-[0]">
                       {title}
                     </h2>
@@ -490,21 +493,22 @@ export default function Home() {
                       ))}
                     </ul>
                   </div>
-                  <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-full w-full" />
+                    <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-full w-full" />
                   <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,1)] to-transparent h-[2px] w-3/4 " />
                   <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233, 1)] to-transparent h-[3px] w-3/4" />
                   <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-[3px]  w-full" />
 
                   <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_25%,white)] rounded-2xl"></div>
-                </div>
-              ))}
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="flex justify-center items-center flex-row w-fit h-fit gap-[6px] px-[20px] py-[12px] rounded-[8px] border border-[rgba(255,255,255,0.36)] hover:cursor-pointer ">
-              <span className="font-semibold text-sm md:text-base leading-[140%] tracking-[0%]">
-                Discover How We Help Your Industry
-              </span>
-              <ArrowRight width={18} height={18} />
+            <div className="flex justify-center">
+              <button className="h-[46px] border border-gray-700  text-white font-medium py-2 px-6 rounded-md inline-flex items-center transition-all duration-300">
+                Discover How We Help Your Industry{" "}
+                <ArrowRight size={16} className="ml-2 mt-1" />
+              </button>
             </div>
           </div>
         </div>

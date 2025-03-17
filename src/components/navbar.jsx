@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, X } from "lucide-react";
+import Logo from "../../public/images/Reknew-logo.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +37,8 @@ export default function Navbar() {
     {/* Logo */}
     <Link href="/">
       <Image
-        src="/Reknew-logo.png"
+        // src="/Reknew-logo.png"
+        src={Logo}
         alt="ReKnew logo"
         width={140}
         height={40}

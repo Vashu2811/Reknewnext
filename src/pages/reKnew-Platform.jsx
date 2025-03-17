@@ -129,7 +129,7 @@ export default function ReKnewPlatform() {
             </p>
           </header>
 
-          <main className="container mx-auto px-4 lg:px-56 py-8">
+          <main className="container mx-auto px-4 max-w-7xl py-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
               <div className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px]  hover:border-indigo-600 transition-all duration-300">
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-full w-full" />
@@ -244,8 +244,8 @@ export default function ReKnewPlatform() {
 
                 </div>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8">
+            
+            <div className="grid md:px-28 lg:px-28 px-2  grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8">
                <div
                 className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px]  hover:border-indigo-600 transition-all duration-300"
               >
@@ -283,9 +283,7 @@ export default function ReKnewPlatform() {
                 </ul>
                 </div>
 
-                   <div
-                className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px]  hover:border-indigo-600 transition-all duration-300"
-              >
+                   <div className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px]  hover:border-indigo-600 transition-all duration-300">
                  <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-full w-full" />
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,1)] to-transparent h-[2px] w-2/3 " />
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233, 1)] to-transparent h-[3px] w-2/3" />
@@ -298,7 +296,7 @@ export default function ReKnewPlatform() {
                   </h2>
                 </div>
                 <p className="relative text-sm text-gray-300 mb-4">
-                Protect your business with AI-driven security solutions and compliance automation.                </p>
+                Protect your business with AI-driven security solutions and compliance automation.</p>
                 <ul className="relative space-y-2 text-sm text-gray-300">
                 <li className="flex items-start">
                       <span className="text-indigo-400 mr-2">•</span>
@@ -332,9 +330,9 @@ export default function ReKnewPlatform() {
           </main>
         </div>
 
-        <div className="my-[100px] text-white flex flex-col items-center justify-center p-4 md:p-8">
+        <div className="my-[100px] text-white flex flex-col items-center justify-center max-w-7xl md:p-8">
           <div className="max-w-6xl w-full mx-auto text-center mb-8 md:mb-12">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
+            <h1 className="text-2xl md:text-[44px] lg:text-[44px] font-bold mb-4">
               Seamless Integration with Leading Technologies
             </h1>
             <p className="text-sm md:text-base text-gray-300 max-w-4xl mx-auto">
@@ -441,12 +439,18 @@ export default function ReKnewPlatform() {
             ))}
           </div>
 
-          <div className="mt-6 flex justify-center">
+          {/* <div className="mt-6 flex justify-center">
             <button className="hover:bg-gray-800 text-white font-medium py-2 px-6 rounded-md border border-gray-700 flex items-center transition-colors duration-300">
-              Talk to an Expert
+              
               <ArrowRight className="h-4 mt-1 w-4 ml-2" />
             </button>
-          </div>
+          </div> */}
+          <div className="flex justify-center">
+              <button className="px-3 py-1 rounded-[8px] text-gray-950 bg-white hover:bg-blue-700 transition-colors flex  items-center">
+              Talk to an Expert
+                <ArrowRight className="ml-2 mt-1 h-4 w-4" />
+              </button>
+            </div>
         </div>
 
         {/* Let’s Talk */}
