@@ -36,13 +36,7 @@
     background-position: center;
     background-repeat: no-repeat;
  }
- 
- .bgcardd{
-  background-image: url("../../public/images/background-fream.svg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+
  #flip {
   height: 50px;
   overflow: hidden;

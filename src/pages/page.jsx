@@ -16,9 +16,11 @@ import Consultation from "./Consultation";
 import Image from "next/image";
 import Navbar from "@/components/navbar";
 import Footer from "../components/footer";
+import CardSlider from "./Card";
+import { motion, AnimatePresence } from "framer-motion";
 // import FOG from "vanta/dist/vanta.fog.min";
 // import * as THREE from "three";
-
+const words = ["Generative", "Streamline", "Strategy", "Innovation", "Optimize"];
 export default function Home() {
   // const vantaRef = useRef(null);
   // const vantaEffect = useRef(null);
@@ -54,7 +56,15 @@ export default function Home() {
   //     }
   //   };
   // }, [vantaRef]);
+  const [index, setIndex] = useState(0);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, 2000); // Change every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
   const sectionsRef = useRef({});
   const [selectedTab, setSelectedTab] = useState("AI-Driven Insights");
 
@@ -96,29 +106,7 @@ export default function Home() {
     "Smart Data Integration": dataIntegrationImage,
     "Enterprise Modernization": modernizationImage,
   };
-  const cardData = [
-    {
-      title: "AI-Powered Intelligence",
-      text: "Transform decision-making with real-time insights.",
-    },
-    {
-      title: "Smart Workflow Automation",
-      text: "Optimize processes and eliminate inefficiencies.",
-    },
-    {
-      title: "Data-Driven Growth",
-      text: "Unify, analyze, and leverage data for better outcomes.",
-    },
-    {
-      title: "Enterprise Digital Transformation",
-      text: "Connect legacy systems with next-gen technology.",
-    },
-    {
-      title: "Scalable & Future-Ready",
-      text: "Grow your business with adaptable AI solutions.",
-    },
-  ];
-
+ 
   function ProcessCard({ number, title, description }) {
     return (
       <div className="flex flex-col items-center max-w-md mx-auto w-full gap-[16px] md:gap-6 lg:gap-8 ">
@@ -165,24 +153,46 @@ export default function Home() {
           className="w-full lg:min-h-screen md:h-[760px] h-[550px] flex justify-center items-center text-center"
         >
           <div className="flex flex-col w-[1280px] gap-9">
-            <div className="flex text-[28px] sm:text-[28px] md:text-[55px]  font-normal  lg:text-[89px] leading-[120%] tracking-[0]  ">
-              <span>
+            <div className="flex text-[28px] sm:text-[28px] md:text-[55px]  font-normal justify-center  lg:text-[89px] leading-[120%] tracking-[0]  ">
+              {/* <span>
                 {" "}
                 <span className="backgroundImage"> Reimagine </span> How Your
                 Business Operates
-              </span>
-           {/* <span className="flex " id="flip">
-        
-        <div className="flex backgroundImage animate-words">
-          <div>Generative</div>
-          <div>Government</div>
-          <div>AI</div>
-          <div>Strategy</div>
-          <div>Innovation</div>
-        
-        </div>{" "}
-        How Your Business Operates
-      </span> */}
+              </span> */}
+             <div>
+             <div className="flex justify-center">
+              <AnimatePresence mode="wait">
+  <motion.span
+    key={words[index]}
+    className="backgroundImage md:w-[450px] relative -top-1 flex justify-center"
+    initial={{ opacity: 0, y: 15, scale: 0.9 }}
+    animate={{ 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.16, 1, 0.3, 1] // Smoother entrance
+      }
+    }}
+    exit={{ 
+      opacity: 0, 
+      y: -15, 
+      scale: 0.9,
+      transition: {
+        duration: 0.35, // Faster exit for better flow
+        ease: [0.4, 0, 0.2, 1] // Subtle exit easing
+      }
+    }}
+  >
+    {words[index]}
+  </motion.span>
+</AnimatePresence>{" "}
+      <span className="">How Your</span>
+           
+              </div>
+              <div><span className="">Business Operates</span></div>
+             </div>
             </div>
             <div>
               <p className="md:px-8 sm:px-8  px-8 lg:px-72 text-[14px] md:text-[20px]  lg:text-[20px] font-normal text-gray-300  text-center">
@@ -205,7 +215,7 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="mb-[100px] mt-10  relative">
+       {/* <div className="mb-[100px] mt-10  relative">
           <div>
             <h1 className="text-[24px] md:text-[44px] sm:text-[18px] font-semibold text-center mb-[52px] ">
               Why <span className="backgroundImage">Businesses</span> Choose Us?
@@ -231,7 +241,11 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>*/}
+        <div>
+          <CardSlider />
         </div>
+
 
         {/*  How We Transform Your Business*/}
         <div className="flex flex-col justify-center items-center px-4 py-6 md:px-8 lg:px-12 ">

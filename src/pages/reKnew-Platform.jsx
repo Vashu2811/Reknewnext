@@ -330,27 +330,27 @@ export default function ReKnewPlatform() {
           </main>
         </div>
 
-        <div className="my-[100px] text-white flex flex-col items-center justify-center max-w-7xl md:p-8">
-          <div className="max-w-6xl w-full mx-auto text-center mb-8 md:mb-12">
-            <h1 className="text-2xl md:text-[44px] lg:text-[44px] font-bold mb-4">
+        <div className="my-[100px] gap-[72px] text-white flex flex-col items-center justify-center">
+          <div className="max-w-7xl w-full text-center">
+            <h1 className="text-2xl md:text-[44px] lg:text-[44px] leading-[140%] font-semibold mb-4">
               Seamless Integration with Leading Technologies
             </h1>
-            <p className="text-sm md:text-base text-gray-300 max-w-4xl mx-auto">
+            <p className="text-sm md:text-[20px] leading-[120%] font-medium max-w-5xl text-center mx-auto ">
               The ReKnew platform is designed to integrate seamlessly with your
               existing business ecosystem, supporting
             </p>
           </div>
 
-          <div className="max-w-[1100px]  w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <div className="max-w-7xl sm:p-2 w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 ">
             <div className="flex justify-center items-center">
               <Image
                 src={DigitalEarth}
                 alt="Digital technology integration visualization"
-                className="rounded-lg md:h-[548px]  object-cover shadow-lg shadow-indigo-500/30"
+                className="rounded-lg md:h-[548px]  object-cover"
               />
             </div>
 
-            <div className="flex flex-col space-y-6">
+            <div className="flex flex-col space-y-10">
               {[
                 {
                   title: "Cloud Platforms",
@@ -377,12 +377,12 @@ export default function ReKnewPlatform() {
                   key={index}
                   className="border-b border-gray-800 pb-4 md:flex md:justify-between md:items-center"
                 >
-                  <h3 className="text-lg font-medium mb-2">{category.title}</h3>
-                  <div className="flex flex-wrap gap-2">
+                  <h3 className="md:text-[24px] lg:text-[24px] text-[24px] font-semibold  leading-[120%] mb-2">{category.title}</h3>
+                  <div className="flex whitespace-nowrap gap-2">
                     {category.items.map((item, idx) => (
                       <button
                         key={idx}
-                        className="py-1.5 px-3 rounded-full border border-gray-700 bg-gray-900 text-xs md:text-sm"
+                        className="py-1.5 px-3 rounded-full border border[#23262F] bg-[#101114] text-xs md:text-sm"
                       >
                         {item}
                       </button>
@@ -394,23 +394,23 @@ export default function ReKnewPlatform() {
               <div className="mt-6">
                 <button className="hover:bg-gray-800 text-white font-medium py-2 px-6 rounded-md border border-gray-700 flex items-center transition-colors duration-300">
                   Talk to an Expert
-                  <span className="ml-2">&rarr;</span>
+                  <ArrowRight className="ml-2 mt-1 h-4 w-4" />
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="p-8 my-[100px] flex flex-col justify-center items-center">
-          <h1 className="text-2xl sm:text-2xl md:text-2xl lg:text-4xl font-bold text-center">
+        <div className="px-8 my-[100px] flex flex-col justify-center items-center">
+          <h1 className="text-2xl sm:text-2xl md:text-[44px] lg:text-[44px] font-semibold  leading-[120%] text-center">
             Future-Proof Your Business with AI
           </h1>
-          <p className="text-sm md:text-base lg:text-lg text-gray-300 max-w-5xl mx-auto mt-4 text-center">
+          <p className="text-sm md:text-[20px] lg:text-[20px] text-white  leading-[140%] max-w-5xl mx-auto mt-4 text-center">
             The ReKnew Platform is scalable, secure, and future-ready—helping
             enterprises evolve in an AI-driven world.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-8 w-full max-w-6xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[32px] py-[52px] w-full max-w-7xl">
             {[
               {
                 title: "Built for Growth",
@@ -427,7 +427,7 @@ export default function ReKnewPlatform() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="bgcard bg-opacity-70 rounded-lg p-6 md:p-8 transition-all duration-300 hover:bg-opacity-90 hover:shadow-lg hover:shadow-blue-900/20"
+                className="bgcard  md:w-[405.33px] h-[173px] bg-opacity-70 rounded-lg p-4 transition-all duration-300 hover:bg-opacity-90 hover:shadow-lg hover:shadow-blue-900/20"
               >
                 <div className="text-blue-500 mb-4">
                   <h2 className="text-xl md:text-2xl font-semibold">
@@ -446,12 +446,15 @@ export default function ReKnewPlatform() {
             </button>
           </div> */}
           <div className="flex justify-center">
-              <button className="px-3 py-1 rounded-[8px] text-gray-950 bg-white hover:bg-blue-700 transition-colors flex  items-center">
+              <button className="px-3 py-1 rounded-[8px] border border-[#606060] hover:bg-blue-700 transition-colors flex  items-center">
               Talk to an Expert
                 <ArrowRight className="ml-2 mt-1 h-4 w-4" />
               </button>
             </div>
         </div>
+
+
+         
 
         {/* Let’s Talk */}
         <Consultation 
