@@ -1,6 +1,7 @@
 module.exports = {
   output: 'export', // Enables static export
+  trailingSlash: true, // Ensures proper static routing
   images: {
-    unoptimized: true, // Next.js optimizations don't work with static exports
+    unoptimized: true, // Disables Next.js image optimization
   },
 };

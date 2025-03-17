@@ -15,12 +15,12 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/our-story", label: "Our Story" },
-    { href: "/reKnew-Platform", label: "The ReKnew Platform" },
-    { href: "/our-services", label: "Our Services" },
-    { href: "/our-team", label: "Our Team" },
-    { href: "/contact", label: "Contact Us" },
+    { to: "/", label: "Home" },
+    { to: "/our-story", label: "Our Story" },
+    { to: "/reKnew-Platform", label: "The ReKnew Platform" },
+    { to: "/our-services", label: "Our Services" },
+    { to: "/our-team", label: "Our Team" },
+    { to: "/contact", label: "Contact Us" },
   ];
 
   return (
@@ -49,15 +49,15 @@ export default function Navbar() {
 
     {/* Navigation Links */}
     <div className="hidden  lg:flex md:gap-4 lg:gap-6 xl:gap-10 text-white text-sm xl:text-base whitespace-nowrap">
-      {navLinks.map(({ href, label }) => (
+      {navLinks.map((item, i) => (
         <Link
-          key={href}
-          href={href}
+          key={i}
+          href={item.to}
           className={`transition-colors cursor-pointer ${
-            pathname === href ? "text-[#665EE9] font-bold" : "hover:text-[#665EE9]"
+            pathname === item.to ? "text-[#665EE9] font-bold" : "hover:text-[#665EE9]"
           }`}
         >
-          {label}
+          {item.label}
         </Link>
       ))}
     </div>
