@@ -6,7 +6,7 @@ import Logo from "../../public/images/Reknew-logo.png";
 
 const Footer = () => {
   return (
-    <div className="footer flex bg-black   justify-center items-center flex-col w-full h-fit px-4 py-6 md:px-8 md:py-8 lg:py-12 lg:px-12 xl:py-20 xl:px-20 2xl:pt-28 2xl:px-40 2xl:pb-24">
+    <div className="footer flex bg-[#060606]   justify-center items-center flex-col w-full h-fit px-4 py-6 md:px-8 md:py-8 lg:py-12 lg:px-12 xl:py-20 xl:px-20 2xl:pt-28 2xl:px-40 2xl:pb-24">
       <div className="flex flex-col gap-8 w-full max-w-7xl">
         <div className="flex flex-col md:flex-row w-full justify-between items-center sm:text-center md:text-left  gap-10 md:gap-16 lg:gap-24">
           <div className="max-w-xs flex flex-col gap-6">

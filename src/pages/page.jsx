@@ -8,7 +8,7 @@ import supply from "../../public/images/Supply.webp";
 import bgfream from "../../public/images/bg-fream.png";
 import workflowImage from "../../public/images/Workflow.png";
 import dataIntegrationImage from "../../public/images/SmartDataIntegration.png";
-import Marquee from "react-fast-marquee";
+// import Marquee from "react-fast-marquee";
 import "./style.css";
 import modernizationImage from "../../public/images/Modernization.png";
 import { ArrowRight } from "lucide-react";
@@ -18,50 +18,21 @@ import Navbar from "@/components/navbar";
 import Footer from "../components/footer";
 import CardSlider from "./Card";
 import { motion, AnimatePresence } from "framer-motion";
-// import FOG from "vanta/dist/vanta.fog.min";
-// import * as THREE from "three";
-const words = ["Generative", "Streamline", "Strategy", "Innovation", "Optimize"];
+
+const words = [
+  "Generative",
+  "Streamline",
+  "Strategy",
+  "Innovation",
+  "Optimize",
+];
 export default function Home() {
-  // const vantaRef = useRef(null);
-  // const vantaEffect = useRef(null);
-
-  // useEffect(() => {
-  //   if (!vantaRef.current) return;
-
-  //   if (!vantaEffect.current) {
-  //     vantaEffect.current = FOG({
-  //       el: vantaRef.current,
-  //     THREE: THREE,
-  //     mouseControls: true,
-  //     touchControls: true,
-  //     gyroControls: false,
-  //     minHeight: 200.0,
-  //     minWidth: 200.0,
-  //     highlightColor: 0x778cef,
-  //     midtoneColor: 0x4c4ee5,
-  //     lowlightColor: 0xc8c8d9,
-  //     baseColor: 0x000000,
-  //     speed: 2,
-  //     zoom: 1,
-  //     fog: true,
-  //     fogDensity: 0.01,
-  //     fogColor: 0x0c0c0c,
-  //     });
-  //   }
-
-  //   return () => {
-  //     if (vantaEffect.current) {
-  //       vantaEffect.current.destroy();
-  //       vantaEffect.current = null;
-  //     }
-  //   };
-  // }, [vantaRef]);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 2000); // Change every 2 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -106,7 +77,7 @@ export default function Home() {
     "Smart Data Integration": dataIntegrationImage,
     "Enterprise Modernization": modernizationImage,
   };
- 
+
   function ProcessCard({ number, title, description }) {
     return (
       <div className="flex flex-col items-center max-w-md mx-auto w-full gap-[16px] md:gap-6 lg:gap-8 ">
@@ -159,40 +130,41 @@ export default function Home() {
                 <span className="backgroundImage"> Reimagine </span> How Your
                 Business Operates
               </span> */}
-             <div>
-             <div className="flex justify-center">
-              <AnimatePresence mode="wait">
-  <motion.span
-    key={words[index]}
-    className="backgroundImage md:w-[450px] relative -top-1 flex justify-center"
-    initial={{ opacity: 0, y: 15, scale: 0.9 }}
-    animate={{ 
-      opacity: 1, 
-      y: 0, 
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1] // Smoother entrance
-      }
-    }}
-    exit={{ 
-      opacity: 0, 
-      y: -15, 
-      scale: 0.9,
-      transition: {
-        duration: 0.35, // Faster exit for better flow
-        ease: [0.4, 0, 0.2, 1] // Subtle exit easing
-      }
-    }}
-  >
-    {words[index]}
-  </motion.span>
-</AnimatePresence>{" "}
-      <span className="">How Your</span>
-           
+              <div>
+                <div className="flex justify-center">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={words[index]}
+                      className="backgroundImage md:w-[450px] relative -top-1 flex justify-center"
+                      initial={{ opacity: 0, y: 15, scale: 0.9 }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        transition: {
+                          duration: 0.5,
+                          ease: [0.16, 1, 0.3, 1],
+                        },
+                      }}
+                      exit={{
+                        opacity: 0,
+                        y: -15,
+                        scale: 0.9,
+                        transition: {
+                          duration: 0.35,
+                          ease: [0.4, 0, 0.2, 1],
+                        },
+                      }}
+                    >
+                      {words[index]}
+                    </motion.span>
+                  </AnimatePresence>{" "}
+                  <span className="">How Your</span>
+                </div>
+                <div>
+                  <span className="">Business Operates</span>
+                </div>  
               </div>
-              <div><span className="">Business Operates</span></div>
-             </div>
             </div>
             <div>
               <p className="md:px-8 sm:px-8  px-8 lg:px-72 text-[14px] md:text-[20px]  lg:text-[20px] font-normal text-gray-300  text-center">
@@ -214,39 +186,9 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-       {/* <div className="mb-[100px] mt-10  relative">
-          <div>
-            <h1 className="text-[24px] md:text-[44px] sm:text-[18px] font-semibold text-center mb-[52px] ">
-              Why <span className="backgroundImage">Businesses</span> Choose Us?
-            </h1>
-
-            <div className="relative w-full overflow-hidden ">
-              <div className="flex w-full overflow-hidden gap-10">
-                <Marquee direction="left" speed={80}>
-                  {[...cardData, ...cardData].map((item, index) => (
-                    <div
-                      key={index}
-                      className="bgcard rounded-[16px] sm:p-4 mx-4 md:p-8 min-w-[260px] min-h-[174px] sm:min-w-[250px] sm:min-h-[1740px] md:min-w-[460px]  md:min-h-[174px] transition-transform duration-500 border border-[#23262F] "
-                    >
-                      <h2 className="flex  text-[16px] md:text-[16px] font-semibold text-[#665EE9] mb-3 ">
-                        {item.title}
-                      </h2>
-                      <p className="text-gray-300 font-medium text-[20px] sm:text-[12px] md:text-[20px] ">
-                        {item.text}
-                      </p>
-                    </div>
-                  ))}
-                </Marquee>
-              </div>
-            </div>
-          </div>
-        </div>*/}
         <div>
           <CardSlider />
         </div>
-
-
         {/*  How We Transform Your Business*/}
         <div className="flex flex-col justify-center items-center px-4 py-6 md:px-8 lg:px-12 ">
           <div className="flex flex-col  max-w-7xl items-center ">
@@ -419,7 +361,7 @@ export default function Home() {
         </div>
 
         {/* Industries We Serve */}
-         <div className="text-white">
+        <div className="text-white">
           <div className="container mx-auto px-4 py-16 md:py-20 lg:py-[100px]">
             <div className="text-center">
               <h1 className="text-3xl md:text-[44px]  font-semibold mb-4">
@@ -470,21 +412,21 @@ export default function Home() {
                   },
                 ].map(({ src, title, items }, index) => (
                   <div
-                  key={index}
-                  className="flex flex-col w-full relative gap-[12px] border border-[#23262F] rounded-[16px] shadow-[inset_0px_1px_1px_1px_#C7D3EA1F,inset_0px_24px_48px_1px_#C7D3EA0D]"
-                >
-                  <div className="flex absolute w-full h-full   z-20 ">
-                    <div
-                      style={{
-                        backgroundImage: `url(${bgfream})`,
-                        backgroundSize: "contain",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                      }}
-                      className="flex w-full h-full "
-                    ></div>
-                  </div>
-                  <div className="flex justify-center mb-6 z-10">
+                    key={index}
+                    className="flex flex-col w-full relative gap-[12px] border border-[#23262F] rounded-[16px] shadow-[inset_0px_1px_1px_1px_#C7D3EA1F,inset_0px_24px_48px_1px_#C7D3EA0D]"
+                  >
+                    <div className="flex absolute w-full h-full z-20 ">
+                      <div
+                        style={{
+                          backgroundImage: `url(${bgfream})`,
+                          backgroundSize: "contain",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                        }}
+                        className="flex w-full h-full "
+                      ></div>
+                    </div>
+                    <div className="flex justify-center mb-6 z-10">
                       <Image
                         src={src}
                         alt={title}
@@ -493,26 +435,26 @@ export default function Home() {
                       />
                     </div>
                     <div className="flex flex-col z-10  h-fit gap-[16px] pt-[24px] pr-[24px] pb-[32px] pl-[24px] bg-[rgba(16,17,20,0.52)]">
-                    <h2 className="font-semibold text-xl lg:text-2xl leading-[140%] tracking-[0]">
-                      {title}
-                    </h2>
-                    <ul className="gap-2 list-disc pl-5">
-                      {items.map((item, idx) => (
-                        <li
-                          key={idx}
-                          className="font-medium text-lg leading-[140%] tracking-[0] text-[#CFD0D3] z-10"
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                      <h2 className="font-semibold text-xl lg:text-2xl leading-[140%] tracking-[0]">
+                        {title}
+                      </h2>
+                      <ul className="gap-2 list-disc pl-5">
+                        {items.map((item, idx) => (
+                          <li
+                            key={idx}
+                            className="font-medium text-lg leading-[140%] tracking-[0] text-[#CFD0D3] z-10"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                     <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-full w-full" />
-                  <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,1)] to-transparent h-[2px] w-3/4 " />
-                  <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233, 1)] to-transparent h-[3px] w-3/4" />
-                  <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-[3px]  w-full" />
+                    <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,1)] to-transparent h-[2px] w-3/4 " />
+                    <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233, 1)] to-transparent h-[3px] w-3/4" />
+                    <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-[3px]  w-full" />
 
-                  <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_25%,white)] rounded-2xl"></div>
+                    <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_25%,white)] rounded-2xl"></div>
                   </div>
                 ))}
               </div>

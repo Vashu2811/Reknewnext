@@ -131,7 +131,7 @@ export default function ReKnewPlatform() {
 
           <main className="container mx-auto px-4 max-w-7xl py-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
-              <div className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px]  hover:border-indigo-600 transition-all duration-300">
+              <div className="relative bgcard bg-opacity-50 backdrop-blur-sm border border-[rgba(35,37,48,1)] p-6 rounded-[16px]  hover:border-indigo-600 transition-all duration-300">
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-full w-full" />
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,1)] to-transparent h-[2px] w-2/3 " />
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233, 1)] to-transparent h-[3px] w-2/3" />
@@ -168,7 +168,7 @@ export default function ReKnewPlatform() {
               </div>
 
               <div
-                className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px]  hover:border-indigo-600 transition-all duration-300"
+                className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px] border border-[rgba(35,37,48,1)]  hover:border-indigo-600 transition-all duration-300"
               >
                  <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-full w-full" />
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,1)] to-transparent h-[2px] w-2/3 " />
@@ -207,7 +207,7 @@ export default function ReKnewPlatform() {
                 </div>
 
                <div
-                className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px]  hover:border-indigo-600 transition-all duration-300"
+                className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px] border border-[rgba(35,37,48,1)]  hover:border-indigo-600 transition-all duration-300"
               >
                  <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-full w-full" />
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,1)] to-transparent h-[2px] w-2/3 " />
@@ -247,7 +247,7 @@ export default function ReKnewPlatform() {
             
             <div className="grid md:px-28 lg:px-28 px-2  grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8">
                <div
-                className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px]  hover:border-indigo-600 transition-all duration-300"
+                className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px] border border-[rgba(35,37,48,1)] hover:border-indigo-600 transition-all duration-300"
               >
                  <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-full w-full" />
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,1)] to-transparent h-[2px] w-2/3 " />
@@ -283,7 +283,7 @@ export default function ReKnewPlatform() {
                 </ul>
                 </div>
 
-                   <div className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px]  hover:border-indigo-600 transition-all duration-300">
+                   <div className="relative bgcard bg-opacity-50 backdrop-blur-sm p-6 rounded-[16px] border border-[rgba(35,37,48,1)] hover:border-indigo-600 transition-all duration-300">
                  <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,0.2)] to-transparent h-full w-full" />
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233,1)] to-transparent h-[2px] w-2/3 " />
               <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-[rgba(102,94,233, 1)] to-transparent h-[3px] w-2/3" />
@@ -330,7 +330,7 @@ export default function ReKnewPlatform() {
           </main>
         </div>
 
-        <div className="my-[100px] gap-[72px] text-white flex flex-col items-center justify-center">
+        <div className="mt-[200px] mb-[100px] gap-[72px] text-white flex flex-col items-center justify-center">
           <div className="max-w-7xl w-full text-center">
             <h1 className="text-2xl md:text-[44px] lg:text-[44px] leading-[140%] font-semibold mb-4">
               Seamless Integration with Leading Technologies
@@ -401,7 +401,7 @@ export default function ReKnewPlatform() {
           </div>
         </div>
 
-        <div className="px-8 my-[100px] flex flex-col justify-center items-center">
+        <div className="px-8 mt-[200px] mb-[100px] flex flex-col justify-center items-center">
           <h1 className="text-2xl sm:text-2xl md:text-[44px] lg:text-[44px] font-semibold  leading-[120%] text-center">
             Future-Proof Your Business with AI
           </h1>
