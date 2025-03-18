@@ -1,23 +1,12 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+
+* {
+  font-family: 'Montserrat', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 .backgroundImage {
     background: linear-gradient(to right, #714DFF, #9C83FF, #E151FF, #FFF759);
@@ -25,7 +14,7 @@
     -webkit-text-fill-color: transparent;
 }
 .back-background{
-    background-image: url("../../public/images/homebg.svg");
+    background-image: url("../../public/images/Home\ Pagebg.svg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -43,63 +32,229 @@
   background-position: center;
   background-repeat: no-repeat;
 }
- #flip {
-  height: 50px;
-  overflow: hidden;
-  display: inline-block;
-}
+/* 
+.cubespinner{
+	-webkit-animation-name:spincube;
+	-webkit-animation-timing-function:ease-in-out;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-duration:8s;
+	animation-name:spincube;
+	animation-timing-function:ease-in-out;
+	animation-iteration-count:infinite;
+	animation-duration:8s;
+	-webkit-transform-style:preserve-3d;
+	-moz-transform-style:preserve-3d;
+	-ms-transform-style:preserve-3d;
+	transform-style:preserve-3d;
+	-webkit-transform-origin:40px 40px 0;
+	-moz-transform-origin:40px 40px 0;
+	-ms-transform-origin:40px 40px 0;
+	transform-origin:40px 40px  0;
+  }
+  .cubespinner div{
+	  position:absolute;
+    background: linear-gradient(to right, #714DFF, #9C83FF, #E151FF, #FFF759);
+    background-clip: text;
+     -webkit-text-fill-color: transparent;
+	  }
+  .cubespinner .face1{
+	  -webkit-transform:translateZ(40px);
+	  -moz-transform:translateZ(40px);
+	  -ms-transform:translateZ(40px);
+	  transform:translateZ(40px);
+	  -webkit-backface-visibility: hidden;
+	  }
+	.cubespinner .face2{
+		-webkit-transform: rotateX(90deg) translateZ(40px);
+		-moz-transform: rotateX(90deg) translateZ(40px);
+		-ms-transform: rotateX(90deg) translateZ(40px);
+		transform: rotateX(90deg) translateZ(40px);
+		-webkit-backface-visibility: hidden;
+	}
+	.cubespinner .face3{
+		-webkit-transform:rotateX(180deg)  translateZ(40px);
+		-moz-transform:rotateX(180deg)  translateZ(40px);
+		-ms-transform:rotateX(180deg)  translateZ(40px);
+		transform:rotateX(180deg)  translateZ(40px);
+		-webkit-backface-visibility: hidden;
+		} 
+.cubespinner .face4{
+		color:#fff;
+		-webkit-transform:rotateX(270deg) translateZ(40px);
+		-moz-transform:rotateX(270deg) translateZ(40px);
+		-ms-transform:rotateX(270deg) translateZ(40px);
+		transform:rotateX(270deg) translateZ(40px);
+		-webkit-backface-visibility: hidden;
+	}
 
-#flip > div {
-  display: flex;
-  flex-direction: column;
-  animation: flip 5s linear infinite;
-}
 
-#flip > div > div {
-  color: #fff;
-  padding: 4px 12px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  border-radius: 8px;
-}
+@-webkit-keyframes spincube {
+    from,to  { -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
+    15%      { -webkit-transform: rotateX(90deg);}
+    25%      { -webkit-transform: rotateX(90deg);}
+    40%      { -webkit-transform: rotateX(180deg);}
+    50%      { -webkit-transform: rotateX(180deg);}
+    65%      { -webkit-transform: rotateX(270deg);}
+	75%      { -webkit-transform: rotateX(270deg);}
+	95%      { -webkit-transform: rotateX(360deg);}
+	100%      { -webkit-transform: rotateX(360deg);}
+  }@keyframes spincube {
+    from,to {
+	  -webkit-transform: rotateX(0deg);
+      -moz-transform: rotateX(0deg);
+      -ms-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+    }
+    15% {
+	  -webkit-transform: rotateX(90deg);
+      -moz-transform: rotateX(90deg);
+      -ms-transform: rotateX(90deg);
+      transform: rotateX(90deg);
+    }
+	25% {
+	  -webkit-transform: rotateX(90deg);
+      -moz-transform: rotateX(90deg);
+      -ms-transform: rotateX(90deg);
+      transform: rotateX(90deg);
+    }
+	40% {
+	  -webkit-transform: rotateX(180deg);
+      -moz-transform: rotateX(180deg);
+      -ms-transform: rotateX(180deg);
+      transform: rotateX(180deg);
+    }
+	50% {
+	  -webkit-transform: rotateX(180deg);
+      -moz-transform: rotateX(180deg);
+      -ms-transform: rotateX(180deg);
+      transform: rotateX(180deg);
+    }
+    65% {
+	  -webkit-transform: rotateX(270deg);
+      -moz-transform: rotateX(270deg);
+      -ms-transform: rotateX(270deg);
+      transform: rotateX(270deg);
+    }
+	75% {
+	  -webkit-transform: rotateX(270deg);
+      -moz-transform: rotateX(270deg);
+      -ms-transform: rotateX(270deg);
+      transform: rotateX(270deg);
+    }
+	90% {
+	  -webkit-transform: rotateX(360deg);
+      -moz-transform: rotateX(360deg);
+      -ms-transform: rotateX(360deg);
+      transform: rotateX(360deg);
+    }
+    100% {
+	  -webkit-transform: rotateX(360deg);
+      -moz-transform: rotateX(360deg);
+      -ms-transform: rotateX(360deg);
+      transform: rotateX(360deg);
+    }
+  } */
 
-#flip div div:nth-child(1) {
-  background-color: #4ec7f3;
-}
-#flip div div:nth-child(2) {
-  background-color: #42c58a;
-}
-#flip div div:nth-child(3) {
-  background-color: #dc143c;
-}
-#flip div div:nth-child(4) {
-  background-color: #ff7eb3;
-}
-#flip div div:nth-child(5) {
-  background-color: #9b51e0;
-}
+  .box {
+    color: white;
+    text-shadow: 0 1px 0 #000;
+    
+    --border-angle: 0turn;
+    --main-bg: conic-gradient(
+        from var(--border-angle),
+        #213,
+        #112 5%,
+        #112 60%,
+        #213 95%
+      );
+    
+    border: solid 1px transparent;
+    border-radius: 6px;
+    --gradient-border: conic-gradient(from var(--border-angle), transparent 25%, #08f, #f03 99%, transparent);
+    
+    background: 
+      var(--main-bg) padding-box,
+      var(--gradient-border) border-box, 
+      var(--main-bg) border-box;
+    
+    animation: bg-spin 3s linear infinite;
+    
+  }
+  
+  .box:hover {
+    animation-direction: reverse; /* Reverse animation when hovered */
+    -webkit-animation:light 1s;
+    animation:light 1s;
+  }
+  
+  @keyframes light {
+    0% {
+          background-position:-600px; 
+    }
+    100% { 
+          background-position:0px; 
+    }
+  }
+          
+  @-webkit-keyframes light {
+    0% {
+          background-position:-600px; 
+    }
+    100% { 
+          background-position:0px; 
+    }
+  }
+  
+  
+  @keyframes bg-spin {
+    from {
+      --border-angle: 0turn;
+    }
+    to {
+      --border-angle: 1turn;
+    }
+  }
+  
+  @property --border-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0turn;
+  }
 
-@keyframes flip {
-  0% {
-    transform: translateY(0);
+.light{
+  background: transparent;
+  background: -moz-linear-gradient(-45deg,  #060606 0%, #060606 40%, #ffffff 50%, #060606 60%, #060606 100%);
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#060606), color-stop(40%,#060606), color-stop(50%,#ffffff), color-stop(60%,#060606), color-stop(100%,#060606));
+  background: -webkit-linear-gradient(-45deg,  #060606 0%,#060606 40%,#ffffff 50%,#060606 60%,#060606 100%);
+  background: -o-linear-gradient(-45deg,  #060606 0%,#060606 40%,#ffffff 50%,#060606 60%,#060606 100%);
+  background: -ms-linear-gradient(-45deg,  #060606 0%,#060606 40%,#ffffff 50%,#060606 60%,#060606 100%);
+  background: linear-gradient(135deg,  #060606 0%,#060606 40%,#ffffff 50%,#060606 60%,#060606 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#060606', endColorstr='#060606',GradientType=1 );
+  background-repeat: no-repeat;  
+  background-position:0px;
+  background-size:300%;  
   }
-  20% {
-    transform: translateY(-45px);
+  
+  .light:hover{
+    -webkit-animation:light 0.5s;
+      animation:light 0.5s;
+    
   }
-  40% {
-    transform: translateY(-90px);
+  
+  @keyframes light {
+    0% {
+          background-position:-600px; 
+    }
+    100% { 
+          background-position:0px; 
+    }
   }
-  60% {
-    transform: translateY(-135px);
+          
+  @-webkit-keyframes light {
+    0% {
+          background-position:-600px; 
+    }
+    100% { 
+          background-position:0px; 
+    }
   }
-  80% {
-    transform: translateY(-180px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}

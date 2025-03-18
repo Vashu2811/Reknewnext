@@ -28,7 +28,7 @@ const Consultation = ({ title="title", tag_one ='tag_one', tag_two = "", btn_nam
               </p>
             )}
           </div>
-          <div className="flex flex-row justify-center md:justify-start items-center w-fit gap-2 px-5 py-3 rounded-lg bg-white hover:cursor-pointer text-black shadow-md">
+          <div className=" flex flex-row justify-center md:justify-start items-center w-fit gap-2 px-5 py-3 rounded-lg bg-white hover:cursor-pointer text-black shadow-md">
             <span className="font-semibold text-base leading-[140%]">
               {btn_name}
             </span>

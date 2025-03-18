@@ -1,13 +1,13 @@
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import Head from "next/head";
+// import Head from "next/head";
 
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // Add the required font weights
+  weight: ["400", "500", "600", "700"], 
 });
 export const metadata = {
   title: "ReKnew",
