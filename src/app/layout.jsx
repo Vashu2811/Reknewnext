@@ -1,14 +1,16 @@
-import { Montserrat } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 // import Head from "next/head";
 
-
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], 
+  weight: ["300", "400", "600", "700", "800"], // Add weights as needed
 });
+
 export const metadata = {
   title: "ReKnew",
   description: "We help organizations reduce inefficiencies, automate workflows, and unlock growth opportunities.",
@@ -30,10 +32,15 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       
-      <body
+      {/* <body
         className={montserrat.variable}
       >
         {children}
+      </body> */}
+      <body className={nunito.variable}>
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

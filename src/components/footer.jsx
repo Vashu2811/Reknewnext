@@ -1,83 +1,111 @@
-import React from "react";
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import Logo from "../../public/images/Reknew-logo.png";
+// components/Footer.js
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Facebook, Twitter, Instagram, Linkedin, MapPin, Mail, Phone } from 'lucide-react';
+import ScrollToTopButton from './ScrollTop'; // Adjust path if needed
 
 const Footer = () => {
-  return (
-    <div className="footer flex bg-[#060606]   justify-center items-center flex-col w-full h-fit px-4 py-6 md:px-8 md:py-8 lg:py-12 lg:px-12 xl:py-20 xl:px-20 2xl:pt-28 2xl:px-40 2xl:pb-24">
-      <div className="flex flex-col gap-8 w-full max-w-7xl">
-        <div className="flex flex-col md:flex-row w-full justify-between items-center sm:text-center md:text-left  gap-10 md:gap-16 lg:gap-24">
-          <div className="max-w-xs flex flex-col gap-6">
-            <div className="flex sm:justify-center md:justify-start ">
-              <Link href="/">
-                {" "}
-                <Image
-                  src={Logo}
-                  alt="ReKnew logo"
-                  width={162}
-                  height={47}
-                  className="w-[162px]  h-[47px]"
-                />
-              </Link>
-            </div>
-            <p className="text-sm text-gray-400 leading-[140%]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut aliqua.
-            </p>
-          </div>
-          <div className="flex flex-col md:flex-row gap-10 md:gap-16">
-            <div className="flex flex-col gap-4">
-              <h3 className="font-semibold text-lg text-white">Quick Links</h3>
-              <ul className="text-sm text-gray-400 space-y-2">
-                <Link href="/">
-                  <li>Home</li>
-                </Link>
-                <Link href="/our-story">
-                  {" "}
-                  <li>Our Story</li>
-                </Link>
-                <Link href="/our-services">
-                  <li>Our Services</li>
-                </Link>
-                <Link href="/our-team">
-                  {" "}
-                  <li>Our Team</li>
-                </Link>
-              </ul>
-            </div>
-            <div className="flex flex-col gap-4">
-              <h3 className="font-semibold text-lg text-white">Get in Touch</h3>
-              <ul className="text-sm text-gray-400 space-y-2">
-                <li>2972 Westheimer Rd. Santa Ana, Illinois 85486</li>
-                <li>debbie.baker@example.com</li>
-                <li>(505) 555-0125</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    return (
+        <div className="bg-gradient-to-b from-white via-gray-50/80 to-gray-100/50">
+            <div className="container mx-auto max-w-7xl px-6 py-10">
+                <div className="flex flex-col lg:flex-row justify-between gap-8">
+                    <div className="lg:max-w-[450px] flex flex-col gap-6">
+                        <Link href="/" className="w-fit">
+                            <Image src="/assets/rklogo_black.png" alt="ReKnew Logo" width={208} height={80} />
+                        </Link>
+                        <div className="group">
+                            <p className="text-gray-600 text-[17px] leading-[1.6]  rounded-xl
+                                bg-gradient-to-br from-white via-gray-50/30 to-transparent
+                                hover:from-[#ff715508] hover:to-transparent
+                                transition-all duration-500 ease-out
+                                hover:border-[#ff715515]"
+                            >
+                                <span className="font-bold text-[#ff7155]">ReKnew</span>
+                                <span className="text-gray-400 mx-3">—</span>
+                                <span className="text-gray-700">We help organizations reduce inefficiencies, automate workflows, and unlock growth opportunities.</span>
+                            </p>
+                        </div>
+                    </div>
 
-        <div className="border-t border-gray-700"></div>
+                    <div className="flex flex-col md:flex-row gap-8 xl:gap-16">
+                        <div className="flex flex-col gap-4">
+                            <h3 className="font-bold text-[#232323] text-xl relative group cursor-default">
+                                Quick Links
+                                <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-[#ff7155] rounded-full transition-all duration-700 ease-in-out group-hover:w-full opacity-70"></span>
+                            </h3>
+                            <span className="flex flex-col gap-3 text-gray-600 pt-1">
+                                {['Our Story', 'Our Services', 'Our Team'].map((item, index) => (
+                                    <Link
+                                        key={index}
+                                        href={`/${item.toLowerCase().replace(' ', '-')}`}
+                                        className="group flex items-center gap-2 w-fit hover:text-[#ff7155] transition-all duration-300 text-[17px]"
+                                    >
+                                        <span className="relative overflow-hidden pl-0 group-hover:pl-6 transition-all duration-500 ease-out">
+                                            <span className="absolute left-0 w-4 h-[1px] bg-[#ff7155] top-[50%] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                                            {item}
+                                        </span>
+                                    </Link>
+                                ))}
+                            </span>
+                        </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4">
-          <p className="text-xs text-gray-500">
-            © 2025 ReKnew. All Rights Reserved.
-          </p>
-          <div className="flex flex-row gap-4">
-            {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
-              <span
-                key={index}
-                className="text-gray-500 hover:text-white transition-colors cursor-pointer"
-              >
-                <Icon size={20} />
-              </span>
-            ))}
-          </div>
+                        <div className="flex flex-col gap-3">
+                            <h3 className="font-bold text-[#232323] text-xl relative group cursor-default">
+                                Coffee: Please Drop By!
+                                <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-[#ff7155] rounded-full transition-all duration-700 ease-in-out group-hover:w-full opacity-70"></span>
+                            </h3>
+                            <div className="flex flex-col gap-2">
+                                {[
+                                    { icon: MapPin, text: "4030 Old Milton Parkway Alpharetta, GA 30005 USA", href: "https://maps.google.com" },
+                                    { icon: Mail, text: "social@reknew.ai", href: "mailto:social@reknew.ai" },
+                                    { icon: Phone, text: "+1(678) 253-2599", href: "tel:+16782532599" }
+                                ].map((item, index) => (
+                                    <a
+                                        key={index}
+                                        href={item.href}
+                                        className="group flex items-center gap-3 text-gray-600 py-1.5 px-2 rounded-lg transition-all duration-500 text-[16px]"
+                                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                    >
+                                        <item.icon
+                                            size={20}
+                                            className="text-[#ff7155] shrink-0 transition-all duration-500 ease-out group-hover:scale-110"
+                                        />
+                                        <span className="select-all cursor-text transition-all hover:text-[#ff7155] duration-500 group-hover:translate-x-1 text-gray-700">
+                                            {item.text}
+                                        </span>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 mt-8 border-t border-gray-200/70">
+                    <p className="text-gray-500 text-sm">© 2025 ReKnew. All Rights Reserved.</p>
+                    <div className="flex gap-8">
+                        {[
+                            { icon: Facebook, href: "#" },
+                            { icon: Twitter, href: "#" },
+                            { icon: Instagram, href: "#" },
+                            { icon: Linkedin, href: "#" }
+                        ].map((item, index) => (
+                            <a
+                                key={index}
+                                href={item.href}
+                                className="p-2.5 rounded-full text-gray-500 hover:text-[#ff7155] hover:bg-[#ff715508] transition-all duration-500 hover:scale-125 relative group"
+                            >
+                                <item.icon size={20} strokeWidth={1.5} className="transition-transform duration-500" />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            <ScrollToTopButton />
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Footer;
