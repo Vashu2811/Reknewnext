@@ -75,7 +75,7 @@ const Consultation = () => {
                         className="font-medium lg:text-[44px] xl:text-[44px] leading-[120%] tracking-[0%] capitalize"
                         
                     >
-                        <span className="bg-gradient-to-r from-[#FF512F] to-[#DD2476] bg-clip-text text-transparent">
+                        <span className="relative z-10 bg-gradient-to-r from-[#FF512F] to-[#FF8A63] bg-clip-text text-transparent">
                             {consultationContent.title}
                         </span>
                         <br />

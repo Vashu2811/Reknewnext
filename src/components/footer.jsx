@@ -77,7 +77,7 @@ const Footer = () => {
                                     </Link>
                                 ))} */}
                 {navLinks.map(({ to, label }) => (
-                  <Link
+                  <a
                     key={to}
                     href={to}
                     onClick={handleNavigation}
@@ -88,7 +88,7 @@ const Footer = () => {
                       <span className="absolute left-0 w-4 h-[1px] bg-[#ff7155] top-[50%] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
                       {label}
                     </span>
-                  </Link>
+                  </a>
                 ))}
               </span>
             </div>

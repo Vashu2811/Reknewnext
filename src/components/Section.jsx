@@ -15,11 +15,11 @@ const Section = ({
     description = '',
     primaryButton = {
         text: '',
-        onClick: () => {}
+        // onClick: () => {}
     },
     secondaryButton = {
         text: '',
-        onClick: () => {}
+        // onClick: () => {}
     },
     backgroundImage = color,
     className = ''
@@ -98,8 +98,8 @@ const Section = ({
                     </div>
                     <div className="flex justify-center items-center">
                         <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
-                            <button
-                                onClick={primaryButton.onClick}
+                            <span
+                                // onClick={primaryButton.onClick}
                                 className="relative w-fit group inline-flex items-center justify-center px-3 lg:px-8 py-3 overflow-hidden rounded-lg bg-gradient-to-r from-[#FF512F] to-[#FF8A63] hover:from-[#FF8A63] hover:to-[#FF512F] transition-all duration-300 ease-out hover:scale-105 transform">
                                 <span className="relative flex justify-center items-center md:text-lg text-[14px] font-semibold text-white tracking-wide">
                                     {primaryButton.text}
@@ -107,9 +107,9 @@ const Section = ({
                                         <ChevronRight />
                                     </span>
                                 </span>
-                            </button>
-                            <button
-                                onClick={secondaryButton.onClick}
+                            </span>
+                            <span
+                                // onClick={secondaryButton.onClick}
                                 className="relative w-fit group inline-flex items-center justify-center lg:px-8 py-3 px-3 overflow-hidden rounded-lg border-2 border-[#FF512F] bg-transparent hover:bg-gradient-to-r hover:from-[#FF512F] hover:to-[#FF8A63] transition-all duration-300 ease-out hover:scale-105 transform">
                                 <span className="relative flex justify-center items-center md:text-lg text-[14px] font-semibold text-[#FF512F] group-hover:text-white tracking-wide">
                                     {secondaryButton.text}
@@ -117,7 +117,7 @@ const Section = ({
                                         <ChevronRight />
                                     </span>
                                 </span>
-                            </button>
+                            </span>
                         </div>
                     </div>
                 </div>

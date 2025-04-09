@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import "./globals.css"
-
+import logo from '../../public/assets/Priloader.png';
 
 
 const loading = () => {
   return <div className={`preloader`}>
   <Image
-     src="/android-chrome-512x512.png"
+    src={logo} 
      alt="ReKnew logo"
      width={125}
      height={50}

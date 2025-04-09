@@ -186,7 +186,7 @@ function ReKnewPlatform() {
                             <div className="flex flex-col gap-4">
                                 <h1 className="text-4xl md:text-[48px] lg:text-[44px] font-bold leading-[120%] text-[#374151]">
                                     Why Choose the{' '}
-                                    <span className="text-highlight relative inline-block group">
+                                    <span className="relative z-10 bg-gradient-to-r from-[#FF512F] to-[#FF8A63] bg-clip-text text-transparent">
                                         ReKnew
                                         <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
                                             <path

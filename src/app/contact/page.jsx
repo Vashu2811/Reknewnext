@@ -8,6 +8,7 @@ import color from '../../../public/assets/logo-left-2.webp';
 import Image from 'next/image';
 
 const ContectUs = () => {
+    
     useEffect(() => {
         document.title = 'Contect Us | ReKnew';
     }, []);
