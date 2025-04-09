@@ -16,37 +16,37 @@ const OurTeam = () => {
     
 const teamMembers = [
     {
-      name: 'Murali sajja',
-      role: 'Senior Director',
-      image: Murlisir,
-      bio: 'With 30 years of experience, Murali specializes in Consulting, Technology, Automation, Integration, ERP, Automotive, and Logistics. He brings strong technical depth and business acumen to enterprise transformation',
-      social: {
-        linkedin: 'https://www.linkedin.com/in/murali-sajja/',
-        twitter: 'https://twitter.com/sarahchen',
-        email: 'sarah.chen@reknew.ai'
-      }
+        name: 'Murali sajja',
+        role: 'Senior Director',
+        image: Murlisir,
+        bio: 'With 30 years of experience, Murali specializes in Consulting, Technology, Automation, Integration, ERP, Automotive, and Logistics. He brings strong technical depth and business acumen to enterprise transformation',
+        social: {
+            linkedin: 'https://www.linkedin.com/in/murali-sajja/',
+            twitter: 'https://twitter.com/sarahchen',
+            email: 'sarah.chen@reknew.ai'
+        }
     },
     {
-      name: "Les D'Souza",
-      role: 'Head of Data Engineering',
-      image: 'https://th.bing.com/th/id/OIP.wtAKxkGGXN9VYFm4BSlslQHaHa?rs=1&pid=ImgDetMain',
-      bio: 'Les brings 30 years of expertise in Financial Services, Technology, Data & Analytics, AI & Gen AI, Digital Transformation, and Innovation. He excels at driving strategy and delivering modern enterprise solutions',
-      social: {
-        linkedin: 'https://linkedin.com/in/mrodriguez',
-        twitter: 'https://twitter.com/mrodriguez',
-        email: 'michael.rodriguez@reknew.ai'
-      }
+        name: "Les D'Souza",
+        role: 'Head of Data Engineering',
+        image: 'https://th.bing.com/th/id/OIP.wtAKxkGGXN9VYFm4BSlslQHaHa?rs=1&pid=ImgDetMain',
+        bio: 'Les brings 30 years of expertise in Financial Services, Technology, Data & Analytics, AI & Gen AI, Digital Transformation, and Innovation. He excels at driving strategy and delivering modern enterprise solutions',
+        social: {
+            linkedin: 'https://linkedin.com/in/mrodriguez',
+            twitter: 'https://twitter.com/mrodriguez',
+            email: 'michael.rodriguez@reknew.ai'
+        }
     },
     {
-      name: 'Dr. Lisa Wang',
-      role: 'Director of AI Research',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=500&h=500&auto=format&fit=crop',
-      bio: 'Les brings 30 years of expertise in Financial Services, Technology, Data & Analytics, AI & Gen AI, Digital Transformation, and Innovation. He excels at driving strategy and delivering modern enterprise solutions',
-      social: {
-        linkedin: 'https://linkedin.com/in/lisawang',
-        twitter: 'https://twitter.com/lisawang',
-        email: 'lisa.wang@reknew.ai'
-      }
+        name: 'Vamsi Kora',
+        role: 'Tech Investor',
+        image: 'https://media.licdn.com/dms/image/v2/C5603AQEJoeF41mw62A/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1655736180166?e=1749686400&v=beta&t=mPkAegOTv-0w8ikKzGr6BOd9bzDc02VLV5nLNkAE0pM',
+        bio: 'Les brings 30 years of expertise in Financial Services, Technology, Data & Analytics, AI & Gen AI, Digital Transformation, and Innovation. He excels at driving strategy and delivering modern enterprise solutions',
+        social: {
+            linkedin: 'https://linkedin.com/in/lisawang',
+            twitter: 'https://twitter.com/lisawang',
+            email: 'lisa.wang@reknew.ai'
+        }
     }
   ];
     const values = [
