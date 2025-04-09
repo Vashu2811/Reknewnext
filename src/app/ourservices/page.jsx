@@ -329,7 +329,7 @@ const Ourservices = () => {
     ];
 
     return (
-        <div className="text-[#374151] w-full min-h-screen overflow-x-hidden">
+        <div className="text-[#374151] w-full min-h-screen overflow-x-hidden font-sans">
             {/* Progress Bar */}
             <motion.div className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF512F] to-[#FF8A63] z-50" style={{ scaleX }} />
 
@@ -663,7 +663,7 @@ const Ourservices = () => {
                     <div className="flex flex-col gap-12">
                         <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 justify-center items-center gap-8 min-h-[600px]">
                             {journeySteps.map((item, index) => (
-                                <motion.div
+                                <div
                                    
                                     style={{
                                         marginBottom: `${index * 80}px`,
@@ -731,7 +731,7 @@ const Ourservices = () => {
                                             ))}
                                         </div>
                                     </div>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     </div>

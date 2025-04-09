@@ -13,30 +13,26 @@ const nunito = Nunito({
 
 export const metadata = {
   title: "ReKnew",
-  description: "We help organizations reduce inefficiencies, automate workflows, and unlock growth opportunities.",
+  description:
+    "We help organizations reduce inefficiencies, automate workflows, and unlock growth opportunities.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-        <Script
-          strategy="lazyOnload"
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-NRS9PX9R2K"
-        ></Script>
-        <Script id="google-analytics">
-          {`
+      <Script
+        strategy="lazyOnload"
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NRS9PX9R2K"
+      ></Script>
+      <Script id="google-analytics">
+        {`
           window.dataLayer = window.dataLayer || []; function gtag()
           {dataLayer.push(arguments)}
           gtag('js', new Date()); gtag('config', 'G-NRS9PX9R2K');
           `}
-        </Script>
-      
-      {/* <body
-        className={montserrat.variable}
-      >
-        {children}
-      </body> */}
+      </Script>
+
       <body className={nunito.variable}>
         <Navbar />
         <main>{children}</main>

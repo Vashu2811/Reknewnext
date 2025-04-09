@@ -152,8 +152,8 @@ export default function Navbar() {
 
   const navLinks = [
     { to: "/", label: "Home" },
-    { to: "/ourstory", label: "Our Story" },
     { to: "/reKnewplatform", label: "The ReKne w Platform" },
+    { to: "/ourstory", label: "Our Story" },
     { to: "/ourservices", label: "Our Services" },
     { to: "/ourteam", label: "Our Team" },
     { to: "/contact", label: "Contact Us" },
@@ -162,7 +162,7 @@ export default function Navbar() {
   const isActive = (path) => pathname === path;
 
   return (
-    <div style={{ position: "relative", zIndex: 50 }}>
+    <div className="font-sans" style={{ position: "relative", zIndex: 50 }}>
       <div
         className={`flex items-center transition-all duration-500 ease-in-out px-6 lg:px-10 ${
           isMenuOpen

@@ -33,7 +33,7 @@ import Section from '../../components/Section';
                 <title>Home | ReKnew</title>
             </Helmet>
 
-            <div className="body65 text-white w-full min-h-screen bg-cover bg-center">
+            <div className="font-sans text-white w-full min-h-screen bg-cover bg-center">
                 <motion.div
                     className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF512F] to-[#FF8A63] z-50"
                     style={{ scaleX }}

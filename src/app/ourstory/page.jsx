@@ -52,7 +52,7 @@ const OurStory = () => {
     };
 
     return (
-        <div className="text-[#374151] w-full min-h-screen overflow-x-hidden">
+        <div className="text-[#374151] w-full min-h-screen overflow-x-hidden font-sans">
             <section className="w-full relative text-[#374151] min-h-screen body65 md:h-[760px] h-[550px] flex justify-center text-center p-0 m-0 overflow-hidden">
                 <Image
                     src={color}
