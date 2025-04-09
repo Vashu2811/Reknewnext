@@ -132,10 +132,10 @@ function Flywheel() {
                             <path
                                 d="M 20,180 A 150,150 0 0,1 180,20"
                                 stroke="#f4c06e"
-                                stroke-width="2"
+                                strokeWidth="2"
                                 fill="transparent"
-                                stroke-dasharray="5,5"
-                                marker-end="url(#arrowhead)"
+                                strokeDasharray="5,5"
+                               markerEnd="url(#arrowhead)"
                             />
                             <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite" />
                         </svg>
@@ -146,10 +146,10 @@ function Flywheel() {
                             <path
                                 d="M 20,180 A 150,150 0 0,1 180,20"
                                 stroke="#f4c06e"
-                                stroke-width="2"
+                                strokeWidth="2"
                                 fill="transparent"
-                                stroke-dasharray="5,5"
-                                marker-end="url(#arrowhead)"
+                                strokeDasharray="5,5"
+                               markerEnd="url(#arrowhead)"
                             />
                             <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite" />
                         </svg>
@@ -161,10 +161,10 @@ function Flywheel() {
                             <path
                                 d="M 20,180 A 150,150 0 0,1 180,20"
                                 stroke="#f4c06e"
-                                stroke-width="2"
+                                strokeWidth="2"
                                 fill="transparent"
-                                stroke-dasharray="5,5"
-                                marker-end="url(#arrowhead)"
+                                strokeDasharray="5,5"
+                               markerEnd="url(#arrowhead)"
                             />
                             <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite" />
                         </svg>
@@ -175,10 +175,10 @@ function Flywheel() {
                             <path
                                 d="M 20,180 A 150,150 0 0,1 180,20"
                                 stroke="#f4c06e"
-                                stroke-width="2"
+                                strokeWidth="2"
                                 fill="transparent"
-                                stroke-dasharray="5,5"
-                                marker-end="url(#arrowhead)"
+                                strokeDasharray="5,5"
+                               markerEnd="url(#arrowhead)"
                             />
                             <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite" />
                         </svg>

@@ -152,7 +152,7 @@ export default function Navbar() {
 
   const navLinks = [
     { to: "/", label: "Home" },
-    { to: "/reKnewplatform", label: "The ReKne w Platform" },
+    { to: "/reKnewplatform", label: "The ReKnew Platform" },
     { to: "/ourstory", label: "Our Story" },
     { to: "/ourservices", label: "Our Services" },
     { to: "/ourteam", label: "Our Team" },
