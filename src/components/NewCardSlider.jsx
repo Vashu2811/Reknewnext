@@ -253,7 +253,7 @@ const NewCardSlider = ({ cards }) => {
                          <Image
                           src={cards[index].img}
                           alt={cards[index].title}
-                          className="w-full h-full object-cover transform transition-transform duration-700"
+                          className="w-full h-full object-contain transform transition-transform duration-700"
                         />
                     
                       </div>

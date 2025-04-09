@@ -104,7 +104,7 @@ const teamMembers = [
     };
 
     return (
-        <div className="text-[#232323] font-sans w-full min-h-screen overflow-x-hidden">
+        <div className="text-[#232323] w-full min-h-screen overflow-x-hidden">
             <motion.div className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF512F] to-[#FF8A63] z-50" style={{ scaleX }} />
             <section className="w-full relative text-[#374151] min-h-screen body65 md:h-[760px] h-[550px] flex justify-center text-center p-0 m-0 overflow-hidden">
                 <Image

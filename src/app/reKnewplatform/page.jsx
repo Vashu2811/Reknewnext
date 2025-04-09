@@ -1,21 +1,12 @@
-// export default function ReKnewPlatform() {
-//     return (
-//         <div>
-//             <h1>The ReKnew Platform</h1>
-//             <p>Welcome to the ReKnew Platform page!</p>
-//         </div>
-//     );
-// }
-
 'use client';
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import automate from '../../../public/assets/Frame3.png';
-import Unify from '../../../public/assets/Frame2.png';
-import Leverage from '../../../public/assets/Frame4.png';
-import Scalewith from '../../../public/assets/Frame1.png';
-import DigitalEarth from '../../../public/assets/Frame14.png';
+import automate from '../../../public/assets/latesticon-2.png';
+import Unify from '../../../public/assets/latesticon-3.png';
+import Leverage from '../../../public/assets/latesticon-1.png';
+import Scalewith from '../../../public/assets/latesticon-4.png';
+import DigitalEarth from '../../../public/assets/Software integration-amico.png';
 import color from '../../../public/assets/logo-left-2.webp';
 import { ChevronRight, CheckCircle2, ArrowUpRight, Zap, Brain, Workflow, Database, MessageSquareCode, Shield } from 'lucide-react';
 import Section from '../../components/Section';
@@ -150,7 +141,7 @@ function ReKnewPlatform() {
 
     return (
         <>
-            <div className="text-[#374151] font-sans w-full min-h-screen overflow-x-hidden">
+            <div className="text-[#374151]  w-full min-h-screen overflow-x-hidden">
                 <section className="w-full relative text-[#374151] min-h-screen body65 md:h-[760px] h-[550px] flex justify-center text-center p-0 m-0 overflow-hidden">
                     <Image
                         src={color}
@@ -237,7 +228,7 @@ function ReKnewPlatform() {
                                 {
                                     image: Scalewith,
                                     title: 'Scale with AI-Powered Intelligence',
-                                    description: 'Future-proof your business with adaptable and scalable AI solutions.'
+                                    description: 'Future-proof your business with adaptable and scalable AI solutions and organization.'
                                 }
                             ].map((item, index) => (
                                 <div

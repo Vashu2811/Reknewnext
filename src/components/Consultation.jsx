@@ -1,5 +1,5 @@
 import React from 'react';
-import consulation from '../../public/assets/ConsultioN.png';
+import consulation from '../../public/assets/Digital presentation-pana.png';
 import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 

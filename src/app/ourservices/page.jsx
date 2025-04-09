@@ -1,11 +1,13 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Aigraph from '../../../public/assets/Frame6.png';
-import Businessai from '../../../public/assets/Frame5.png';
-import Assistants from '../../../public/assets/Frame7.png';
-import DataAiImage from '../../../public/assets/Frame8.png';
-import Cloudsolustion from '../../../public/assets/Frame10.png';
-import Compliance from '../../../public/assets/Frame9.png';
+import Aigraph from '../../../public/assets/slidericon-8.png';
+import Businessai from '../../../public/assets/slidericon-7.png';
+import Assistants from '../../../public/assets/slidericon-2.png';
+import DataAiImage from '../../../public/assets/slidericon-1.png';
+import Cloudsolustion from '../../../public/assets/slidericon-4.png';
+import Compliance from '../../../public/assets/slidericon-3.png';
+import Generative from '../../../public/assets/slidericon-6.png';
+import Transformation from '../../../public/assets/slidericon-5.png';
 import color from '../../../public/assets/logo-left-2.webp';
 import { Code2, RockingChair } from 'lucide-react';
 import {
@@ -190,7 +192,7 @@ const Ourservices = () => {
             'Microservices Architecture'
           ],
           buttonname: 'Transform Digital Assets',
-          img: Compliance
+          img: Transformation
         },
         {
           id: 8,
@@ -203,7 +205,7 @@ const Ourservices = () => {
             'AI Infrastructure Design'
           ],
           buttonname: 'Explore Gen-AI',
-          img: Cloudsolustion
+          img: Generative
         }
       ];
 
@@ -327,7 +329,7 @@ const Ourservices = () => {
     ];
 
     return (
-        <div className="text-[#374151] font-sans w-full min-h-screen overflow-x-hidden">
+        <div className="text-[#374151] w-full min-h-screen overflow-x-hidden">
             {/* Progress Bar */}
             <motion.div className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF512F] to-[#FF8A63] z-50" style={{ scaleX }} />
 
@@ -396,7 +398,7 @@ const Ourservices = () => {
                 </div>
 
                 <div className="relative container mx-auto">
-                    <div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                    <div initial={{ opacity: 0, y: 20 }}  viewport={{ once: true }} className="text-center mb-16">
                         {/* Enhanced Section Header */}
                         <div className="inline-flex items-center px-6 py-2 rounded-full bg-gradient-to-r from-[#FF512F]/10 to-[#FF8A63]/10 border border-[#FF512F]/20 mb-6">
                             <span className="bg-gradient-to-r from-[#FF512F] to-[#FF8A63] bg-clip-text text-transparent font-medium">
