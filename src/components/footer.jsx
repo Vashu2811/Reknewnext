@@ -12,20 +12,24 @@ import {
   Mail,
   Phone,
 } from "lucide-react";
+import { useRouter } from 'next/navigation';
 import ScrollToTopButton from "./ScrollTop"; // Adjust path if needed
 
 const Footer = () => {
-  const handleNavigation = () => {
+  // const handleNavigation = () => {
+  //   setIsMenuOpen(false);
+  //   setIsTransitioning(false);
+  //   window.scrollTo(0, 0);
+  // };
+  const router = useRouter();
+
+  const handleNavigation = (e, path) => {
+    e.preventDefault(); // prevent default anchor behavior
+    router.push(path); // programmatic navigation
     setIsMenuOpen(false);
     setIsTransitioning(false);
     window.scrollTo(0, 0);
   };
-
-  const navLinks = [
-    { to: "/ourstory", label: "Our Story" },
-    { to: "/ourservices", label: "Our Services" },
-    { to: "/ourteam", label: "Our Team" },
-  ];
   return (
     <div className="bg-gradient-to-b from-white via-gray-50/80 to-gray-100/50 font-sans">
       <div className="container mx-auto max-w-7xl px-6 py-10">
@@ -68,6 +72,7 @@ const Footer = () => {
                                     <Link
                                         key={index}
                                         href={`/${item.toLowerCase().replace(' ', '-')}`}
+                                        onClick={handleNavigation}
                                         className="group flex items-center gap-2 w-fit hover:text-[#ff7155] transition-all duration-300 text-[17px]"
                                     >
                                         <span className="relative overflow-hidden pl-0 group-hover:pl-6 transition-all duration-500 ease-out">
@@ -76,7 +81,23 @@ const Footer = () => {
                                         </span>
                                     </Link>
                                 ))} */}
-                {navLinks.map(({ to, label }) => (
+   {['ourstory', 'ourservices', 'ourteam'].map((item, index) => {
+        const path = `/${item.toLowerCase().replace(' ', '-')}`;
+        return (
+          <a
+            key={index}
+            href={path}
+            onClick={(e) => handleNavigation(e, path)}
+            className="group flex items-center gap-2 w-fit hover:text-[#ff7155] transition-all duration-300 text-[17px]"
+          >
+            <span className="relative overflow-hidden pl-0 group-hover:pl-6 transition-all duration-500 ease-out">
+              <span className="absolute left-0 w-4 h-[1px] bg-[#ff7155] top-[50%] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+              {item}
+            </span>
+          </a>
+        );
+      })}
+                {/* {navLinks.map(({ to, label }) => (
                   <a
                     key={to}
                     href={to}
@@ -89,7 +110,7 @@ const Footer = () => {
                       {label}
                     </span>
                   </a>
-                ))}
+                ))} */}
               </span>
             </div>
 
