@@ -3,3 +3,28 @@
 :root {
   font-family: var(--font-nunito), sans-serif;
 }
+.preloader {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-out !important;
+  z-index: 9999;
+  visibility: visible;
+}
+.preloader img {
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
