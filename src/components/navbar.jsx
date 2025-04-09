@@ -125,7 +125,7 @@ import {
   Instagram,
   Linkedin,
 } from "lucide-react";
-
+import { useRouter } from 'next/navigation';
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -143,12 +143,20 @@ export default function Navbar() {
     setIsMenuOpen(!isMenuOpen);
     setTimeout(() => setIsTransitioning(false), 500);
   };
+  const router = useRouter();
 
-  const handleNavigation = () => {
+  const handleNavigation = (e, to) => {
+    e.preventDefault(); // prevent the default link behavior
+    router.push(to);    // navigate programmatically
     setIsMenuOpen(false);
     setIsTransitioning(false);
     window.scrollTo(0, 0);
   };
+  // const handleNavigation = () => {
+  //   setIsMenuOpen(false);
+  //   setIsTransitioning(false);
+  //   window.scrollTo(0, 0);
+  // };
 
   const navLinks = [
     { to: "/", label: "Home" },
@@ -240,7 +248,7 @@ export default function Navbar() {
             <div className="flex flex-row w-full h-full justify-center items-center">
               <div className="flex flex-col md:flex-row lg:flex-row w-[90%] lg:w-[70%] h-full justify-center items-center">
                 <nav className="flex flex-col w-2/3 gap-1 lg:gap-9 md:gap-9 items-start text-left justify-center h-[80%]">
-                  {navLinks.map(({ to, label }) => (
+                  {/* {navLinks.map(({ to, label }) => (
                     <Link
                       key={to}
                       href={to}
@@ -254,7 +262,21 @@ export default function Navbar() {
                         {label}
                       </span>
                     </Link>
-                  ))}
+                  ))} */} {navLinks.map(({ to, label }) => (
+        <a
+        key={to}
+        href={to}
+        onClick={(e) => handleNavigation(e, to)}
+        className={`group flex text-base md:text-[28px] lg:text-[28px] font-medium ${
+          isActive(to) ? 'text-[#ff7155]' : 'text-gray-700'
+        }`}
+      >
+        <span className="relative overflow-hidden pl-0 group-hover:pl-8 transition-all hover:text-[#ff7155] duration-500 ease-out">
+          <span className="absolute left-0 w-6 h-[1px] bg-[#ff7155] top-[50%] hover:text-[#ff7155] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+          {label}
+        </span>
+      </a>
+    ))}
                 </nav>
 
                 <div className="h-full flex items-center justify-start p-8">

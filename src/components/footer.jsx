@@ -68,19 +68,6 @@ const Footer = () => {
                 <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-[#ff7155] rounded-full transition-all duration-700 ease-in-out group-hover:w-full opacity-70"></span>
               </h3>
               <span className="flex flex-col gap-3 text-gray-600 pt-1">
-                {/* {['ourstory', 'ourservices', 'ourteam'].map((item, index) => (
-                                    <Link
-                                        key={index}
-                                        href={`/${item.toLowerCase().replace(' ', '-')}`}
-                                        onClick={handleNavigation}
-                                        className="group flex items-center gap-2 w-fit hover:text-[#ff7155] transition-all duration-300 text-[17px]"
-                                    >
-                                        <span className="relative overflow-hidden pl-0 group-hover:pl-6 transition-all duration-500 ease-out">
-                                            <span className="absolute left-0 w-4 h-[1px] bg-[#ff7155] top-[50%] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
-                                            {item}
-                                        </span>
-                                    </Link>
-                                ))} */}
    {['ourstory', 'ourservices', 'ourteam'].map((item, index) => {
         const path = `/${item.toLowerCase().replace(' ', '-')}`;
         return (
@@ -97,20 +84,7 @@ const Footer = () => {
           </a>
         );
       })}
-                {/* {navLinks.map(({ to, label }) => (
-                  <a
-                    key={to}
-                    href={to}
-                    onClick={handleNavigation}
-                    className={`group flex items-center gap-2 w-fit hover:text-[#ff7155] transition-all duration-300 text-[17px]
-                      }`}
-                  >
-                    <span className="relative overflow-hidden pl-0 group-hover:pl-6 transition-all duration-500 ease-out">
-                      <span className="absolute left-0 w-4 h-[1px] bg-[#ff7155] top-[50%] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
-                      {label}
-                    </span>
-                  </a>
-                ))} */}
+                
               </span>
             </div>
 
