@@ -12,7 +12,6 @@ const nunito = Nunito({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://d3ni7pvekaqu2j.cloudfront.net'),
   title: {
     default: "ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation",
     template: "%s | ReKnew"
@@ -46,13 +45,13 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://d3ni7pvekaqu2j.cloudfront.net",
+    url: "https://reknew.ai",
     title: "ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation",
     description: "Transform your enterprise with ReKnew's AI-powered solutions. We help businesses reduce inefficiencies, automate workflows, and unlock growth opportunities through intelligent automation and data-driven insights.",
     siteName: "ReKnew",
     images: [
       {
-        url: "https://d3ni7pvekaqu2j.cloudfront.net/assets/reknew-logo-white.png",
+        url: "https://reknew.ai/assets/reknew-logo-white.png",
         width: 1200,
         height: 630,
         alt: "ReKnew - Enterprise AI Transformation Platform",
@@ -65,7 +64,7 @@ export const metadata = {
     description: "Transform your enterprise with AI-powered solutions. Reduce inefficiencies, automate workflows, and unlock growth opportunities with ReKnew's intelligent automation platform.",
     creator: "@ReKnewAI",
     site: "@ReKnewAI",
-    images: ["https://d3ni7pvekaqu2j.cloudfront.net/assets/reknew-logo-white.png"],
+    images: ["https://reknew.ai/assets/reknew-logo-white.png"],
   },
   viewport: {
     width: "device-width",
@@ -88,7 +87,7 @@ export const metadata = {
     google: "your-google-verification-code",
   },
   alternates: {
-    canonical: "https://d3ni7pvekaqu2j.cloudfront.net",
+    canonical: "https://reknew.ai",
   },
 };
 

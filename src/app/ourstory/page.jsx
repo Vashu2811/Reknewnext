@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import {
   ChevronRight,
   Users,
@@ -14,78 +16,196 @@ import color from "../../../public/assets/logo-left-2.webp";
 import Image from "next/image";
 
 const OurStory = () => {
+  useEffect(() => {
+    // Set basic document title
+    document.title = "Our Story | ReKnew - AI-Powered Enterprise Transformation";
+    
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Discover ReKnew\'s journey from a bold idea to a game-changer in Enterprise AI. Learn how we transform hiring landscapes through ethical AI solutions and innovative enterprise transformation strategies.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Discover ReKnew\'s journey from a bold idea to a game-changer in Enterprise AI. Learn how we transform hiring landscapes through ethical AI solutions and innovative enterprise transformation strategies.';
+      document.head.appendChild(meta);
+    }
+
+    // Set keywords
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', 'ReKnew story, enterprise AI transformation, ethical AI hiring, business automation, AI-driven solutions, enterprise technology, workflow optimization, data intelligence');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'keywords';
+      meta.content = 'ReKnew story, enterprise AI transformation, ethical AI hiring, business automation, AI-driven solutions, enterprise technology, workflow optimization, data intelligence';
+      document.head.appendChild(meta);
+    }
+
+    // Set Open Graph tags
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', 'Our Story | ReKnew - AI-Powered Enterprise Transformation');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:title');
+      meta.content = 'Our Story | ReKnew - AI-Powered Enterprise Transformation';
+      document.head.appendChild(meta);
+    }
+
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+      ogDescription.setAttribute('content', 'From founding principles to real-world impact—learn how ReKnew.AI is transforming the hiring landscape and empowering enterprises through innovative AI solutions.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:description');
+      meta.content = 'From founding principles to real-world impact—learn how ReKnew.AI is transforming the hiring landscape and empowering enterprises through innovative AI solutions.';
+      document.head.appendChild(meta);
+    }
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) {
+      ogUrl.setAttribute('content', 'https://reknew.ai/ourstory');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:url');
+      meta.content = 'https://reknew.ai/ourstory';
+      document.head.appendChild(meta);
+    }
+
+    // Set Twitter Card tags
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) {
+      twitterTitle.setAttribute('content', 'Our Story | ReKnew - AI-Powered Enterprise Transformation');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'twitter:title';
+      meta.content = 'Our Story | ReKnew - AI-Powered Enterprise Transformation';
+      document.head.appendChild(meta);
+    }
+
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDescription) {
+      twitterDescription.setAttribute('content', 'Discover how ReKnew transforms enterprises through ethical AI hiring solutions and intelligent automation. From bold idea to industry game-changer.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'twitter:description';
+      meta.content = 'Discover how ReKnew transforms enterprises through ethical AI hiring solutions and intelligent automation. From bold idea to industry game-changer.';
+      document.head.appendChild(meta);
+    }
+
+    // Set canonical URL
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute('href', 'https://reknew.ai/ourstory');
+    } else {
+      const link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = 'https://reknew.ai/ourstory';
+      document.head.appendChild(link);
+    }
+  }, []);
+
   const gradientText = (
     <div className="text-[#374151]">
       Be Part of Our <span className="text-highlight pr-2">Story</span>
     </div>
   );
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "name": "Our Story - ReKnew Enterprise AI Transformation",
-    "description": "Learn about ReKnew's journey from founding principles to becoming a leader in ethical AI hiring and enterprise transformation.",
-    "url": "https://d3ni7pvekaqu2j.cloudfront.net/ourstory",
-    "mainEntity": {
-      "@type": "Organization",
-      "name": "ReKnew",
-      "description": "Enterprise AI transformation company specializing in ethical AI hiring solutions",
-      "url": "https://d3ni7pvekaqu2j.cloudfront.net",
-      "foundingDate": "2020",
-      "industry": "Artificial Intelligence",
-      "numberOfEmployees": "100+",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "US"
-      }
-    }
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const handleGetStarted = () => {
+    console.log("Get Started clicked");
+  };
+
+  const handleLearnMore = () => {
+    console.log("Learn More clicked");
   };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      <div className="text-[#374151] bg-white/95 w-full min-h-screen overflow-x-hidden font-sans">
+    <div className="text-[#374151] w-full min-h-screen overflow-x-hidden font-sans">
       <section className="w-full relative text-[#374151] min-h-screen body65 md:h-[760px] h-[550px] flex justify-center text-center p-0 m-0 overflow-hidden">
         <Image
           src={color}
-          alt="ReKnew AI Enterprise Transformation Background"
+          alt="color-sharp"
           className="absolute w-[200px] top-36 md:top-60 right-0 lg:w-[350px] lg:top-20 lg:right-40"
           style={{ zIndex: 1 }}
-          priority
         />
         <div className="flex flex-col items-center justify-center w-[1280px] gap-9">
           <Section
             rotatingWords={["Discover", "Follow", "Explore"]}
             headingStart="Our Journey to"
             headingEnd="Ethical AI Hiring"
-            description="From founding principles to real-world impact—learn how ReKnew.AI is transforming the hiring landscape through innovative enterprise AI solutions."
+            description="From founding principles to real-world impact—learn how ReKnew.AI is transforming the hiring landscape."
             primaryButton={{
               text: "Get Started",
-              action: "getStarted"
+              onClick: () => handleGetStarted(),
             }}
             secondaryButton={{
               text: "Learn More",
-              action: "learnMore"
+              onClick: () => handleLearnMore(),
             }}
           />
         </div>
       </section>
 
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF512F] to-[#FF8A63] z-50"
+        style={{ scaleX }}
+      />
+
       {/* Our Journey Section - Radial Gradient Style */}
       <section className="py-32 bg-white relative overflow-hidden">
+        <motion.div
+          className="absolute inset-0 opacity-20"
+          animate={{
+            background: [
+              "radial-gradient(circle at top left, rgba(255,81,47,0.08) 0%, transparent 50%), radial-gradient(circle at bottom right, rgba(255,138,99,0.08) 0%, transparent 50%)",
+              "radial-gradient(circle at top right, rgba(255,138,99,0.08) 0%, transparent 50%), radial-gradient(circle at bottom left, rgba(255,81,47,0.08) 0%, transparent 50%)",
+            ],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+            repeatType: "reverse",
+          }}
+        />
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={sectionVariants}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
             <div className="text-center mb-16">
-              <div className="inline-flex items-center px-6 py-2 rounded-full bg-gradient-to-r from-[#FF512F]/10 to-[#FF8A63]/10 border border-[#FF512F]/20 mb-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center px-6 py-2 rounded-full bg-gradient-to-r from-[#FF512F]/10 to-[#FF8A63]/10 border border-[#FF512F]/20 mb-6"
+              >
                 <History className="w-4 h-4 text-[#FF512F] mr-2" />
                 <span className="bg-gradient-to-r from-[#FF512F] to-[#FF8A63] bg-clip-text text-transparent font-medium">
                   Our Journey So Far
                 </span>
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              </motion.div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 From a Bold Idea to a Game-Changer in
                 <span className="relative inline-block">
                   <span className="relative z-10 text-[#FF512F] pl-2">
@@ -106,19 +226,19 @@ const OurStory = () => {
                     />
                   </svg>
                 </span>
-              </h1>
+              </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 Over the years, we've transformed countless enterprises through
-                AI-first strategies and innovative solutions that revolutionize hiring and business operations.
+                AI-first strategies and innovative solutions.
               </p>
             </div>
 
             <div className="space-y-16">
               {/* Mission Statement */}
               <div className="bg-gradient-to-r from-[#FF512F]/5 to-[#FF8A63]/5 rounded-2xl p-8 border border-[#FF512F]/10">
-                <h2 className="text-2xl font-bold mb-4 text-[#374151]">
+                <h3 className="text-2xl font-bold mb-4 text-[#374151]">
                   Our story began with a simple realization
-                </h2>
+                </h3>
                 <p className="text-xl text-gray-600 mb-8">
                   Enterprises struggle to keep pace with technological
                   advancements. While AI and automation were revolutionizing
@@ -126,10 +246,10 @@ const OurStory = () => {
                   systems, siloed data, and inefficient workflows.
                 </p>
 
-                <h3 className="text-xl font-bold mb-4 text-[#374151]">
+                <h4 className="text-xl font-bold mb-4 text-[#374151]">
                   ReKnew was founded to bridge this gap, creating AI-powered
                   solutions that:
-                </h3>
+                </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     "Enhance decision-making with real-time insights.",
@@ -137,36 +257,59 @@ const OurStory = () => {
                     "Unify data ecosystems for smarter business operations.",
                     "Enable businesses to react faster and scale efficiently.",
                   ].map((item, index) => (
-                    <div
+                    <motion.div
                       key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
                       className="flex items-center gap-3"
                     >
                       <span className="flex-shrink-0 p-1 rounded-full bg-gradient-to-br from-[#FF512F]/10 to-[#FF8A63]/10">
                         <CheckCircle2 className="w-5 h-5 text-[#FF512F]" />
                       </span>
                       <span className="text-xl text-gray-600">{item}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Who We Are Section - Diagonal Gradient Style */}
-      <section className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FF512F]/5 via-transparent to-[#FF8A63]/5" />
+      <section className="py-32  relative overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: [
+              "linear-gradient(135deg, rgba(255,81,47,0.05) 0%, transparent 50%, rgba(255,138,99,0.05) 100%)",
+              "linear-gradient(135deg, rgba(255,138,99,0.05) 0%, transparent 50%, rgba(255,81,47,0.05) 100%)",
+            ],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        />
         <div className="absolute inset-0 backdrop-blur-[100px] opacity-30" />
         <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto"
+          >
             <div className="text-center mb-16">
-              <div className="inline-flex items-center px-6 py-2 rounded-full bg-gradient-to-r from-[#FF512F]/10 to-[#FF8A63]/10 border border-[#FF512F]/20 mb-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center px-6 py-2 rounded-full bg-gradient-to-r from-[#FF512F]/10 to-[#FF8A63]/10 border border-[#FF512F]/20 mb-6"
+              >
                 <Users className="w-4 h-4 text-[#FF512F] mr-2" />
                 <span className="bg-gradient-to-r from-[#FF512F] to-[#FF8A63] bg-clip-text text-transparent font-medium">
                   About Us
                 </span>
-              </div>
+              </motion.div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Who
                 <span className="relative inline-block">
@@ -188,10 +331,11 @@ const OurStory = () => {
                     />
                   </svg>
                 </span>
+                {/* <span className="text-highlight">We Are</span> */}
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 More than just a technology company—we are architects of
-                transformation who empower enterprises through innovative AI solutions.
+                transformation
               </p>
             </div>
 
@@ -227,24 +371,44 @@ const OurStory = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* What Drives Us Section - Mesh Gradient Style */}
       <section className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FF512F]/5 via-[#FF8A63]/3 to-[#FF512F]/5" />
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: [
+              "conic-gradient(from 0deg at 50% 50%, rgba(255,81,47,0.05) 0%, rgba(255,138,99,0.05) 25%, rgba(255,81,47,0.05) 50%, rgba(255,138,99,0.05) 75%, rgba(255,81,47,0.05) 100%)",
+              "conic-gradient(from 360deg at 50% 50%, rgba(255,81,47,0.05) 0%, rgba(255,138,99,0.05) 25%, rgba(255,81,47,0.05) 50%, rgba(255,138,99,0.05) 75%, rgba(255,81,47,0.05) 100%)",
+            ],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        />
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto"
+          >
             <div className="text-center mb-20">
-              <div className="inline-flex items-center px-6 py-2 rounded-full bg-gradient-to-r from-[#FF512F]/10 to-[#FF8A63]/10 border border-[#FF512F]/20 mb-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center px-6 py-2 rounded-full bg-gradient-to-r from-[#FF512F]/10 to-[#FF8A63]/10 border border-[#FF512F]/20 mb-6"
+              >
                 <Rocket className="w-4 h-4 text-[#FF512F] mr-2" />
                 <span className="bg-gradient-to-r from-[#FF512F] to-[#FF8A63] bg-clip-text text-transparent font-medium">
                   Our Core Values
                 </span>
-              </div>
+              </motion.div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 What
+                {/* <span className="text-highlight">Drives Us</span> Forward */}
                 <span className="relative inline-block">
                   <span className="relative z-10 text-[#FF512F] px-2">
                     Drives Us
@@ -268,7 +432,7 @@ const OurStory = () => {
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 Our commitment to innovation and excellence shapes everything we
-                do, driving transformative outcomes for our clients through ethical AI solutions.
+                do, driving transformative outcomes for our clients.
               </p>
             </div>
 
@@ -277,7 +441,7 @@ const OurStory = () => {
                 {
                   title: "Scalability & Future-Readiness",
                   description:
-                    "We don't just solve today's problems—we future-proof your business with AI-driven transformation strategies that ensure long-term success.",
+                    "We don't just solve today's problems—we future-proof your business with AI-driven transformation strategies.",
                   icon: Rocket,
                   stat: "2.5x",
                   statText: "Average Growth",
@@ -285,7 +449,7 @@ const OurStory = () => {
                 {
                   title: "Data-Driven Decisions",
                   description:
-                    "Transform fragmented data into actionable insights, fueling smarter decision-making and sustainable growth through advanced analytics.",
+                    "Transform fragmented data into actionable insights, fueling smarter decision-making and sustainable growth.",
                   icon: BarChart2,
                   stat: "99%",
                   statText: "Accuracy Rate",
@@ -293,7 +457,7 @@ const OurStory = () => {
                 {
                   title: "Customer-Centricity",
                   description:
-                    "Our solutions are meticulously designed to solve real business challenges and enhance operational excellence with measurable results.",
+                    "Our solutions are meticulously designed to solve real business challenges and enhance operational excellence.",
                   icon: Users,
                   stat: "95%",
                   statText: "Client Satisfaction",
@@ -301,7 +465,7 @@ const OurStory = () => {
                 {
                   title: "Innovation Leadership",
                   description:
-                    "Continuously pushing boundaries with cutting-edge AI technologies to drive intelligent automation and efficiency across enterprises.",
+                    "Continuously pushing boundaries with cutting-edge AI technologies to drive intelligent automation and efficiency.",
                   icon: Lightbulb,
                   stat: "100+",
                   statText: "Innovation Projects",
@@ -319,7 +483,18 @@ const OurStory = () => {
                     <div className="flex flex-col md:flex-row items-start gap-6 mb-6">
                       <div className="flex-shrink-0">
                         <div className="relative">
-                          <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#FF512F]/20 to-[#FF8A63]/20 opacity-20" />
+                          <motion.div
+                            className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#FF512F]/20 to-[#FF8A63]/20"
+                            animate={{
+                              opacity: [0, 0.2, 0],
+                              scale: [1, 1.2, 1],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          />
                           <span className="relative flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-[#FF512F]/10 to-[#FF8A63]/10">
                             <item.icon className="w-8 h-8 text-[#FF512F]" />
                           </span>
@@ -338,18 +513,34 @@ const OurStory = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Mission & Vision Section - Wave Gradient Style */}
       <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FF512F]/8 via-transparent to-[#FF8A63]/8" style={{
-          backgroundImage: "repeating-linear-gradient(45deg, rgba(255,81,47,0.08) 0px, rgba(255,81,47,0.08) 25px, transparent 25px, transparent 50px)",
-        }} />
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: [
+              "linear-gradient(45deg, rgba(255,81,47,0.08) 25%, transparent 25%), linear-gradient(-45deg, rgba(255,138,99,0.08) 25%, transparent 25%)",
+              "linear-gradient(45deg, transparent 75%, rgba(255,81,47,0.08) 75%), linear-gradient(-45deg, transparent 75%, rgba(255,138,99,0.08) 75%)",
+            ],
+          }}
+          style={{
+            backgroundSize: "60px 60px",
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={sectionVariants}
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto"
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {/* Mission Side */}
               <div className="space-y-6">
@@ -380,12 +571,13 @@ const OurStory = () => {
                       />
                     </svg>
                   </span>
+                  {/* <span className="text-highlight">Innovation</span> */}
                 </h2>
                 <p className="text-xl text-gray-600 leading-relaxed">
                   To empower enterprises by optimizing workflows, unifying data,
                   and integrating AI-driven solutions, enabling them to make
                   intelligent, data-backed decisions that fuel growth and
-                  innovation in the modern digital landscape.
+                  innovation.
                 </p>
               </div>
 
@@ -418,6 +610,7 @@ const OurStory = () => {
                       />
                     </svg>
                   </span>
+                  {/* <span className="text-highlight">Future</span> */}
                 </h2>
                 <div className="space-y-4 text-xl text-gray-600 leading-relaxed">
                   <p>
@@ -428,7 +621,7 @@ const OurStory = () => {
                   <p>
                     ReKnew aims to be the bridge between legacy business models
                     and AI-powered enterprises, fostering agility, intelligence,
-                    and resilience in an ever-evolving marketplace.
+                    and resilience.
                   </p>
                 </div>
               </div>
@@ -447,24 +640,32 @@ const OurStory = () => {
                 </span>
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Consultation Section - Soft Gradient Style */}
       <div className="py-[120px] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FF512F]/5 via-[#FF8A63]/3 to-[#FF512F]/5" />
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: [
+              "linear-gradient(to right, rgba(255,81,47,0.05), rgba(255,138,99,0.05)), linear-gradient(to bottom, rgba(255,81,47,0.05), rgba(255,138,99,0.05))",
+              "linear-gradient(to left, rgba(255,81,47,0.05), rgba(255,138,99,0.05)), linear-gradient(to top, rgba(255,81,47,0.05), rgba(255,138,99,0.05))",
+            ],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        />
         <div className="relative z-10">
           <Consultation
             title={gradientText}
-            tag_one="Join us in shaping the future of enterprise AI. Partner with ReKnew to transform your business through innovative technology solutions."
+            tag_one="Join us in shaping the future of enterprise AI. Partner with ReKnew to transform your business."
             btn_name="Schedule a Consultation"
             className="relative z-10"
           />
         </div>
       </div>
-      </div>
-    </>
+    </div>
   );
 };
 

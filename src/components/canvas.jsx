@@ -106,7 +106,6 @@ export default function CanvasDots() {
     }, []);
     return <canvas ref={canvasRef} style={{
         position: "fixed",
-        backgroundColor: "",
         top: 0,
         left: 0,
         width: "100%",
