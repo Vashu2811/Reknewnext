@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import {
   ChevronRight,
@@ -15,44 +15,97 @@ import Consultation from "../../components/Consultation";
 import color from "../../../public/assets/logo-left-2.webp";
 import Image from "next/image";
 
-export 
-
 const OurStory = () => {
-  const metadata = {
-  title: "Our Story - AI-Powered Enterprise Transformation Journey",
-  description: "Discover ReKnew's journey from a bold idea to a game-changer in Enterprise AI. Learn how we transform hiring landscapes through ethical AI solutions and innovative enterprise transformation strategies.",
-  keywords: [
-    "ReKnew story",
-    "enterprise AI transformation",
-    "ethical AI hiring",
-    "business automation",
-    "AI-driven solutions", 
-    "enterprise technology",
-    "workflow optimization",
-    "data intelligence"
-  ],
-  openGraph: {
-    title: "Our Story - AI-Powered Enterprise Transformation Journey | ReKnew",
-    description: "From founding principles to real-world impact—learn how ReKnew.AI is transforming the hiring landscape and empowering enterprises through innovative AI solutions.",
-    url: "https://reknew.ai/ourstory",
-    images: [
-      {
-        url: "https://reknew.ai/assets/reknew-logo-white.png",
-        width: 1200,
-        height: 630,
-        alt: "ReKnew Story - Enterprise AI Transformation Journey",
-      },
-    ],
-  },
-  twitter: {
-    title: "Our Story - AI-Powered Enterprise Transformation Journey | ReKnew",
-    description: "From founding principles to real-world impact—learn how ReKnew.AI is transforming the hiring landscape and empowering enterprises.",
-  },
-  alternates: {
-    canonical: "https://reknew.ai/ourstory",
-  },
-};
-     
+  useEffect(() => {
+    // Set basic document title
+    document.title = "Our Story | ReKnew - AI-Powered Enterprise Transformation";
+    
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Discover ReKnew\'s journey from a bold idea to a game-changer in Enterprise AI. Learn how we transform hiring landscapes through ethical AI solutions and innovative enterprise transformation strategies.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Discover ReKnew\'s journey from a bold idea to a game-changer in Enterprise AI. Learn how we transform hiring landscapes through ethical AI solutions and innovative enterprise transformation strategies.';
+      document.head.appendChild(meta);
+    }
+
+    // Set keywords
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', 'ReKnew story, enterprise AI transformation, ethical AI hiring, business automation, AI-driven solutions, enterprise technology, workflow optimization, data intelligence');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'keywords';
+      meta.content = 'ReKnew story, enterprise AI transformation, ethical AI hiring, business automation, AI-driven solutions, enterprise technology, workflow optimization, data intelligence';
+      document.head.appendChild(meta);
+    }
+
+    // Set Open Graph tags
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', 'Our Story | ReKnew - AI-Powered Enterprise Transformation');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:title');
+      meta.content = 'Our Story | ReKnew - AI-Powered Enterprise Transformation';
+      document.head.appendChild(meta);
+    }
+
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+      ogDescription.setAttribute('content', 'From founding principles to real-world impact—learn how ReKnew.AI is transforming the hiring landscape and empowering enterprises through innovative AI solutions.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:description');
+      meta.content = 'From founding principles to real-world impact—learn how ReKnew.AI is transforming the hiring landscape and empowering enterprises through innovative AI solutions.';
+      document.head.appendChild(meta);
+    }
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) {
+      ogUrl.setAttribute('content', 'https://reknew.ai/ourstory');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:url');
+      meta.content = 'https://reknew.ai/ourstory';
+      document.head.appendChild(meta);
+    }
+
+    // Set Twitter Card tags
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) {
+      twitterTitle.setAttribute('content', 'Our Story | ReKnew - AI-Powered Enterprise Transformation');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'twitter:title';
+      meta.content = 'Our Story | ReKnew - AI-Powered Enterprise Transformation';
+      document.head.appendChild(meta);
+    }
+
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDescription) {
+      twitterDescription.setAttribute('content', 'Discover how ReKnew transforms enterprises through ethical AI hiring solutions and intelligent automation. From bold idea to industry game-changer.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'twitter:description';
+      meta.content = 'Discover how ReKnew transforms enterprises through ethical AI hiring solutions and intelligent automation. From bold idea to industry game-changer.';
+      document.head.appendChild(meta);
+    }
+
+    // Set canonical URL
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute('href', 'https://reknew.ai/ourstory');
+    } else {
+      const link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = 'https://reknew.ai/ourstory';
+      document.head.appendChild(link);
+    }
+  }, []);
+
   const gradientText = (
     <div className="text-[#374151]">
       Be Part of Our <span className="text-highlight pr-2">Story</span>

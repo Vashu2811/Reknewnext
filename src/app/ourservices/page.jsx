@@ -1,7 +1,4 @@
 "use client";
-
-
-
 import React, { useEffect, useState } from "react";
 import Aigraph from "../../../public/assets/slidericon-8.png";
 import Businessai from "../../../public/assets/slidericon-7.png";
@@ -92,44 +89,6 @@ const gradientText4 = (
 );
 
 const Ourservices = () => {
-   const metadata = {
-  title: "Our Services - AI Solutions & Enterprise Transformation",
-  description:
-    "Discover ReKnew's comprehensive AI services including intelligent automation, business process optimization, data analytics, cloud solutions, and enterprise transformation services.",
-  keywords: [
-    "AI services",
-    "enterprise transformation",
-    "intelligent automation",
-    "business process optimization",
-    "data analytics",
-    "cloud solutions",
-    "AI consulting",
-    "digital transformation services",
-    "ReKnew services",
-  ],
-  openGraph: {
-    title: "Our Services - AI Solutions & Enterprise Transformation | ReKnew",
-    description:
-      "Discover ReKnew's comprehensive AI services including intelligent automation, business process optimization, data analytics, and enterprise transformation.",
-    url: "https://reknew.ai/ourservices",
-    images: [
-      {
-        url: "https://reknew.ai/assets/reknew-logo-white.png",
-        width: 1200,
-        height: 630,
-        alt: "ReKnew AI Services - Enterprise Transformation Solutions",
-      },
-    ],
-  },
-  twitter: {
-    title: "Our Services - AI Solutions & Enterprise Transformation | ReKnew",
-    description:
-      "Discover ReKnew's comprehensive AI services including intelligent automation, business process optimization, and enterprise transformation.",
-  },
-  alternates: {
-    canonical: "https://reknew.ai/ourservices",
-  },
-};
   // eslint-disable-next-line no-unused-vars
   const [scrollProgress, setScrollProgress] = useState(0);
   const { scrollYProgress } = useScroll();
@@ -146,7 +105,7 @@ const Ourservices = () => {
   useEffect(() => {
     // Set basic document title
     document.title = "Our Services | ReKnew - Enterprise AI & Data Transformation Solutions";
-
+    
     // Set meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
@@ -916,8 +875,7 @@ const Ourservices = () => {
           <div className="flex flex-col gap-12">
             <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 justify-center items-center gap-8 min-h-[600px]">
               {journeySteps.map((item, index) => (
-                <div
-                  key={index}
+                <div  key={index}
                   className="group w-full bg-white/80 backdrop-blur-xl rounded-2xl p-6 
                                              border border-[#FF512F]/10 hover:border-[#FF512F]/30 
                                              transition-all duration-500 relative
