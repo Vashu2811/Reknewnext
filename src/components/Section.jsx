@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
+"use client";
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import './style.css';
@@ -15,11 +16,15 @@ const Section = ({
     description = '',
     primaryButton = {
         text: '',
-        // onClick: () => {}
+        href: '',
+        action: '',
+        onClick: null
     },
     secondaryButton = {
         text: '',
-        // onClick: () => {}
+        href: '',
+        action: '',
+        onClick: null
     },
     backgroundImage = color,
     className = ''
@@ -27,6 +32,40 @@ const Section = ({
     const sectionsRef = useRef({});
     const [index, setIndex] = useState(0);
     const words = rotatingWords;
+
+    const handleButtonClick = (button) => {
+        // If onClick function is provided (for client components), use it
+        if (button.onClick && typeof button.onClick === 'function') {
+            button.onClick();
+            return;
+        }
+
+        // Otherwise handle href and action (for server components)
+        if (button.href) {
+            // Navigate to URL
+            window.location.href = button.href;
+        } else if (button.action) {
+            // Handle specific actions
+            switch (button.action) {
+                case 'getStarted':
+                    console.log('Get Started clicked');
+                    // Add your get started logic here
+                    break;
+                case 'learnMore':
+                    console.log('Learn More clicked');
+                    // Add your learn more logic here
+                    break;
+                case 'contact':
+                    window.location.href = '/contact';
+                    break;
+                case 'services':
+                    window.location.href = '/ourservices';
+                    break;
+                default:
+                    console.log('Button clicked:', button.action);
+            }
+        }
+    };
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -39,7 +78,7 @@ const Section = ({
     return (
         <>
             <section
-                className={`w-full relative text-[#374151] min-h-screen body65 md:h-[760px] h-[550px] flex justify-center text-center p-0 m-0 overflow-hidden ${className}`}>
+                className={`w-full  relative text-[#374151] min-h-screen body65 md:h-[760px] h-[550px] flex justify-center text-center p-0 m-0 overflow-hidden ${className}`}>
                 <CanvasDots />
                 {/* {backgroundImage && (
                     <img 
@@ -98,26 +137,30 @@ const Section = ({
                     </div>
                     <div className="flex justify-center items-center">
                         <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
-                            <span
-                                // onClick={primaryButton.onClick}
-                                className="relative w-fit group inline-flex items-center justify-center px-3 lg:px-8 py-3 overflow-hidden rounded-lg bg-gradient-to-r from-[#FF512F] to-[#FF8A63] hover:from-[#FF8A63] hover:to-[#FF512F] transition-all duration-300 ease-out hover:scale-105 transform">
-                                <span className="relative flex justify-center items-center md:text-lg text-[14px] font-semibold text-white tracking-wide">
-                                    {primaryButton.text}
-                                    <span className="ml-2 inline-block transition-transform duration-200 group-hover:translate-x-1">
-                                        <ChevronRight />
+                            {primaryButton.text && (
+                                <button
+                                    onClick={() => handleButtonClick(primaryButton)}
+                                    className="relative w-fit group inline-flex items-center justify-center px-3 lg:px-8 py-3 overflow-hidden rounded-lg bg-gradient-to-r from-[#FF512F] to-[#FF8A63] hover:from-[#FF8A63] hover:to-[#FF512F] transition-all duration-300 ease-out hover:scale-105 transform">
+                                    <span className="relative flex justify-center items-center md:text-lg text-[14px] font-semibold text-white tracking-wide">
+                                        {primaryButton.text}
+                                        <span className="ml-2 inline-block transition-transform duration-200 group-hover:translate-x-1">
+                                            <ChevronRight />
+                                        </span>
                                     </span>
-                                </span>
-                            </span>
-                            <span
-                                // onClick={secondaryButton.onClick}
-                                className="relative w-fit group inline-flex items-center justify-center lg:px-8 py-3 px-3 overflow-hidden rounded-lg border-2 border-[#FF512F] bg-transparent hover:bg-gradient-to-r hover:from-[#FF512F] hover:to-[#FF8A63] transition-all duration-300 ease-out hover:scale-105 transform">
-                                <span className="relative flex justify-center items-center md:text-lg text-[14px] font-semibold text-[#FF512F] group-hover:text-white tracking-wide">
-                                    {secondaryButton.text}
-                                    <span className="ml-2 inline-block transition-transform duration-200 group-hover:translate-x-1">
-                                        <ChevronRight />
+                                </button>
+                            )}
+                            {secondaryButton.text && (
+                                <button
+                                    onClick={() => handleButtonClick(secondaryButton)}
+                                    className="relative w-fit group inline-flex items-center justify-center lg:px-8 py-3 px-3 overflow-hidden rounded-lg border-2 border-[#FF512F] bg-transparent hover:bg-gradient-to-r hover:from-[#FF512F] hover:to-[#FF8A63] transition-all duration-300 ease-out hover:scale-105 transform">
+                                    <span className="relative flex justify-center items-center md:text-lg text-[14px] font-semibold text-[#FF512F] group-hover:text-white tracking-wide">
+                                        {secondaryButton.text}
+                                        <span className="ml-2 inline-block transition-transform duration-200 group-hover:translate-x-1">
+                                            <ChevronRight />
+                                        </span>
                                     </span>
-                                </span>
-                            </span>
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

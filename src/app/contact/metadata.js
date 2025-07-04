@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Contact Us | ReKnew - Get Started with AI Transformation",
+  title: "Contact Us - Get Started with AI Transformation | ReKnew",
   description: "Ready to transform your business with AI? Contact ReKnew today to discuss your enterprise transformation needs. Let's collaborate to reimagine your hiring processes and business operations through intelligent automation.",
   keywords: [
     "contact ReKnew",
@@ -10,23 +10,57 @@ export const metadata = {
     "get started with AI",
     "ReKnew contact information",
     "enterprise automation consultation",
-    "AI implementation support"
+    "AI implementation support",
+    "schedule consultation",
+    "AI strategy meeting"
   ],
+  authors: [{ name: "ReKnew Team" }],
+  creator: "ReKnew",
+  publisher: "ReKnew",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: "Contact Us | ReKnew - Get Started with AI Transformation",
+    title: "Contact Us - Get Started with AI Transformation | ReKnew",
     description: "Ready to transform your business with AI? Contact ReKnew today to discuss your enterprise transformation needs and discover how intelligent automation can revolutionize your operations.",
     url: "https://reknew.ai/contact",
+    siteName: "ReKnew",
+    type: "website",
+    locale: "en_US",
     images: [
       {
         url: "https://reknew.ai/assets/reknew-logo-white.png",
         width: 1200,
         height: 630,
         alt: "ReKnew - Contact Us for Enterprise AI Transformation",
+        type: "image/png",
       },
     ],
   },
   twitter: {
-    title: "Contact Us | ReKnew - Get Started with AI Transformation",
+    card: "summary_large_image",
+    site: "@ReKnewAI",
+    creator: "@ReKnewAI",
+    title: "Contact Us - Get Started with AI Transformation | ReKnew",
     description: "Ready to transform your business with AI? Contact ReKnew today to discuss your enterprise transformation needs and intelligent automation solutions.",
+    images: ["https://reknew.ai/assets/reknew-logo-white.png"],
   },
+  alternates: {
+    canonical: "https://reknew.ai/contact",
+    languages: {
+      "en-US": "https://reknew.ai/contact",
+    },
+  },
+  category: "Contact",
+  classification: "Business Contact",
+  applicationName: "ReKnew",
+  referrer: "origin-when-cross-origin",
 };

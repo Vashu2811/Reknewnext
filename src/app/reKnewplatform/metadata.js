@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "ReKnew Platform | AI-Powered Enterprise Automation Platform",
+  title: "ReKnew Platform - AI-Powered Enterprise Automation Platform | ReKnew",
   description: "Explore the ReKnew Platform - an integrated AI solution for enterprise automation, workflow optimization, data intelligence, and business transformation. Transform your operations with our comprehensive AI-powered platform.",
   keywords: [
     "ReKnew platform",
@@ -11,23 +11,57 @@ export const metadata = {
     "digital transformation platform",
     "intelligent automation platform",
     "enterprise AI solutions",
-    "business process automation"
+    "business process automation",
+    "AI-powered dashboard",
+    "enterprise software platform"
   ],
+  authors: [{ name: "ReKnew Team" }],
+  creator: "ReKnew",
+  publisher: "ReKnew",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: "ReKnew Platform | AI-Powered Enterprise Automation Platform",
+    title: "ReKnew Platform - AI-Powered Enterprise Automation Platform | ReKnew",
     description: "Discover the ReKnew Platform - comprehensive AI solution for enterprise automation, workflow optimization, and business transformation. Revolutionize your operations with intelligent automation.",
     url: "https://reknew.ai/reKnewplatform",
+    siteName: "ReKnew",
+    type: "website",
+    locale: "en_US",
     images: [
       {
         url: "https://reknew.ai/assets/reknew-logo-white.png",
         width: 1200,
         height: 630,
         alt: "ReKnew Platform - Enterprise AI Automation Platform",
+        type: "image/png",
       },
     ],
   },
   twitter: {
-    title: "ReKnew Platform | AI-Powered Enterprise Automation",
+    card: "summary_large_image",
+    site: "@ReKnewAI",
+    creator: "@ReKnewAI",
+    title: "ReKnew Platform - AI-Powered Enterprise Automation | ReKnew",
     description: "Discover the ReKnew Platform - comprehensive AI solution for enterprise automation, workflow optimization, and intelligent business transformation.",
+    images: ["https://reknew.ai/assets/reknew-logo-white.png"],
   },
+  alternates: {
+    canonical: "https://reknew.ai/reKnewplatform",
+    languages: {
+      "en-US": "https://reknew.ai/reKnewplatform",
+    },
+  },
+  category: "Platform",
+  classification: "Technology Platform",
+  applicationName: "ReKnew",
+  referrer: "origin-when-cross-origin",
 };

@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Our Team | ReKnew - Expert AI & Enterprise Transformation Leaders",
+  title: "Our Team - Expert AI & Enterprise Transformation Leaders | ReKnew",
   description: "Meet the brilliant minds behind ReKnew's AI transformation solutions. Our team of experts in artificial intelligence, enterprise automation, and business optimization drives innovation and delivers exceptional results for clients worldwide.",
   keywords: [
     "ReKnew team",
@@ -10,23 +10,57 @@ export const metadata = {
     "technology innovation team",
     "AI transformation consultants",
     "enterprise solutions experts",
-    "ReKnew leadership"
+    "ReKnew leadership",
+    "machine learning engineers",
+    "data scientists"
   ],
+  authors: [{ name: "ReKnew Team" }],
+  creator: "ReKnew",
+  publisher: "ReKnew",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: "Our Team | ReKnew - Expert AI & Enterprise Transformation Leaders",
+    title: "Our Team - Expert AI & Enterprise Transformation Leaders | ReKnew",
     description: "Meet the brilliant minds behind ReKnew's AI transformation solutions. Our expert team drives innovation in enterprise automation, intelligent solutions, and business optimization.",
     url: "https://reknew.ai/ourteam",
+    siteName: "ReKnew",
+    type: "website",
+    locale: "en_US",
     images: [
       {
         url: "https://reknew.ai/assets/reknew-logo-white.png",
         width: 1200,
         height: 630,
         alt: "ReKnew Team - AI & Enterprise Transformation Experts",
+        type: "image/png",
       },
     ],
   },
   twitter: {
-    title: "Our Team | ReKnew - Expert AI & Enterprise Transformation Leaders",
+    card: "summary_large_image",
+    site: "@ReKnewAI",
+    creator: "@ReKnewAI",
+    title: "Our Team - Expert AI & Enterprise Transformation Leaders | ReKnew",
     description: "Meet the brilliant minds behind ReKnew's AI transformation solutions. Expert team driving innovation in enterprise automation and intelligent business solutions.",
+    images: ["https://reknew.ai/assets/reknew-logo-white.png"],
   },
+  alternates: {
+    canonical: "https://reknew.ai/ourteam",
+    languages: {
+      "en-US": "https://reknew.ai/ourteam",
+    },
+  },
+  category: "Team",
+  classification: "About Team",
+  applicationName: "ReKnew",
+  referrer: "origin-when-cross-origin",
 };

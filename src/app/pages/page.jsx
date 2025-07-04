@@ -87,14 +87,6 @@ import Section from '../../components/Section';
         restDelta: 0.001
     });
 
-    const handleExplore = () => {
-        console.log('Explore Solutions clicked');
-    };
-
-    const handleConsultation = () => {
-        console.log('Book a Consultation clicked');
-    };
-
     return (
         <div className="font-sans text-white w-full min-h-screen bg-cover bg-center">
                 <motion.div
@@ -119,11 +111,11 @@ import Section from '../../components/Section';
                             description="We help enterprises reduce inefficiencies, automate workflows, and unlock growth opportunities."
                             primaryButton={{
                                 text: "Explore Solutions",
-                                onClick: handleExplore
+                                action: "services"
                             }}
                             secondaryButton={{
                                 text: "Book a Consultation",
-                                onClick: handleConsultation
+                                action: "contact"
                             }}
                         />
                     </div>
