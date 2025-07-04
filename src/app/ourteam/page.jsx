@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import color from '../../../public/assets/logo-left-2.webp';
 import { Linkedin, Twitter, Mail, Users2, Lightbulb, Target, Workflow, Brain, Award } from 'lucide-react';
@@ -9,9 +9,40 @@ import Murlisir from '../../../public/assets/MurliSir.jpg';
 import Image from 'next/image';
 
 const OurTeam = () => {
-    useEffect(() => {
-        document.title = 'Our Team | ReKnew';
-    }, []);
+    const metadata = {
+  title: "Our Team - Meet the AI Transformation Experts",
+  description: "Meet ReKnew's expert team of AI specialists, enterprise transformation consultants, and technology leaders driving innovation in intelligent automation and business optimization.",
+  keywords: [
+    "ReKnew team",
+    "AI experts",
+    "enterprise transformation specialists",
+    "technology consultants",
+    "automation experts",
+    "AI leadership team",
+    "business transformation experts"
+  ],
+  openGraph: {
+    title: "Our Team - Meet the AI Transformation Experts | ReKnew",
+    description: "Meet ReKnew's expert team of AI specialists, enterprise transformation consultants, and technology leaders driving innovation.",
+    url: "https://reknew.ai/ourteam",
+    images: [
+      {
+        url: "https://reknew.ai/assets/reknew-logo-white.png",
+        width: 1200,
+        height: 630,
+        alt: "ReKnew Team - AI Transformation Experts",
+      },
+    ],
+  },
+  twitter: {
+    title: "Our Team - Meet the AI Transformation Experts | ReKnew",
+    description: "Meet ReKnew's expert team of AI specialists, enterprise transformation consultants, and technology leaders.",
+  },
+  alternates: {
+    canonical: "https://reknew.ai/ourteam",
+  },
+};
+
 
     
 const teamMembers = [

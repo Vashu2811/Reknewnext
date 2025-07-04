@@ -17,9 +17,40 @@ import Image from 'next/image';
 gsap.registerPlugin(ScrollTrigger);
 
 function ReKnewPlatform() {
-    useEffect(() => {
-        document.title = 'ReKnew Platform | ReKnew';
-    }, []);
+    const metadata = {
+  title: "ReKnew Platform - AI-Powered Enterprise Automation Platform",
+  description: "Explore the ReKnew Platform - an integrated AI solution for enterprise automation, workflow optimization, data intelligence, and business transformation. Transform your operations with our comprehensive platform.",
+  keywords: [
+    "ReKnew platform",
+    "AI platform",
+    "enterprise automation platform",
+    "workflow automation",
+    "business intelligence platform",
+    "AI integration platform",
+    "digital transformation platform"
+  ],
+  openGraph: {
+    title: "ReKnew Platform - AI-Powered Enterprise Automation Platform | ReKnew",
+    description: "Explore the ReKnew Platform - an integrated AI solution for enterprise automation, workflow optimization, and business transformation.",
+    url: "https://reknew.ai/reknewplatform",
+    images: [
+      {
+        url: "https://reknew.ai/assets/reknew-logo-white.png",
+        width: 1200,
+        height: 630,
+        alt: "ReKnew Platform - AI-Powered Enterprise Automation",
+      },
+    ],
+  },
+  twitter: {
+    title: "ReKnew Platform - AI-Powered Enterprise Automation Platform | ReKnew",
+    description: "Explore the ReKnew Platform - an integrated AI solution for enterprise automation and business transformation.",
+  },
+  alternates: {
+    canonical: "https://reknew.ai/reknewplatform",
+  },
+};
+
     const cardRefs = useRef([]);
     const headerRef = useRef(null);
 
