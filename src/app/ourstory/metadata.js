@@ -48,13 +48,13 @@ export const metadata = {
   openGraph: {
     title: "Our Story - Transforming Enterprise AI | ReKnew",
     description: "From founding principles to real-world impact—learn how ReKnew.AI is revolutionizing ethical AI hiring and enterprise transformation. Discover our mission to bridge legacy business models with AI-powered enterprises.",
-    url: "https://reknew.ai/ourstory",
+    url: "https://d3ni7pvekaqu2j.cloudfront.net/ourstory",
     siteName: "ReKnew",
     type: "website",
     locale: "en_US",
     images: [
       {
-        url: "https://reknew.ai/assets/reknew-logo-white.png",
+        url: "https://d3ni7pvekaqu2j.cloudfront.net/assets/reknew-logo-white.png",
         width: 1200,
         height: 630,
         alt: "ReKnew - Enterprise AI Transformation & Ethical Hiring Solutions",
@@ -70,14 +70,14 @@ export const metadata = {
     creator: "@ReKnewAI",
     title: "Our Story - Transforming Enterprise AI | ReKnew",
     description: "Discover how ReKnew transforms enterprises through ethical AI hiring solutions and intelligent automation. From bold idea to industry game-changer in enterprise transformation.",
-    images: ["https://reknew.ai/assets/reknew-logo-white.png"],
+    images: ["https://d3ni7pvekaqu2j.cloudfront.net/assets/reknew-logo-white.png"],
   },
   
   // Canonical URL and alternates
   alternates: {
-    canonical: "https://reknew.ai/ourstory",
+    canonical: "https://d3ni7pvekaqu2j.cloudfront.net/ourstory",
     languages: {
-      "en-US": "https://reknew.ai/ourstory",
+      "en-US": "https://d3ni7pvekaqu2j.cloudfront.net/ourstory",
     },
   },
   
@@ -106,7 +106,7 @@ export const metadata = {
     yandex: "your-yandex-verification-code",
     yahoo: "your-yahoo-verification-code",
     other: {
-      me: ["your-email@domain.com", "https://reknew.ai"],
+      me: ["your-email@domain.com", "https://d3ni7pvekaqu2j.cloudfront.net"],
     },
   },
   
