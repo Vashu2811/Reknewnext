@@ -1,8 +1,7 @@
 // pages/index.js
 'use client';
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import Helmet from 'next/head';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import CardList from '../../components/Foundation';
 import Consultation from '../../components/Consultation';
@@ -12,6 +11,75 @@ import ScrollToBottomButton from '../../components/scrollBottom';
 import Section from '../../components/Section';
 
  export default function MyHome() {
+    useEffect(() => {
+        // Set basic document title
+        document.title = 'ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation';
+        
+        // Set meta description
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', 'Transform your enterprise with ReKnew\'s AI-powered solutions. We help businesses reduce inefficiencies, automate workflows, and unlock growth opportunities through intelligent automation and data-driven insights.');
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'description';
+            meta.content = 'Transform your enterprise with ReKnew\'s AI-powered solutions. We help businesses reduce inefficiencies, automate workflows, and unlock growth opportunities through intelligent automation and data-driven insights.';
+            document.head.appendChild(meta);
+        }
+
+        // Set keywords
+        const metaKeywords = document.querySelector('meta[name="keywords"]');
+        if (metaKeywords) {
+            metaKeywords.setAttribute('content', 'AI enterprise transformation, intelligent automation, business process optimization, workflow automation, AI-powered solutions, enterprise AI, digital transformation, business efficiency, ReKnew AI');
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'keywords';
+            meta.content = 'AI enterprise transformation, intelligent automation, business process optimization, workflow automation, AI-powered solutions, enterprise AI, digital transformation, business efficiency, ReKnew AI';
+            document.head.appendChild(meta);
+        }
+
+        // Set Open Graph tags
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) {
+            ogTitle.setAttribute('content', 'ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation');
+        } else {
+            const meta = document.createElement('meta');
+            meta.setAttribute('property', 'og:title');
+            meta.content = 'ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation';
+            document.head.appendChild(meta);
+        }
+
+        const ogDescription = document.querySelector('meta[property="og:description"]');
+        if (ogDescription) {
+            ogDescription.setAttribute('content', 'Reimagine, revitalize, and reinvent how your business operates. ReKnew helps enterprises reduce inefficiencies, automate workflows, and unlock growth through AI-powered transformation.');
+        } else {
+            const meta = document.createElement('meta');
+            meta.setAttribute('property', 'og:description');
+            meta.content = 'Reimagine, revitalize, and reinvent how your business operates. ReKnew helps enterprises reduce inefficiencies, automate workflows, and unlock growth through AI-powered transformation.';
+            document.head.appendChild(meta);
+        }
+
+        const ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) {
+            ogUrl.setAttribute('content', 'https://reknew.ai/');
+        } else {
+            const meta = document.createElement('meta');
+            meta.setAttribute('property', 'og:url');
+            meta.content = 'https://reknew.ai/';
+            document.head.appendChild(meta);
+        }
+
+        // Set canonical URL
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) {
+            canonical.setAttribute('href', 'https://reknew.ai/');
+        } else {
+            const link = document.createElement('link');
+            link.rel = 'canonical';
+            link.href = 'https://reknew.ai/';
+            document.head.appendChild(link);
+        }
+    }, []);
+
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
         stiffness: 100,
@@ -28,12 +96,7 @@ import Section from '../../components/Section';
     };
 
     return (
-        <>
-            <Helmet>
-                <title>Home | ReKnew</title>
-            </Helmet>
-
-            <div className="font-sans text-white w-full min-h-screen bg-cover bg-center">
+        <div className="font-sans text-white w-full min-h-screen bg-cover bg-center">
                 <motion.div
                     className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF512F] to-[#FF8A63] z-50"
                     style={{ scaleX }}
@@ -132,7 +195,6 @@ import Section from '../../components/Section';
                     </div>
                 </div>
             </div>
-        </>
     );
 };
 

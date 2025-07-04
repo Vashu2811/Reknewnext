@@ -1,115 +1,3 @@
-// "use client";
-// import React, { useState } from "react";
-// import Link from "next/link";
-// import Image from "next/image";
-// import { usePathname } from "next/navigation";
-// import { ArrowRight, Menu, X } from "lucide-react";
-// import Logo from "../../public/images/Reknew-logo.png";
-
-// export default function Navbar() {
-//   const [isMenuOpen, setIsMenuOpen] = useState(false);
-//   const pathname = usePathname(); // Get current path
-
-//   const toggleMenu = () => {
-//     setIsMenuOpen(!isMenuOpen);
-//   };
-
-// const navLinks = [
-//   { to: "/", label: "Home" },
-//   { to: "/our-story", label: "Our Story" },
-//   { to: "/reKnew-Platform", label: "The ReKnew Platform" },
-//   { to: "/our-services", label: "Our Services" },
-//   { to: "/our-team", label: "Our Team" },
-//   { to: "/contact", label: "Contact Us" },
-// ];
-
-//   return (
-
-// <div
-//   className="border-b"
-//   style={{
-//     borderImageSource:
-//       "linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 52.07%, rgba(255, 255, 255, 0) 100%)",
-//     borderImageSlice: 1,
-//   }}
-// >
-//   <nav className="w-full mx-auto px-4 py-4 gap-6 flex sm:justify-evenly md:justify-between lg:justify-center justify-between items-center h-[110px] lg:h-[90px] xl:h-[100px]">
-//     {/* Logo */}
-//     <Link href="/">
-//       <Image
-//         // src="/Reknew-logo.png"
-//         src={Logo}
-//         alt="ReKnew logo"
-//         width={140}
-//         height={40}
-//         className="w-[120px] lg:w-[140px] xl:w-[150px] h-auto"
-//         priority
-//       />
-//     </Link>
-
-//     {/* Navigation Links */}
-//     <div className="hidden  lg:flex md:gap-4 lg:gap-6 xl:gap-10 text-white text-sm xl:text-base whitespace-nowrap">
-//       {navLinks.map((item, i) => (
-//         <Link
-//           key={i}
-//           href={item.to}
-//           className={`transition-colors cursor-pointer ${
-//             pathname === item.to ? "text-[#665EE9] font-bold" : "hover:text-[#665EE9]"
-//           }`}
-//         >
-//           {item.label}
-//         </Link>
-//       ))}
-//     </div>
-
-//     {/* Buttons */}
-//     <div className="hidden lg:flex gap-3 xl:gap-5 md:ml-[70px] lg:ml-[70px] whitespace-pre overflow-x-hidden">
-//       <button className="px-4 py-2 flex  text-white font-semibold rounded-lg border border-[#636668]  justify-center hover:bg-gray-800 transition">
-//         Log In
-//       </button>
-
-//       <button className="px-5 py-2 bg-white text-black font-semibold rounded-lg hover:bg-[#665EE9] hover:text-white transition flex justify-center items-center">
-//         Explore Our Platform <ArrowRight className="ml-1 h-4 w-4" />
-//       </button>
-//     </div>
-
-//     {/* Mobile Menu Button */}
-//     <button className="lg:hidden" onClick={toggleMenu}>
-//       {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-//     </button>
-//   </nav>
-
-//   {/* Mobile Menu */}
-//   {isMenuOpen && (
-//     <div className="lg:hidden bg-gray-900 py-4">
-//       <div className="container mx-auto px-4 flex flex-col space-y-4">
-//         {navLinks.map(({ href, label }) => (
-//           <Link
-//             key={href}
-//             href={href}
-//             className={`transition-colors cursor-pointer ${
-//               pathname === href ? "text-[#665EE9] font-bold" : "hover:text-[#665EE9]"
-//             }`}
-//           >
-//             {label}
-//           </Link>
-//         ))}
-//         <div className="flex flex-col space-y-2 pt-4">
-//           <button className="px-3 py-2 text-sm font-semibold text-white rounded-lg border border-[#636668] hover:bg-gray-800 transition">
-//             Log In
-//           </button>
-//           <button className="px-4 py-2 text-sm font-semibold text-black rounded-lg bg-white hover:bg-blue-700 transition flex items-center justify-center">
-//             Explore Our Platform <ArrowRight className="ml-2 h-5 w-5" />
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   )}
-// </div>
-
-//   );
-// }
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -125,7 +13,7 @@ import {
   Instagram,
   Linkedin,
 } from "lucide-react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -147,7 +35,7 @@ export default function Navbar() {
 
   const handleNavigation = (e, to) => {
     e.preventDefault(); // prevent the default link behavior
-    router.push(to);    // navigate programmatically
+    router.push(to); // navigate programmatically
     setIsMenuOpen(false);
     setIsTransitioning(false);
     window.scrollTo(0, 0);
@@ -167,7 +55,17 @@ export default function Navbar() {
     { to: "/contact", label: "Contact Us" },
   ];
 
-  const isActive = (path) => pathname === path;
+  // Normalize pathname by removing trailing slash (except for root)
+  const normalizePathname = (path) => {
+    if (path === '/') return path;
+    return path.endsWith('/') ? path.slice(0, -1) : path;
+  };
+
+  const isActive = (path) => {
+    const currentPath = normalizePathname(pathname);
+    const linkPath = normalizePathname(path);
+    return currentPath === linkPath;
+  };
 
   return (
     <div className="font-sans" style={{ position: "relative", zIndex: 50 }}>
@@ -262,21 +160,22 @@ export default function Navbar() {
                         {label}
                       </span>
                     </Link>
-                  ))} */} {navLinks.map(({ to, label }) => (
-        <a
-        key={to}
-        href={to}
-        onClick={(e) => handleNavigation(e, to)}
-        className={`group flex text-base md:text-[28px] lg:text-[28px] font-medium ${
-          isActive(to) ? 'text-[#ff7155]' : 'text-gray-700'
-        }`}
-      >
-        <span className="relative overflow-hidden pl-0 group-hover:pl-8 transition-all hover:text-[#ff7155] duration-500 ease-out">
-          <span className="absolute left-0 w-6 h-[1px] bg-[#ff7155] top-[50%] hover:text-[#ff7155] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
-          {label}
-        </span>
-      </a>
-    ))}
+                  ))} */}{" "}
+                  {navLinks.map(({ to, label }) => (
+                    <a
+                      key={to}
+                      href={to}
+                      onClick={(e) => handleNavigation(e, to)}
+                      className={`group flex text-base md:text-[28px] lg:text-[28px] font-medium ${
+                        isActive(to) ? "text-[#ff7155]" : "text-gray-700"
+                      }`}
+                    >
+                      <span className="relative overflow-hidden pl-0 group-hover:pl-8 transition-all hover:text-[#ff7155] duration-500 ease-out">
+                        <span className="absolute left-0 w-6 h-[1px] bg-[#ff7155] top-[50%] hover:text-[#ff7155] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                        {label}
+                      </span>
+                    </a>
+                  ))}
                 </nav>
 
                 <div className="h-full flex items-center justify-start p-8">

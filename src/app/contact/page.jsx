@@ -10,7 +10,72 @@ import Image from 'next/image';
 const ContectUs = () => {
     
     useEffect(() => {
-        document.title = 'Contect Us | ReKnew';
+        // Set basic document title
+        document.title = 'Contact Us | ReKnew - Get Started with AI Transformation';
+        
+        // Set meta description
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', 'Ready to transform your business with AI? Contact ReKnew today to discuss your enterprise transformation needs. Let\'s collaborate to reimagine your hiring processes and business operations.');
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'description';
+            meta.content = 'Ready to transform your business with AI? Contact ReKnew today to discuss your enterprise transformation needs. Let\'s collaborate to reimagine your hiring processes and business operations.';
+            document.head.appendChild(meta);
+        }
+
+        // Set keywords
+        const metaKeywords = document.querySelector('meta[name="keywords"]');
+        if (metaKeywords) {
+            metaKeywords.setAttribute('content', 'contact ReKnew, AI transformation consultation, enterprise AI services, business transformation, AI hiring solutions, get started with AI, ReKnew contact information');
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'keywords';
+            meta.content = 'contact ReKnew, AI transformation consultation, enterprise AI services, business transformation, AI hiring solutions, get started with AI, ReKnew contact information';
+            document.head.appendChild(meta);
+        }
+
+        // Set Open Graph tags
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) {
+            ogTitle.setAttribute('content', 'Contact Us | ReKnew - Get Started with AI Transformation');
+        } else {
+            const meta = document.createElement('meta');
+            meta.setAttribute('property', 'og:title');
+            meta.content = 'Contact Us | ReKnew - Get Started with AI Transformation';
+            document.head.appendChild(meta);
+        }
+
+        const ogDescription = document.querySelector('meta[property="og:description"]');
+        if (ogDescription) {
+            ogDescription.setAttribute('content', 'Ready to explore ethical AI hiring and enterprise transformation? Reach out to ReKnew - we\'d love to discuss your goals and how we can help revolutionize your business.');
+        } else {
+            const meta = document.createElement('meta');
+            meta.setAttribute('property', 'og:description');
+            meta.content = 'Ready to explore ethical AI hiring and enterprise transformation? Reach out to ReKnew - we\'d love to discuss your goals and how we can help revolutionize your business.';
+            document.head.appendChild(meta);
+        }
+
+        const ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) {
+            ogUrl.setAttribute('content', 'https://reknew.ai/contact');
+        } else {
+            const meta = document.createElement('meta');
+            meta.setAttribute('property', 'og:url');
+            meta.content = 'https://reknew.ai/contact';
+            document.head.appendChild(meta);
+        }
+
+        // Set canonical URL
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) {
+            canonical.setAttribute('href', 'https://reknew.ai/contact');
+        } else {
+            const link = document.createElement('link');
+            link.rel = 'canonical';
+            link.href = 'https://reknew.ai/contact';
+            document.head.appendChild(link);
+        }
     }, []);
     const gradientText = (
         <div className="text-[#232323]">
@@ -33,8 +98,7 @@ const ContectUs = () => {
     };
 
     return (
-        <>
-            <div className="text-[#232323] font-sans w-full min-h-screen overflow-x-hidden">
+        <div className="text-[#232323] font-sans w-full min-h-screen overflow-x-hidden">
                 {/* <Section 
                 rotatingWords={['Partner', 'Collaborate', 'Connect']}
                 headingStart="With Us to"
@@ -422,7 +486,6 @@ const ContectUs = () => {
                     </div>
                 </div>
             </div>
-        </>
     );
 };
 

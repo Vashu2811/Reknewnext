@@ -103,7 +103,72 @@ const Ourservices = () => {
   const parallaxY = { y: 0 }; // Simplified static value
 
   useEffect(() => {
-    document.title = "Our Services | ReKnew";
+    // Set basic document title
+    document.title = "Our Services | ReKnew - Enterprise AI & Data Transformation Solutions";
+    
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Discover ReKnew\'s comprehensive AI and data transformation services. From data modernization to generative AI solutions, we help enterprises scale and innovate through intelligent automation and analytics.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Discover ReKnew\'s comprehensive AI and data transformation services. From data modernization to generative AI solutions, we help enterprises scale and innovate through intelligent automation and analytics.';
+      document.head.appendChild(meta);
+    }
+
+    // Set keywords
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', 'enterprise AI services, data transformation, business intelligence, AI analytics, data modernization, cloud migration, machine learning solutions, enterprise automation, data governance, digital transformation');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'keywords';
+      meta.content = 'enterprise AI services, data transformation, business intelligence, AI analytics, data modernization, cloud migration, machine learning solutions, enterprise automation, data governance, digital transformation';
+      document.head.appendChild(meta);
+    }
+
+    // Set Open Graph tags
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', 'Our Services | ReKnew - Enterprise AI & Data Transformation Solutions');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:title');
+      meta.content = 'Our Services | ReKnew - Enterprise AI & Data Transformation Solutions';
+      document.head.appendChild(meta);
+    }
+
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+      ogDescription.setAttribute('content', 'Transform your enterprise with ReKnew\'s comprehensive AI and data services. Leverage data modernization, AI-powered analytics, and intelligent automation for business growth.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:description');
+      meta.content = 'Transform your enterprise with ReKnew\'s comprehensive AI and data services. Leverage data modernization, AI-powered analytics, and intelligent automation for business growth.';
+      document.head.appendChild(meta);
+    }
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) {
+      ogUrl.setAttribute('content', 'https://reknew.ai/ourservices');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:url');
+      meta.content = 'https://reknew.ai/ourservices';
+      document.head.appendChild(meta);
+    }
+
+    // Set canonical URL
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute('href', 'https://reknew.ai/ourservices');
+    } else {
+      const link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = 'https://reknew.ai/ourservices';
+      document.head.appendChild(link);
+    }
 
     const handleScroll = () => {
       const winScroll = document.documentElement.scrollTop;

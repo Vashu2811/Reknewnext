@@ -26,8 +26,6 @@ const Footer = () => {
   const handleNavigation = (e, path) => {
     e.preventDefault(); // prevent default anchor behavior
     router.push(path); // programmatic navigation
-    setIsMenuOpen(false);
-    setIsTransitioning(false);
     window.scrollTo(0, 0);
   };
   return (
