@@ -24,9 +24,53 @@ const Slide = ({ isActive, children }) => (
 const SuccessstorySliderSection = () => {
     const [activeSlide, setActiveSlide] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-    // eslint-disable-next-line no-unused-vars
     const [direction, setDirection] = useState(0);
-    // const [ setAutoSlide] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Listen for theme changes from navbar
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark = document.documentElement.classList.contains('dark') || 
+                          document.body.classList.contains('dark') ||
+                          localStorage.getItem('theme') === 'dark';
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === 'theme') {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        window.addEventListener('themeChanged', checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('themeChanged', checkTheme);
+        };
+    }, []);
 
     const slides = [
         { id: '1', title: 'Real-Time Engagement', content: <SuccessStoryOne /> },
@@ -79,7 +123,7 @@ const SuccessstorySliderSection = () => {
                 {/* Header */}
                 <div className="text-center mb-4 sm:mb-8 pt-6 sm:pt-10 px-4">
                     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 text-[#374151] dark:text-white">Success Stories</h2>
+                        <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 ${isDarkMode ? 'text-white' : 'text-[#374151]'}`}>Success Stories</h2>
                     </motion.div>
                 </div>
 
@@ -93,7 +137,7 @@ const SuccessstorySliderSection = () => {
                                 className={`px-3 py-2 sm:py-2.5 rounded-lg transition-all duration-300 whitespace-normal md:whitespace-nowrap text-sm md:text-base flex-grow md:flex-grow-0 mb-2 md:mb-0 ${
                                     activeSlide === index
                                         ? 'bg-[#FF512F] text-white shadow-md'
-                                        : 'bg-white/70 dark:bg-slate-800/70 text-gray-700 dark:text-gray-300 hover:bg-[#FF512F]/10'
+                                        : `${isDarkMode ? 'bg-slate-800/70 text-gray-300' : 'bg-white/70 text-gray-700'} hover:bg-[#FF512F]/10`
                                 }`}>
                                 <span className="text-base md:text-lg">{slide.title}</span>
                             </button>
@@ -117,10 +161,11 @@ const SuccessstorySliderSection = () => {
                 <div className="flex justify-center space-x-4 mt-4 md:mt-0">
                     <button
                         onClick={prevSlide}
-                        className="absolute left-4 md:left-6 lg:left-8 bottom-4 md:bottom-auto md:top-1/2 xl:top-[60%] transform md:-translate-y-1/2 
-                        text-black dark:text-white size-10 md:size-14 flex justify-center items-center z-20 
-                        shadow-lg transition-all duration-300 border-2 border-[#FF512F] dark:border-[#FF512F] 
-                        p-2 md:p-3 rounded-full dark:bg-gray-800 bg-white/80 hover:bg-white group"
+                        className={`absolute left-4 md:left-6 lg:left-8 bottom-4 md:bottom-auto md:top-1/2 xl:top-[60%] transform md:-translate-y-1/2 
+                        size-10 md:size-14 flex justify-center items-center z-20 
+                        shadow-lg transition-all duration-300 border-2 border-[#FF512F] 
+                        p-2 md:p-3 rounded-full hover:bg-white group
+                        ${isDarkMode ? 'text-white bg-gray-800' : 'text-black bg-white/80'}`}
                         aria-label="Previous Slide">
                         <div className="flex items-center justify-center w-full h-full">
                             <Image src={Arrow} alt="Previous" className="rotate-[210deg] w-[67.5%] left-2 top-[9px] absolute object-contain" loading="lazy" />
@@ -129,10 +174,11 @@ const SuccessstorySliderSection = () => {
 
                     <button
                         onClick={nextSlide}
-                        className="absolute right-4 md:right-6 lg:right-8 bottom-4 md:bottom-auto md:top-1/2 xl:top-[60%] transform md:-translate-y-1/2
-                        text-black dark:text-white size-10 md:size-14 flex justify-center items-center z-20 
-                        shadow-lg transition-all duration-300 border-2 border-[#FF512F] dark:border-[#FF512F] 
-                        p-2 md:p-3 rounded-full dark:bg-gray-800 bg-white/80 hover:bg-white group"
+                        className={`absolute right-4 md:right-6 lg:right-8 bottom-4 md:bottom-auto md:top-1/2 xl:top-[60%] transform md:-translate-y-1/2
+                        size-10 md:size-14 flex justify-center items-center z-20 
+                        shadow-lg transition-all duration-300 border-2 border-[#FF512F] 
+                        p-2 md:p-3 rounded-full hover:bg-white group
+                        ${isDarkMode ? 'text-white bg-gray-800' : 'text-black bg-white/80'}`}
                         aria-label="Next Slide">
                         <div className="flex items-center justify-center w-full h-full">
                             <Image src={Arrow} alt="Next" className="rotate-[28deg] w-[67.5%] right-2 top-[13px] absolute object-contain" loading="lazy" />
@@ -147,7 +193,7 @@ const SuccessstorySliderSection = () => {
                             key={index}
                             onClick={() => handleSlideChange(index)}
                             className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                                activeSlide === index ? 'bg-[#FF512F] w-2.5' : 'bg-gray-300 dark:bg-gray-600'
+                                activeSlide === index ? 'bg-[#FF512F] w-2.5' : `${isDarkMode ? 'bg-gray-600' : 'bg-gray-300'}`
                             }`}
                             aria-label={`Go to slide ${index + 1}`}
                         />

@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
+import { useTheme } from "@/Context/ThemeContext";
 
 const SuccessStoryThree = () => {
+    const { theme } = useTheme();
+    const isDarkMode = theme === 'dark';
+
     const item = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 }
@@ -30,7 +34,7 @@ const SuccessStoryThree = () => {
     ];
 
     return (
-        <div className="dark:text-gray-100 relative overflow-hidden px-4">
+        <div className={`relative overflow-hidden px-4 ${isDarkMode ? 'text-gray-100' : 'text-gray-900'}`}>
         
             {/* Header Section */}
             <div className="container mx-auto max-w-7xl px-8 relative z-10">
@@ -41,31 +45,39 @@ const SuccessStoryThree = () => {
                     className="mb-12 text-center"
                 >
                   
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#374151] to-[#374151]/80 dark:from-gray-100 dark:to-gray-100">
+                    <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${
+                        isDarkMode 
+                            ? 'bg-gradient-to-r from-gray-100 to-gray-100 bg-clip-text text-transparent' 
+                            : 'bg-gradient-to-r from-[#374151] to-[#374151]/80 bg-clip-text text-transparent'
+                    }`}>
                         Cut Costs. Elevate Experience.
                         <span className="relative inline-block mx-2">
-                            <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F]">Delight</span>
+                            <span className="relative z-10 text-[#FF512F]">Delight</span>
                             <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
                                 <path
                                     d="M0 5c30-5 70-5 100 0"
                                     stroke="currentColor"
                                     strokeWidth="2"
                                     fill="none"
-                                    className="text-[#FF512F] dark:text-[#FF512F] transition-all duration-300"
+                                    className="text-[#FF512F] transition-all duration-300"
                                 />
                             </svg>
                         </span>
                         Customers.
                     </h2>
                     
-                    <p className="text-[#374151] dark:text-gray-100 text-lg max-w-4xl mx-auto leading-relaxed">
+                    <p className={`text-lg max-w-4xl mx-auto leading-relaxed ${isDarkMode ? 'text-gray-100' : 'text-[#374151]'}`}>
                         We optimized a large national financial institution's customer service division by deploying AI-powered models across digital channels,
                         ultimately reducing operational expenses, enhancing efficiency, and increasing client satisfaction.
                     </p>
                 </motion.div>
                 
                 {/* Content Section - Responsive Layout */}
-                <div className="flex flex-col lg:flex-row gap-8 bg-white/30 dark:bg-slate-800/30 backdrop-blur-md p-2 rounded-2xl border border-gray-100 dark:border-slate-700">
+                <div className={`flex flex-col lg:flex-row gap-8 backdrop-blur-md p-6 rounded-2xl border ${
+                    isDarkMode 
+                        ? 'bg-slate-800/30 border-slate-700' 
+                        : 'bg-white/30 border-gray-200'
+                }`}>
                     {/* Left Column - Actions and Outcomes */}
                     <motion.div 
                         initial="hidden"
@@ -75,10 +87,14 @@ const SuccessStoryThree = () => {
                     >
                         <motion.div 
                             variants={item} 
-                            className="bg-white/50 dark:bg-slate-800/40 backdrop-blur-sm p-5 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 mb-4"
+                            className={`backdrop-blur-sm p-5 rounded-xl shadow-sm border mb-4 ${
+                                isDarkMode 
+                                    ? 'bg-slate-800/40 border-slate-700' 
+                                    : 'bg-white/70 border-gray-200'
+                            }`}
                         >
-                            <h3 className="text-lg font-semibold text-[#FF512F] dark:text-[#FF512F] mb-3">Main Actions</h3>
-                            <ul className="text-sm md:text-lg text-slate-600 dark:text-slate-300 space-y-2 pl-5 list-disc mt-2">
+                            <h3 className="text-lg font-semibold text-[#FF512F] mb-3">Main Actions</h3>
+                            <ul className={`text-sm md:text-lg space-y-2 pl-5 list-disc mt-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                                 {actions.map((action, idx) => (
                                     <li key={idx} className="leading-relaxed">{action}</li>
                                 ))}
@@ -87,10 +103,14 @@ const SuccessStoryThree = () => {
                         
                         <motion.div 
                             variants={item} 
-                            className="bg-white/50 dark:bg-slate-800/40 backdrop-blur-sm p-5 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700"
+                            className={`backdrop-blur-sm p-5 rounded-xl shadow-sm border ${
+                                isDarkMode 
+                                    ? 'bg-slate-800/40 border-slate-700' 
+                                    : 'bg-white/70 border-gray-200'
+                            }`}
                         >
-                            <h3 className="text-lg font-semibold text-[#FF512F] dark:text-[#FF512F] mb-3">Outcomes</h3>
-                            <ul className="text-sm md:text-lg text-slate-600 dark:text-slate-300 space-y-2 pl-5 list-disc mt-2">
+                            <h3 className="text-lg font-semibold text-[#FF512F] mb-3">Outcomes</h3>
+                            <ul className={`text-sm md:text-lg space-y-2 pl-5 list-disc mt-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                                 {outcomes.map((outcome, idx) => (
                                     <li key={idx} className="leading-relaxed">{outcome}</li>
                                 ))}
@@ -109,7 +129,7 @@ const SuccessStoryThree = () => {
                             transition={{ duration: 0.6, delay: 0.3 }}
                             className="overflow-hidden"
                         >
-                            <svg className="w-full h-auto text-black dark:text-gray-100" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                            <svg className={`w-full h-auto ${isDarkMode ? 'text-gray-100' : 'text-black'}`} viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                                 <defs>
                                     <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" style={{ stopColor: '#FF512F', stopOpacity: 1 }} />
@@ -129,7 +149,6 @@ const SuccessStoryThree = () => {
                                     </filter>
                                 </defs>
                                 
-                                {/* Rest of the SVG content remains unchanged */}
                                 <rect x="0" y="0" width="800" height="600" fill="none" rx="10" ry="10" />
                                 <text x="440" y="30" textAnchor="middle" fontSize="22" fontWeight="bold" className="fill-current">
                                     Optimize / Personalize
@@ -247,15 +266,19 @@ const SuccessStoryThree = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.6 }}
-                            className=" p-4 bg-white/50 dark:bg-slate-800/40 border border-[#FF512F]/20 rounded-lg flex flex-wrap gap-4"
+                            className={`p-4 border border-[#FF512F]/20 rounded-lg flex flex-wrap gap-4 ${
+                                isDarkMode 
+                                    ? 'bg-slate-800/40' 
+                                    : 'bg-white/70'
+                            }`}
                         >
                             <div className="flex items-center">
                                 <span className="inline-block w-4 h-4 rounded-sm bg-gradient-to-br from-[#FF512F] to-[#F09819] mr-2"></span>
-                                <span className="text-sm text-[#374151] dark:text-gray-200">Data Flow</span>
+                                <span className={`text-sm ${isDarkMode ? 'text-gray-200' : 'text-[#374151]'}`}>Data Flow</span>
                             </div>
                             <div className="flex items-center">
                                 <span className="inline-block w-4 h-4 rounded-sm bg-gradient-to-br from-[#FF512F] to-[#DD2476] mr-2"></span>
-                                <span className="text-sm text-[#374151] dark:text-gray-200">Digital Interaction</span>
+                                <span className={`text-sm ${isDarkMode ? 'text-gray-200' : 'text-[#374151]'}`}>Digital Interaction</span>
                             </div>
                         </motion.div>
                     </div>

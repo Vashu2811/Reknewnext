@@ -6,12 +6,14 @@ import { usePathname } from 'next/navigation';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../Context/ThemeContext';
+import { useThemeStyles } from '../hooks/useThemeStyles';
 import logoBlack from '../../public/assets/rklogo_black.png';
 import logoWhite from '../../public/assets/reknew-logo-white.png';
 
 const Navbar = () => {
   const pathname = usePathname();
-  const { theme, toggleTheme, mounted } = useTheme();
+  const { toggleTheme } = useTheme();
+  const { isDark, mounted, themeStyles, currentTheme } = useThemeStyles();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [,setOpenSubmenu] = useState(null);
   const [scrolled, setScrolled] = useState(false);
@@ -21,7 +23,6 @@ const Navbar = () => {
     { href: '/capabilities', label: 'Capabilities' },
     { href: '/perspectives', label: 'Perspectives' },
     { href: '/about-us', label: 'About Us' }
-    // You can add submenus with `hasSubmenu: true, submenu: [...]`
   ], []);
 
   const isActive = useCallback(
@@ -79,13 +80,17 @@ const Navbar = () => {
     <header 
       className={`w-full z-50 ${
         scrolled 
-          ? 'fixed top-0 bg-white/90 dark:bg-gray-900/90 shadow-md backdrop-blur-sm border-b border-[#FF512F]/10 dark:border-[#FF512F]/10' 
+          ? `fixed top-0 shadow-md backdrop-blur-sm border-b transition-all duration-500 ${
+              isDark 
+                ? 'bg-gray-900/95 border-orange-500/20' 
+                : 'bg-white/95 border-orange-500/20'
+            }` 
           : 'relative bg-transparent'
-      } transition-all duration-500 ease-in-out`}
+      } ease-in-out`}
     >
       {/* Progress indicator when scrolled */}
       {scrolled && (
-        <div className="absolute top-0 left-0 h-0.5 w-full bg-gradient-to-r from-[#FF512F] to-[#FF8A63] dark:from-[#FF512F] dark:to-[#FF8A63] opacity-70"></div>
+        <div className="absolute top-0 left-0 h-0.5 w-full bg-gradient-to-r from-[#FF512F] to-[#FF8A63] opacity-70"></div>
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex justify-between items-center h-[80px] relative">
@@ -95,7 +100,7 @@ const Navbar = () => {
           className="transition-transform duration-300 hover:scale-105"
         >
           <Image
-            src={theme === 'dark' ? logoWhite : logoBlack}
+            src={isDark ? logoWhite : logoBlack}
             alt="ReKnew Logo"
             height={40}
             width={120}
@@ -107,7 +112,7 @@ const Navbar = () => {
         {/* Mobile menu toggle */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-[#FF512F]/10 dark:hover:bg-[#FF512F]/10 hover:text-[#FF512F] transition-all"
+          className={`md:hidden p-2 rounded-md transition-all ${themeStyles.button.ghost}`}
           aria-label="Toggle menu"
         >
           {isMenuOpen ? (
@@ -139,13 +144,13 @@ const Navbar = () => {
                   onClick={handleNavigation}
                   className={`relative px-3 py-2 text-base md:text-lg transition-colors duration-300 font-medium group ${
                     isActive(item.href) 
-                      ? 'text-[#FF512F] dark:text-[#FF512F]' 
-                      : 'text-gray-800 dark:text-gray-200'
-                  } hover:text-[#FF512F]`}
+                      ? themeStyles.text.accent 
+                      : `${themeStyles.text.primary} hover:text-[#FF512F]`
+                  }`}
                 >
                   {item.label}
                   <span 
-                    className={`absolute left-0 -bottom-1 h-0.5 w-full bg-gradient-to-r from-[#FF512F] to-[#FF8A63] dark:from-[#FF512F] dark:to-[#FF8A63] transition-transform origin-left duration-300 ${
+                    className={`absolute left-0 -bottom-1 h-0.5 w-full bg-gradient-to-r from-[#FF512F] to-[#FF8A63] transition-transform origin-left duration-300 ${
                       isActive(item.href) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                     }`} 
                   />
@@ -156,10 +161,10 @@ const Navbar = () => {
 
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-[#FF512F]/10 dark:hover:bg-[#FF512F]/10 hover:text-[#FF512F] transition-all"
+            className={`p-2 rounded-md transition-all ${themeStyles.button.ghost}`}
             aria-label="Toggle Theme"
           >
-            {theme === 'dark' ? (
+            {isDark ? (
               <Sun size={20} className="transition-transform duration-500 hover:rotate-90" />
             ) : (
               <Moon size={20} className="transition-transform duration-500 hover:-rotate-90" />
@@ -175,7 +180,11 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg rounded-b-2xl border-t border-[#FF512F]/10 dark:border-[#FF512F]/10 py-4 px-6 md:hidden z-50"
+              className={`absolute top-full left-0 right-0 shadow-lg rounded-b-2xl py-4 px-6 md:hidden z-50 ${
+                isDark 
+                  ? 'bg-gray-900 border-t border-orange-500/20' 
+                  : 'bg-white border-t border-orange-500/20'
+              }`}
             >
               <div className="flex flex-col space-y-4">
                 {navLinks.map((item, index) => (
@@ -185,19 +194,19 @@ const Navbar = () => {
                     onClick={handleNavigation}
                     className={`py-2 px-3 rounded-lg transition-all duration-300 font-medium ${
                       isActive(item.href) 
-                        ? 'text-[#FF512F] dark:text-[#FF512F] bg-[#FF512F]/10 dark:bg-[#FF512F]/10' 
-                        : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
-                    } hover:text-[#FF512F]`}
+                        ? `${themeStyles.text.accent} bg-orange-500/10` 
+                        : `${themeStyles.text.primary} ${themeStyles.bg.hover} hover:text-[#FF512F]`
+                    }`}
                   >
                     {item.label}
                   </Link>
                 ))}
-                <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                <div className={`pt-2 border-t ${themeStyles.border.primary}`}>
                   <button
                     onClick={toggleTheme}
-                    className="flex items-center gap-2 py-2 px-3 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#FF512F] w-full transition-all"
+                    className={`flex items-center gap-2 py-2 px-3 rounded-lg w-full transition-all ${themeStyles.button.ghost}`}
                   >
-                    {theme === 'dark' ? (
+                    {isDark ? (
                       <>
                         <Sun size={18} />
                         <span className="text-base">Light Mode</span>

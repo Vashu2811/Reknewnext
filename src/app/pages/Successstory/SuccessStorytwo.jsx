@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
+import { useTheme } from "@/Context/ThemeContext";
 
 const SuccessStoryTwo = () => {
+    const { theme } = useTheme();
+    const isDarkMode = theme === 'dark';
+
     const item = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 }
@@ -37,7 +41,7 @@ const SuccessStoryTwo = () => {
     ];
 
     const AchievementDetails = ({ details }) => (
-        <ul className="text-sm md:text-lg text-slate-600 dark:text-slate-300 space-y-2 pl-5 list-disc mt-2">
+        <ul className={`text-sm md:text-lg space-y-2 pl-5 list-disc mt-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
             {details.map((detail, idx) => (
                 <li key={idx} className="leading-relaxed">{detail}</li>
             ))}
@@ -47,16 +51,20 @@ const SuccessStoryTwo = () => {
     const AchievementCard = ({ achievement, index }) => (
         <motion.div 
             variants={item} 
-            className="bg-white/50 dark:bg-slate-800/40 backdrop-blur-sm p-5 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 mb-4"
+            className={`backdrop-blur-sm p-5 rounded-xl shadow-sm border mb-4 ${
+                isDarkMode 
+                    ? 'bg-slate-800/40 border-slate-700' 
+                    : 'bg-white/70 border-gray-200'
+            }`}
         >
-            <h3 className="text-lg font-semibold text-[#FF512F] dark:text-[#FF512F] mb-3">{achievement.title}</h3>
-            {achievement.description && <p className="text-slate-600 dark:text-slate-300">{achievement.description}</p>}
+            <h3 className="text-lg font-semibold text-[#FF512F] mb-3">{achievement.title}</h3>
+            {achievement.description && <p className={isDarkMode ? 'text-slate-300' : 'text-slate-700'}>{achievement.description}</p>}
             {achievement.details && <AchievementDetails details={achievement.details} />}
         </motion.div>
     );
     
     return (
-        <div className="dark:text-gray-100 relative overflow-hidden px-4">
+        <div className={`relative overflow-hidden px-4 ${isDarkMode ? 'text-gray-100' : 'text-gray-900'}`}>
           
             {/* Header Section */}
             <div className="container mx-auto max-w-7xl px-8 relative z-10">
@@ -72,31 +80,39 @@ const SuccessStoryTwo = () => {
                         </span>
                     </div>
                      */}
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#374151] to-[#374151]/80 dark:from-gray-100 dark:to-gray-100">
+                    <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${
+                        isDarkMode 
+                            ? 'bg-gradient-to-r from-gray-100 to-gray-100 bg-clip-text text-transparent' 
+                            : 'bg-gradient-to-r from-[#374151] to-[#374151]/80 bg-clip-text text-transparent'
+                    }`}>
                         From Siloed to
                         <span className="relative inline-block mx-2">
-                            <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F]">Scaled</span>
+                            <span className="relative z-10 text-[#FF512F]">Scaled</span>
                             <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
                                 <path
                                     d="M0 5c30-5 70-5 100 0"
                                     stroke="currentColor"
                                     strokeWidth="2"
                                     fill="none"
-                                    className="text-[#FF512F] dark:text-[#FF512F] transition-all duration-300"
+                                    className="text-[#FF512F] transition-all duration-300"
                                 />
                             </svg>
                         </span>
                         Impact
                     </h2>
                     
-                    <p className="text-[#374151] dark:text-gray-100 text-lg max-w-4xl mx-auto leading-relaxed">
+                    <p className={`text-lg max-w-4xl mx-auto leading-relaxed ${isDarkMode ? 'text-gray-100' : 'text-[#374151]'}`}>
                         Partnered with a large national financial institution to redesign its AI engagement and operating model, transitioning from siloed
                         efforts to a scalable hub-and-spoke structure that resulted in a 2.5x increase in AI-driven value.
                     </p>
                 </motion.div>
                 
                 {/* Content Section - Responsive Layout */}
-                <div className="flex flex-col lg:flex-row gap-8 bg-white/30 dark:bg-slate-800/30 backdrop-blur-md p-2 rounded-2xl border border-gray-100 dark:border-slate-700">
+                <div className={`flex flex-col lg:flex-row gap-8 backdrop-blur-md p-6 rounded-2xl border ${
+                    isDarkMode 
+                        ? 'bg-slate-800/30 border-slate-700' 
+                        : 'bg-white/30 border-gray-200'
+                }`}>
                     {/* Left Column - Achievements */}
                     <motion.div 
                         initial="hidden"
@@ -120,7 +136,7 @@ const SuccessStoryTwo = () => {
                             transition={{ duration: 0.6, delay: 0.3 }}
                             className="overflow-hidden"
                         >
-                            <svg className="text-black dark:text-gray-100 w-full h-auto" viewBox="0 0 850 650" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                            <svg className={`w-full h-auto ${isDarkMode ? 'text-gray-100' : 'text-black'}`} viewBox="0 0 850 650" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                                 {/* <!-- Background --> */}
                                 <rect width="800" height="650" fill="none" />
 

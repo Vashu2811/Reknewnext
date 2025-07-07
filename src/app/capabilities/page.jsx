@@ -21,38 +21,51 @@ function Capabilities() {
     }, []);
     const cardRefs = useRef([]);
     const headerRef = useRef(null);
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
+    // Listen for theme changes from navbar
     useEffect(() => {
-        cardRefs.current.forEach((card) => {
-            if (card) card.style.willChange = 'opacity, transform';
-        });
+        const checkTheme = () => {
+            const isDark = document.documentElement.classList.contains('dark') || 
+                          document.body.classList.contains('dark') ||
+                          localStorage.getItem('theme') === 'dark';
+            setIsDarkMode(isDark);
+        };
 
-        ScrollTrigger.batch(cardRefs.current, {
-            onEnter: (batch) => {
-                gsap.to(batch, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    stagger: 0.2,
-                    ease: 'power3.out'
-                });
-            },
-            start: 'top 85%'
-        });
+        checkTheme();
 
-        gsap.fromTo(
-            headerRef.current,
-            { opacity: 0, y: 30 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                scrollTrigger: {
-                    trigger: headerRef.current,
-                    start: 'top 80%'
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    checkTheme();
                 }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === 'theme') {
+                checkTheme();
             }
-        );
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        window.addEventListener('themeChanged', checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('themeChanged', checkTheme);
+        };
     }, []);
 
     const { scrollYProgress } = useScroll();
@@ -131,7 +144,9 @@ function Capabilities() {
     return (
         <>
             <ReKnewModal isOpen={isModalOpen} onClose={closeModal} />
-            <div className="text-[#374151] dark:text-gray-100 font-sans w-full min-h-screen overflow-x-hidden">
+            <div className={`font-sans w-full min-h-screen overflow-x-hidden ${
+                isDarkMode ? "text-white" : "text-[#374151]"
+            }`}>
                 <DataandAiVarticalSlider />
                 {/* <div className="fixed inset-0 pointer-events-none z-0">
                     <div
@@ -149,12 +164,14 @@ function Capabilities() {
                 />
 
                 <div className=" z-10 relative">
-                    <div className="relative py-24 lg:py-32 overflow-hidden  dark:from-gray-900">
+                    <div className="relative py-24 lg:py-32 overflow-hidden">
                         <Image src={small} alt="color-sharp" className="absolute w-[250px] bottom-40 right-2" style={{ zIndex: 1 }} loading="lazy" />
                         <div className="relative container mx-auto px-4 z-10">
                             <div className="text-center mb-20">
                                 <div className="flex flex-col items-center gap-8 max-w-4xl mx-auto">
-                                    <h1 className="text-4xl md:text-[56px] font-bold leading-tight max-w-7xl px-4">
+                                    <h1 className={`text-4xl md:text-[56px] font-bold leading-tight max-w-7xl px-4 ${
+                                        isDarkMode ? "text-white" : "text-[#374151]"
+                                    }`}>
                                         <span className="relative inline-block">
                                             <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F]">Next Gen</span>
                                             <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
@@ -169,7 +186,9 @@ function Capabilities() {
                                         </span>{' '}
                                         Solutions, Architected on Four Essential Foundations
                                     </h1>
-                                    <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
+                                    <p className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4 ${
+                                        isDarkMode ? "text-gray-100" : "text-gray-600"
+                                    }`}>
                                         Transform enterprise backbone into a future-ready AI infrastructure
                                     </p>
                                 </div>
@@ -184,11 +203,15 @@ function Capabilities() {
                     <ContextEngineeringDiagram />
                     <ReknewSection />
 
-                    <section className="py-24  text-[#374151] dark:text-gray-100  flex justify-center items-center relative overflow-hidden">
+                    <section className={`py-24 flex justify-center items-center relative overflow-hidden ${
+                        isDarkMode ? "text-white" : "text-[#374151]"
+                    }`}>
                         <div className="container mx-auto px-4 relative z-10">
                             {/* Enhanced Section Header */}
                             <div className="max-w-3xl mx-auto text-center mb-20">
-                                <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#374151] to-[#374151]/80 dark:from-gray-100 dark:to-gray-100">
+                                <h2 className={`text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r ${
+                                    isDarkMode ? "from-gray-100 to-gray-100" : "from-gray-800 to-gray-600"
+                                }`}>
                                     ReKnew
                                     <span className="relative inline-block">
                                         <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F] pl-2">Accelerators™</span>
@@ -203,7 +226,9 @@ function Capabilities() {
                                         </svg>
                                     </span>
                                 </h2>
-                                <p className="text-lg text-[#374151]/80 dark:text-gray-100/80 leading-relaxed">
+                                <p className={`text-lg leading-relaxed ${
+                                    isDarkMode ? "text-gray-100/80" : "text-gray-600"
+                                }`}>
                                     Accelerators help enterprises fast track their initiatives by providing <br /> well-defined, configurable and deployable
                                     assets
                                 </p>
@@ -247,8 +272,10 @@ function Capabilities() {
                                     <div key={index} className="group  relative transform-gpu transition-all duration-300">
                                         {/* Enhanced Card Container */}
                                         <div
-                                            className="relative bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-[#FF512F]/20 dark:border-[#FF512F]/20 
-                                            shadow-md hover:shadow-lg transition-all duration-300">
+                                            className={`relative  rounded-2xl p-8 border-2 border-[#FF512F]/20 dark:border-[#FF512F]/20 
+                                            shadow-md hover:shadow-lg transition-all duration-300 ${
+                                isDarkMode ? "text-white bg-gray-800" : "text-black bg-white/80"
+                            }`}>
                                             {/* Card Header */}
                                             <div className="flex flex-col items-center text-center mb-8">
                                                 <div
@@ -263,7 +290,9 @@ function Capabilities() {
                                                         {layer.title}
                                                         <span className="absolute bottom-0 left-0 w-full h-1 rounded-full bg-gradient-to-r from-[#FF512F] to-[#FF8A63]"></span>
                                                     </h3>
-                                                    <p className="text-[#374151]/70 dark:text-gray-100/70 mt-1 text-lg font-medium">{layer.description}</p>
+                                                    <p className={`mt-1 text-lg font-medium ${
+                                                        isDarkMode ? "text-gray-100/70" : "text-gray-600"
+                                                    }`}>{layer.description}</p>
                                                 </div>
                                             </div>
 
@@ -273,23 +302,29 @@ function Capabilities() {
                                                     <div
                                                         key={idx}
                                                         className="relative overflow-hidden rounded-lg 
-                                                         bg-white dark:bg-gray-800 border-2 border-[#FF512F]/15 dark:border-[#FF512F]/15
+                                                          border-2 border-[#FF512F]/15 dark:border-[#FF512F]/15
                                                          p-6 hover:border-[#FF512F]/40 dark:hover:border-[#FF512F]/40 
                                                          hover:shadow-md transition-all duration-300">
                                                         <div className="space-y-3">
-                                                            <h4 className="font-semibold text-[#374151] dark:text-gray-100 text-lg border-b border-[#FF512F]/20 pb-2 relative">
+                                                            <h4 className={`font-semibold text-lg border-b border-[#FF512F]/20 pb-2 relative ${
+                                                                isDarkMode ? "text-gray-100" : "text-gray-800"
+                                                            }`}>
                                                                 {item.title}
                                                                 <div className="absolute -bottom-px left-0 w-8 h-[2px] bg-[#FF512F]"></div>
                                                             </h4>
 
                                                             <div className="flex">
                                                                 <span className="text-[#FF512F] text-2xl">•</span>
-                                                                <p className="text-lg pl-2 text-[#374151]/80 dark:text-gray-100/80">{item.description}</p>
+                                                                <p className={`text-lg pl-2 ${
+                                                                    isDarkMode ? "text-gray-100/80" : "text-gray-600"
+                                                                }`}>{item.description}</p>
                                                             </div>
 
                                                             <div className="flex">
                                                                 {item.descriptiontwo && <span className="text-[#FF512F] text-2xl">•</span>}
-                                                                <p className="text-lg pl-2 text-[#374151]/80 dark:text-gray-100/80">
+                                                                <p className={`text-lg pl-2 ${
+                                                                    isDarkMode ? "text-gray-100/80" : "text-gray-600"
+                                                                }`}>
                                                                     {item.descriptiontwo}
                                                                 </p>
                                                             </div>

@@ -10,6 +10,56 @@ const BlogList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Listen for theme changes from navbar
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark =
+                document.documentElement.classList.contains("dark") ||
+                document.body.classList.contains("dark") ||
+                localStorage.getItem("theme") === "dark";
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (
+                    mutation.type === "attributes" &&
+                    mutation.attributeName === "class"
+                ) {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === "theme") {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+        window.addEventListener("themeChanged", checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("themeChanged", checkTheme);
+        };
+    }, []);
 
     const loadPosts = useCallback(async () => {
         try {
@@ -45,7 +95,9 @@ const BlogList = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <div className={`min-h-screen flex items-center justify-center ${
+                isDarkMode ? "bg-gray-900" : "bg-transparent"
+            }`}>
                 <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#FF512F]"></div>
             </div>
         );
@@ -53,19 +105,27 @@ const BlogList = () => {
 
     if (error) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <div className={`min-h-screen flex items-center justify-center ${
+                isDarkMode ? "bg-gray-900" : "bg-transparent"
+            }`}>
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+                    <h2 className={`text-2xl font-bold mb-4 ${
+                        isDarkMode ? "text-gray-200" : "text-gray-800"
+                    }`}>
                         Oops! Something went wrong
                     </h2>
-                    <p className="text-gray-600 dark:text-gray-400">{error}</p>
+                    <p className={`${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                    }`}>{error}</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <>
+        <div className={`min-h-screen transition-colors duration-300 ${
+            isDarkMode ? "bg-gray-900" : "bg-transparent"
+        }`}>
             <div className="hidden sm:block">
                 <CanvasDots />
             </div>
@@ -73,22 +133,26 @@ const BlogList = () => {
                 <div className="container mx-auto px-4 max-w-7xl">
                     {/* Header */}
                     <div className="text-center mb-16">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#374151] dark:text-gray-100">
+                        <h1 className={`text-4xl md:text-5xl font-bold mb-6 transition-colors duration-300 ${
+                            isDarkMode ? "text-gray-100" : "text-[#374151]"
+                        }`}>
                             Our
                             <span className="relative inline-block mx-2">
-                                <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F]">Perspectives</span>
+                                <span className="relative z-10 text-[#FF512F]">Perspectives</span>
                                 <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
                                     <path
                                         d="M0 5c30-5 70-5 100 0"
                                         stroke="currentColor"
                                         strokeWidth="2"
                                         fill="none"
-                                        className="text-[#FF512F] dark:text-[#FF512F]"
+                                        className="text-[#FF512F]"
                                     />
                                 </svg>
                             </span>
                         </h1>
-                        <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                        <p className={`text-lg max-w-3xl mx-auto transition-colors duration-300 ${
+                            isDarkMode ? "text-gray-300" : "text-gray-600"
+                        }`}>
                             Insights, updates, and thought leadership on data modernization, AI adoption, and enterprise transformation.
                         </p>
                     </div>
@@ -101,7 +165,9 @@ const BlogList = () => {
                                 href={`/perspectives/${post.slug}`}
                                 className="block group cursor-pointer"
                             >
-                                <article className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group h-full">
+                                <article className={`rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group h-full border border-[#FF512F]/20 ${
+                                    isDarkMode ? "bg-gray-800" : "bg-white"
+                                }`}>
                                     {/* Featured Image */}
                                     {post.featuredImage && (
                                         <div className="aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
@@ -128,7 +194,9 @@ const BlogList = () => {
                                     {/* Content */}
                                     <div className="p-6">
                                         {/* Meta Info */}
-                                        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                                        <div className={`flex items-center gap-4 text-sm mb-3 transition-colors duration-300 ${
+                                            isDarkMode ? "text-gray-300" : "text-gray-500"
+                                        }`}>
                                             <div className="flex items-center gap-1">
                                                 <Calendar size={16} />
                                                 <span>{formatDate(post.date)}</span>
@@ -140,12 +208,16 @@ const BlogList = () => {
                                         </div>
 
                                         {/* Title */}
-                                        <h2 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200 group-hover:text-[#FF512F] transition-colors">
+                                        <h2 className={`text-xl font-bold mb-3 group-hover:text-[#FF512F] transition-colors duration-300 ${
+                                            isDarkMode ? "text-gray-100" : "text-gray-800"
+                                        }`}>
                                             {post.title}
                                         </h2>
 
                                         {/* Excerpt */}
-                                        <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                                        <p className={`mb-4 line-clamp-3 transition-colors duration-300 ${
+                                            isDarkMode ? "text-gray-300" : "text-gray-600"
+                                        }`}>
                                             {stripHtml(post.excerpt)}
                                         </p>
 
@@ -169,7 +241,9 @@ const BlogList = () => {
                         >
                             Previous
                         </button>
-                        <span className="px-4 py-2 text-gray-600 dark:text-gray-400">
+                        <span className={`px-4 py-2 transition-colors duration-300 ${
+                            isDarkMode ? "text-gray-300" : "text-gray-600"
+                        }`}>
                             Page {currentPage}
                         </span>
                         <button
@@ -182,9 +256,8 @@ const BlogList = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
 export default BlogList;
-        

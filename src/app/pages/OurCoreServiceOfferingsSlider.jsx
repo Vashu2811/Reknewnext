@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Arrow from '../../../public/assets/Arrow logo.png';
 import Image from 'next/image';
 import {
@@ -31,8 +31,53 @@ import { motion } from 'framer-motion';
 const NewCardSlider = ({ cards }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [, setIsAutoPlaying] = useState(true);
-    // eslint-disable-next-line no-unused-vars
     const [direction, setDirection] = useState(0);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Listen for theme changes from navbar
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark = document.documentElement.classList.contains('dark') || 
+                          document.body.classList.contains('dark') ||
+                          localStorage.getItem('theme') === 'dark';
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === 'theme') {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        window.addEventListener('themeChanged', checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('themeChanged', checkTheme);
+        };
+    }, []);
 
     const previousSlide = () => {
         setDirection(-1);
@@ -134,8 +179,8 @@ const NewCardSlider = ({ cards }) => {
                                                 rounded-[32px] overflow-hidden transition-all duration-500 
                                                 ${
                                                     offset === 0
-                                                        ? 'bg-white dark:bg-gray-800 dark:from-gray-800 dark:to-gray-900 border-2 border-[#FF512F]/20 dark:border-[#FF512F]/20 shadow-lg group transform-gpu'
-                                                        : 'bg-white/90 dark:bg-gray-800/90 border-2 border-[#FF512F]/10 dark:border-[#FF512F]/10 opacity-90'
+                                                        ? `border-2 border-[#FF512F]/20 shadow-lg group transform-gpu ${isDarkMode ? 'bg-gray-800 dark:from-gray-800 dark:to-gray-900' : 'bg-white'}`
+                                                        : `border-2 border-[#FF512F]/10 opacity-90 ${isDarkMode ? 'bg-gray-800/90' : 'bg-white/90'}`
                                                 }`}>
                                     <div className="relative overflow-hidden rounded-t-[32px] md:px-6 py-4 lg:px-8">
                                         <div className="relative">
@@ -156,7 +201,7 @@ const NewCardSlider = ({ cards }) => {
                                                 <div className="flex">
                                                     <h2 className="text-base md:text-xl font-medium text-left bg-gradient-to-r from-[#232323] to-[#232323] dark:from-gray-100 dark:to-gray-100 bg-clip-text text-transparent transition-all duration-300 leading-tight">
                                                         <span className="relative inline-flex flex-col">
-                                                            <span className="bg-gradient-to-r text-base md:text-xl p-2 text-center md:text-left from-[#232323] via-[#3d3d3d] to-[#232323] dark:from-gray-100 dark:via-white dark:to-gray-100 bg-clip-text text-transparent">
+                                                            <span className={` text-base md:text-xl p-2 text-center md:text-left   ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                                                                 {cards[index].title}
                                                             </span>
                                                             <span className="mt-2 block w-16 h-1 bg-gradient-to-r from-[#FF512F] to-[#FF8A63] rounded-full"></span>
@@ -167,7 +212,7 @@ const NewCardSlider = ({ cards }) => {
                                             <div className="flex w-full border-t border-[#FF512F]/20 dark:border-[#FF512F]/20" />
 
                                             <div className="flex mt-4 font-normal px-4 flex-col text-left w-full">
-                                                <p className="text-base md:text-lg text-[#374151] dark:text-gray-100 leading-relaxed">
+                                                <p className={`text-base md:text-lg  leading-relaxed  ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                                                     {cards[index].description}
                                                 </p>
                                             </div>
@@ -192,7 +237,7 @@ const NewCardSlider = ({ cards }) => {
                                                                 'size-2 md:size-5 text-[#FF512F] stroke-2 transition-transform duration-300 group-hover/item:scale-110'
                                                         })}
                                                     </motion.span>
-                                                    <span className="text-gray-600 text-base md:text-lg dark:text-gray-300 flex-1 font-normal md:font-medium group-hover/item:text-[#FF512F] dark:group-hover/item:text-[#FF8A63] transition-colors duration-300">
+                                                    <span className={` text-base md:text-lg flex-1 font-normal group-hover/item:text-[#FF512F] dark:group-hover/item:text-[#FF8A63] transition-colors duration-300  ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                                                         {point}
                                                     </span>
                                                 </motion.div>
@@ -222,10 +267,11 @@ const NewCardSlider = ({ cards }) => {
                 </div>
             </div>
 
+            {/* Navigation buttons with theme-aware styling */}
             <button
                 onClick={previousSlide}
-                className="absolute left-4 md:left-[10%] top-[96.5%] md:top-[40%] transform -translate-y-1/2  dark:from-gray-800/90 dark:to-gray-800/70  dark:hover:to-gray-800 text-black dark:text-white size-14 flex justify-center items-center z-20 shadow-lg transition-all duration-300 border-2 border-[#FF512F] dark:border-[#FF512F] p-3 rounded-full dark:bg-gray-800 
-                     group"
+                className={`absolute left-4 md:left-[10%] top-[96.5%] md:top-[40%] transform -translate-y-1/2 size-14 flex justify-center items-center z-20 shadow-lg transition-all duration-300 border-2 border-[#FF512F] p-3 rounded-full group
+                    ${isDarkMode ? 'text-white bg-gray-800' : 'text-black'}`}
                 aria-label="Previous Slide">
                 <div className="flex items-center justify-center w-full h-full">
                     <Image src={Arrow} alt="Previous" className="rotate-[210deg] w-[67.5%] left-3 top-[10px] absolute  object-contain" loading="lazy" />
@@ -234,8 +280,8 @@ const NewCardSlider = ({ cards }) => {
 
             <button
                 onClick={nextSlide}
-                className="absolute right-4  md:right-[10%] top-[96.5%] md:top-[40%] transform -translate-y-1/2  dark:from-gray-800/90 dark:to-gray-800/70  dark:hover:to-gray-800 text-black dark:text-white size-14 flex justify-center items-center z-20 shadow-lg transition-all duration-300 border-2 border-[#FF512F] dark:border-[#FF512F] p-3 rounded-full dark:bg-gray-800 
-                     group"
+                className={`absolute right-4 md:right-[10%] top-[96.5%] md:top-[40%] transform -translate-y-1/2 size-14 flex justify-center items-center z-20 shadow-lg transition-all duration-300 border-2 border-[#FF512F] p-3 rounded-full group
+                    ${isDarkMode ? 'text-white bg-gray-800' : 'text-black'}`}
                 aria-label="Next Slide">
                 <div className="flex items-center justify-center w-full h-full">
                     <Image src={Arrow} alt="Next" className="rotate-[28deg] w-[67.5%] right-3 top-[16px] absolute  object-contain" loading="lazy" />
@@ -245,9 +291,8 @@ const NewCardSlider = ({ cards }) => {
             {/* Enhanced Progress Dots - Updated positioning */}
             <div className="relative md:mt-20 lg:mt-28 mt-10 flex justify-center">
                 <div
-                    className="flex gap-5 p-6 rounded-full 
-          bg-white/95 dark:bg-gray-800/95  border border-[#FF512F]/10 dark:border-[#FF512F]/10
-          backdrop-blur-md">
+                    className={`flex gap-5 p-6 rounded-full border border-[#FF512F]/10 backdrop-blur-md
+                        ${isDarkMode ? 'bg-gray-800/95' : 'bg-white/95'}`}>
                     {cards.map((_, index) => (
                         <motion.button
                             key={index}

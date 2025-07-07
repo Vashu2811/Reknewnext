@@ -33,6 +33,7 @@ const BlogPostClient = ({ slug }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     const openImageModal = (imageUrl, altText) => {
         setSelectedImage({ url: imageUrl, alt: altText });
@@ -131,21 +132,27 @@ const BlogPostClient = ({ slug }) => {
                         // Handle headers
                         if (paragraph.startsWith('# ')) {
                             return (
-                                <h1 key={index} className="text-3xl font-bold mb-4 mt-8 text-gray-800 dark:text-gray-200">
+                                <h1 key={index} className={`text-3xl font-bold mb-4 mt-8 transition-colors duration-300 ${
+                                    isDarkMode ? "text-gray-100" : "text-gray-800"
+                                }`}>
                                     {paragraph.substring(2).trim()}
                                 </h1>
                             );
                         }
                         if (paragraph.startsWith('## ')) {
                             return (
-                                <h2 key={index} className="text-2xl font-bold mb-3 mt-6 text-gray-800 dark:text-gray-200">
+                                <h2 key={index} className={`text-2xl font-bold mb-3 mt-6 transition-colors duration-300 ${
+                                    isDarkMode ? "text-gray-100" : "text-gray-800"
+                                }`}>
                                     {paragraph.substring(3).trim()}
                                 </h2>
                             );
                         }
                         if (paragraph.startsWith('### ')) {
                             return (
-                                <h3 key={index} className="text-xl font-bold mb-2 mt-5 text-gray-800 dark:text-gray-200">
+                                <h3 key={index} className={`text-xl font-bold mb-2 mt-5 transition-colors duration-300 ${
+                                    isDarkMode ? "text-gray-100" : "text-gray-800"
+                                }`}>
                                     {paragraph.substring(4).trim()}
                                 </h3>
                             );
@@ -154,7 +161,9 @@ const BlogPostClient = ({ slug }) => {
                         // Handle blockquotes
                         if (paragraph.startsWith('> ')) {
                             return (
-                                <blockquote key={index} className="border-l-4 border-[#FF512F] pl-4 my-4 italic text-gray-600 dark:text-gray-400">
+                                <blockquote key={index} className={`border-l-4 border-[#FF512F] pl-4 my-4 italic transition-colors duration-300 ${
+                                    isDarkMode ? "text-gray-300" : "text-gray-600"
+                                }`}>
                                     {paragraph.substring(2)}
                                 </blockquote>
                             );
@@ -164,7 +173,9 @@ const BlogPostClient = ({ slug }) => {
                         if (paragraph.startsWith('- ')) {
                             return (
                                 <ul key={index} className="list-disc ml-6 mb-2">
-                                    <li className="text-gray-600 dark:text-gray-400">{paragraph.substring(2)}</li>
+                                    <li className={`transition-colors duration-300 ${
+                                        isDarkMode ? "text-gray-300" : "text-gray-600"
+                                    }`}>{paragraph.substring(2)}</li>
                                 </ul>
                             );
                         }
@@ -220,7 +231,7 @@ const BlogPostClient = ({ slug }) => {
                             
                             return text
                                 // Bold text
-                                .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-gray-800 dark:text-gray-200">$1</strong>')
+                                .replace(/\*\*(.*?)\*\*/g, `<strong class="font-bold transition-colors duration-300 ${isDarkMode ? "text-gray-100" : "text-gray-800"}">$1</strong>`)
                                 // Italic text
                                 .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
                                 // Inline code
@@ -233,7 +244,9 @@ const BlogPostClient = ({ slug }) => {
                         return (
                             <p 
                                 key={index} 
-                                className="mb-4 text-gray-600 dark:text-gray-400 leading-relaxed"
+                                className={`mb-4 leading-relaxed transition-colors duration-300 ${
+                                    isDarkMode ? "text-gray-300" : "text-gray-600"
+                                }`}
                                 dangerouslySetInnerHTML={{ __html: formatInlineContent(paragraph) }}
                             />
                         );
@@ -243,9 +256,60 @@ const BlogPostClient = ({ slug }) => {
         );
     };
 
+    // Listen for theme changes from navbar
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark =
+                document.documentElement.classList.contains("dark") ||
+                document.body.classList.contains("dark") ||
+                localStorage.getItem("theme") === "dark";
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (
+                    mutation.type === "attributes" &&
+                    mutation.attributeName === "class"
+                ) {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === "theme") {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+        window.addEventListener("themeChanged", checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("themeChanged", checkTheme);
+        };
+    }, []);
+
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <div className={`min-h-screen flex items-center justify-center transition-colors duration-300 ${
+                isDarkMode ? "bg-gray-900" : "bg-transparent"
+            }`}>
                 <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#FF512F]"></div>
             </div>
         );
@@ -253,12 +317,18 @@ const BlogPostClient = ({ slug }) => {
 
     if (error || !post) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <div className={`min-h-screen flex items-center justify-center transition-colors duration-300 ${
+                isDarkMode ? "bg-gray-900" : "bg-transparent"
+            }`}>
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+                    <h2 className={`text-2xl font-bold mb-4 ${
+                        isDarkMode ? "text-gray-200" : "text-gray-800"
+                    }`}>
                         Article Not Found
                     </h2>
-                    <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
+                    <p className={`mb-6 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                    }`}>{error}</p>
                     <Link 
                         href="/perspectives"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF512F] text-white rounded-lg hover:bg-[#FF8A63] transition-colors"
@@ -272,7 +342,9 @@ const BlogPostClient = ({ slug }) => {
     }
 
     return (
-        <>
+        <div className={`min-h-screen transition-colors duration-300 ${
+            isDarkMode ? "bg-gray-900" : "bg-transparent"
+        }`}>
             <div className="hidden sm:block">
                 <CanvasDots />
             </div>
@@ -288,11 +360,15 @@ const BlogPostClient = ({ slug }) => {
                     </Link>
 
                     {/* Article */}
-                    <article className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg mb-16 max-w-6xl mx-auto">
+                    <article className={`rounded-2xl overflow-hidden shadow-lg mb-16 max-w-6xl mx-auto border border-[#FF512F]/20 transition-colors duration-300 ${
+                        isDarkMode ? "bg-gray-800" : "bg-white"
+                    }`}>
                         {/* Content */}
                         <div className="p-8">
                             {/* Title */}
-                            <h1 className="text-3xl md:text-6xl font-bold mb-8 text-gray-800 dark:text-gray-200">
+                            <h1 className={`text-3xl md:text-6xl font-bold mb-8 transition-colors duration-300 ${
+                                isDarkMode ? "text-gray-100" : "text-gray-800"
+                            }`}>
                                 {cleanTitle(post.title)}
                             </h1>
 
@@ -304,7 +380,9 @@ const BlogPostClient = ({ slug }) => {
                     {/* Recent Posts Section */}
                     {recentPosts.length > 0 && (
                         <section>
-                            <h2 className="text-2xl font-bold mb-8 text-gray-800 dark:text-gray-200">
+                            <h2 className={`text-2xl font-bold mb-8 transition-colors duration-300 ${
+                                isDarkMode ? "text-gray-100" : "text-gray-800"
+                            }`}>
                                 Recent Posts
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -315,7 +393,9 @@ const BlogPostClient = ({ slug }) => {
                                         className="block cursor-pointer relative z-50 pointer-events-auto"
                                         style={{ pointerEvents: 'auto' }}
                                     >
-                                        <article className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group h-full cursor-pointer relative z-50">
+                                        <article className={`rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group h-full cursor-pointer relative z-50 border border-[#FF512F]/20 ${
+                                            isDarkMode ? "bg-gray-800" : "bg-white"
+                                        }`}>
                                             {/* Featured Image */}
                                             {recentPost.featuredImage && (
                                                 <div className="aspect-video overflow-hidden">
@@ -342,7 +422,9 @@ const BlogPostClient = ({ slug }) => {
                                             {/* Content */}
                                             <div className="p-6">
                                                 {/* Meta Info */}
-                                                <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                                                <div className={`flex items-center gap-4 text-sm mb-3 transition-colors duration-300 ${
+                                                    isDarkMode ? "text-gray-300" : "text-gray-500"
+                                                }`}>
                                                     <div className="flex items-center gap-1">
                                                         <Calendar size={16} />
                                                         <span>{formatDate(recentPost.date)}</span>
@@ -354,12 +436,16 @@ const BlogPostClient = ({ slug }) => {
                                                 </div>
 
                                                 {/* Title */}
-                                                <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200 group-hover:text-[#FF512F] transition-colors">
+                                                <h3 className={`text-xl font-bold mb-3 group-hover:text-[#FF512F] transition-colors duration-300 ${
+                                                    isDarkMode ? "text-gray-100" : "text-gray-800"
+                                                }`}>
                                                     {cleanTitle(recentPost.title)}
                                                 </h3>
 
                                                 {/* Excerpt */}
-                                                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                                                <p className={`mb-4 line-clamp-3 transition-colors duration-300 ${
+                                                    isDarkMode ? "text-gray-300" : "text-gray-600"
+                                                }`}>
                                                     {stripHtml(recentPost.excerpt)}
                                                 </p>
 
@@ -406,7 +492,7 @@ const BlogPostClient = ({ slug }) => {
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 

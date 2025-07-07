@@ -1,4 +1,53 @@
+import { useEffect, useState } from 'react';
+
 const FoundersExperience = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Listen for theme changes from navbar
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark = document.documentElement.classList.contains('dark') || 
+                          document.body.classList.contains('dark') ||
+                          localStorage.getItem('theme') === 'dark';
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === 'theme') {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        window.addEventListener('themeChanged', checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('themeChanged', checkTheme);
+        };
+    }, []);
+
     // Define company logos array with online URLs
     const companyLogos = [
         {
@@ -44,18 +93,17 @@ const FoundersExperience = () => {
             <div className="container mx-auto px-4">
                 {/* Section Header */}
                 <div className="text-center mb-16">
-                   
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[#374151] dark:text-gray-100">
+                    <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-6 ${isDarkMode ? 'text-gray-100' : 'text-[#374151]'}`}>
                         Built by
                         <span className="relative inline-block mx-2">
-                            <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F]">Founders</span>
+                            <span className={`relative z-10 ${isDarkMode ? 'text-[#FF512F]' : 'text-[#FF512F]'}`}>Founders</span>
                             <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
                                 <path
                                     d="M0 5c30-5 70-5 100 0"
                                     stroke="currentColor"
                                     strokeWidth="2"
                                     fill="none"
-                                    className="text-[#FF512F] dark:text-[#FF512F] transition-all duration-300"
+                                    className={`${isDarkMode ? 'text-[#FF512F]' : 'text-[#FF512F]'} transition-all duration-300`}
                                 />
                             </svg>
                         </span>
@@ -68,7 +116,8 @@ const FoundersExperience = () => {
                     {companyLogos.map((logo, index) => (
                         <div
                             key={index}
-                            className="w-32 md:w-28 h-16 md:h-20 lg:h-24 flex items-center justify-center p-4 bg-white/90 dark:bg-white/90 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
+                            className={`w-32 md:w-28 h-16 md:h-20 lg:h-24 flex items-center justify-center p-4 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md
+                                ${isDarkMode ? 'bg-white/90' : 'bg-white/90'}`}>
                             <img
                                 src={logo.src}
                                 alt={logo.alt}

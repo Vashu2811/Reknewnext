@@ -28,18 +28,53 @@ const DataandAiVarticalSlider = () => {
     const [direction, setDirection] = useState(0);
     const [touchStart, setTouchStart] = useState(0);
     const [touchEnd, setTouchEnd] = useState(0);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Listen for theme changes from navbar
     useEffect(() => {
-        const checkIsMobile = () => {
-            setIsMobile(window.innerWidth < 768); // Common breakpoint for mobile devices
+        const checkTheme = () => {
+            const isDark = document.documentElement.classList.contains('dark') || 
+                          document.body.classList.contains('dark') ||
+                          localStorage.getItem('theme') === 'dark';
+            setIsDarkMode(isDark);
         };
 
-        checkIsMobile(); // Check initially
-        window.addEventListener('resize', checkIsMobile); // Listen for window resize
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === 'theme') {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        window.addEventListener('themeChanged', checkTheme);
 
         return () => {
-            window.removeEventListener('resize', checkIsMobile);
+            observer.disconnect();
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('themeChanged', checkTheme);
         };
     }, []);
+
     const slides = [
         {
             id: '1',
@@ -49,7 +84,9 @@ const DataandAiVarticalSlider = () => {
                     <section className="w-full relative md:h-[760px] sm:h-[550px] flex justify-center p-0 m-0 overflow-hidden">
                         <div className="flex justify-center items-center flex-col gap-9 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto pb-8 md:pb-12 lg:pb-16">
                             <div className="text-center px-4 sm:px-6 md:px-8">
-                                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.2] tracking-tight">
+                                <h1 className={`text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.2] tracking-tight ${
+                                    isDarkMode ? "text-white" : "text-[#374151]"
+                                }`}>
                                     <div className="flex flex-col items-center justify-center">
                                         <div className="flex flex-col whitespace-normal md:whitespace-nowrap items-center justify-center">
                                             <span className="flex flex-col md:flex-row items-center gap-2">
@@ -78,7 +115,9 @@ const DataandAiVarticalSlider = () => {
                             </div>
 
                             <div className="mx-4 text-base md:text-lg font-medium text-center">
-                                <p className="flex flex-wrap justify-center w-full">
+                                <p className={`flex flex-wrap justify-center w-full ${
+                                    isDarkMode ? "text-gray-100" : "text-gray-800"
+                                }`}>
                                     ReKnew helps enterprises build a trusted, modern data foundation that drives consistency, quality, and scalability
                                     <br className="hidden md:block" /> - enabling faster, more effective adoption of AI and agentic platforms
                                 </p>
@@ -95,7 +134,9 @@ const DataandAiVarticalSlider = () => {
                 <>
                     <div className="flex md:min-h-screen md:py-[50px] flex-col">
                         <header className="mb-8 text-center px-4 md:px-6 max-w-7xl mx-auto">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[120%] dark:text-gray-100 tracking-[0] pt-8 md:pt-12">
+                            <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold leading-[120%] tracking-[0] pt-8 md:pt-12 ${
+                                isDarkMode ? "text-white" : "text-[#374151]"
+                            }`}>
                                 Gain
                                 <span className="relative inline-block">
                                     <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F] px-2">Wisdom</span>
@@ -126,7 +167,9 @@ const DataandAiVarticalSlider = () => {
                 <>
                     <div className="flex md:min-h-screen flex-col">
                         <header className="mb-8 text-center px-4 md:px-6 max-w-7xl mx-auto">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[120%] dark:text-gray-100 tracking-[0] pt-8 md:pt-12">
+                            <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold leading-[120%] tracking-[0] pt-8 md:pt-12 ${
+                                isDarkMode ? "text-white" : "text-[#374151]"
+                            }`}>
                                 The Key to
                                 <span className="relative inline-block">
                                     <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F] px-2">Unlocking Enterprise</span>
@@ -136,7 +179,9 @@ const DataandAiVarticalSlider = () => {
                                 </span>
                                 Knowledge
                             </h2>
-                            <p className="mx-4 mt-[36px] text-base md:text-lg font-medium text-center">
+                            <p className={`mx-4 mt-[36px] text-base md:text-lg font-medium text-center ${
+                                isDarkMode ? "text-gray-100" : "text-gray-800"
+                            }`}>
                                 ReKnew's approach delivers the rich contextual understanding needed for Enterprise Gen AI <br />
                                 to overcome data limitations and achieve its full potential
                             </p>
@@ -192,7 +237,7 @@ const DataandAiVarticalSlider = () => {
     };
 
     return (
-        <div className=" md:min-h-screen max-w-7xl overflow-x-hidden dark:bg-gray-900">
+        <div className=" md:min-h-screen max-w-7xl overflow-x-hidden">
             {!isMobile ? (
                 <>
                     {/* Desktop/Tablet Slider View */}
@@ -209,7 +254,9 @@ const DataandAiVarticalSlider = () => {
                     <div className="hidden md:flex">
                         <button
                             onClick={prevSlide}
-                            className="absolute left-4 md:left-[10%] md:top-[75%] lg:left-[5%]   xl:left-[5%] top-[95%] xxl:left-[6.5%] lg:top-[55%] transform -translate-y-1/2 dark:from-gray-800/90 dark:to-gray-800/70 dark:hover:to-gray-800 text-black dark:text-white size-14 flex justify-center items-center z-20 shadow-lg transition-all duration-300 border-2 border-[#FF512F] dark:border-[#FF512F] p-3 rounded-full dark:bg-gray-800 group"
+                            className={`absolute left-4 md:left-[10%] md:top-[75%] lg:left-[5%] xl:left-[5%] top-[95%] xxl:left-[6.5%] lg:top-[55%] transform -translate-y-1/2 size-14 flex justify-center items-center z-20 shadow-lg transition-all duration-300 border-2 border-[#FF512F] p-3 rounded-full group ${
+                                isDarkMode ? "text-white bg-gray-800" : "text-black bg-white/80"
+                            }`}
                             aria-label="Previous Slide">
                             <div className="flex items-center justify-center w-full h-full">
                                 <Image
@@ -223,7 +270,9 @@ const DataandAiVarticalSlider = () => {
 
                         <button
                             onClick={nextSlide}
-                            className="absolute right-4 top-[95%] md:top-[75%] md:right-[10%] xl:right-[5%] xxl:right-[6.5%] lg:right-[5%] lg:top-[55%] transform -translate-y-1/2 dark:from-gray-800/90 dark:to-gray-800/70 dark:hover:to-gray-800 text-black dark:text-white size-14 flex justify-center items-center z-20 shadow-lg transition-all duration-300 border-2 border-[#FF512F] dark:border-[#FF512F] p-3 rounded-full dark:bg-gray-800 group"
+                            className={`absolute right-4 top-[95%] md:top-[75%] md:right-[10%] xl:right-[5%] xxl:right-[6.5%] lg:right-[5%] lg:top-[55%] transform -translate-y-1/2 size-14 flex justify-center items-center z-20 shadow-lg transition-all duration-300 border-2 border-[#FF512F] p-3 rounded-full group ${
+                                isDarkMode ? "text-white bg-gray-800" : "text-black bg-white/80"
+                            }`}
                             aria-label="Next Slide">
                             <div className="flex items-center justify-center w-full h-full">
                                 <Image src={Arrow} alt="Next" className="rotate-[28deg] w-[67.5%] right-3 top-[16px] absolute object-contain" loading="lazy" />

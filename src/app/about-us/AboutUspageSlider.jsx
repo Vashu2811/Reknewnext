@@ -22,6 +22,63 @@ const AboutUspageSlider = () => {
     const [activeSlide, setActiveSlide] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
     const [direction, setDirection] = useState(0);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Listen for theme changes from navbar
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark =
+                document.documentElement.classList.contains("dark") ||
+                document.body.classList.contains("dark") ||
+                localStorage.getItem("theme") === "dark" ||
+                (localStorage.getItem("theme") === null && window.matchMedia("(prefers-color-scheme: dark)").matches);
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (
+                    mutation.type === "attributes" &&
+                    mutation.attributeName === "class"
+                ) {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === "theme") {
+                checkTheme();
+            }
+        };
+
+        const handleThemeChange = () => {
+            checkTheme();
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+        window.addEventListener("themeChanged", handleThemeChange);
+        document.addEventListener("themeChanged", handleThemeChange);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("themeChanged", handleThemeChange);
+            document.removeEventListener("themeChanged", handleThemeChange);
+        };
+    }, []);
 
     const slides = [
         { id: '1', title: 'From Reports to Real-Time Engagement', content: <FirstPrinciple /> },
@@ -103,17 +160,20 @@ const AboutUspageSlider = () => {
                     <button
                         onClick={prevSlide}
                         disabled={isAnimating}
-                        className="absolute left-4 md:left-6 lg:left-8 bottom-4 md:top-1/2 md:-translate-y-1/2 dark:from-gray-800/90 dark:to-gray-800/70 dark:hover:to-gray-800 
-                        text-black dark:text-white w-10 h-10 md:w-12 md:h-12 xxl:-left-[5%] xl:left-[1%] flex justify-center items-center z-20 
+                        className={`absolute left-4 md:left-6 lg:left-8 bottom-4 md:top-1/2 md:-translate-y-1/2 
+                        w-10 h-10 md:w-12 md:h-12 xxl:-left-[5%] xl:left-[1%] flex justify-center items-center z-20 
                         shadow-lg transition-all duration-300 border-2 border-[#FF512F] dark:border-[#FF512F] 
-                        rounded-full dark:bg-gray-800 hover:scale-105 active:scale-95 group"
+                        rounded-full hover:scale-105 active:scale-95 group ${
+                            isDarkMode 
+                                ? 'text-white bg-gray-800 hover:bg-gray-700' 
+                                : 'text-black bg-white hover:bg-gray-50'
+                        }`}
                         aria-label="Previous Slide">
                         <div className="flex items-center justify-center w-full h-full relative">
                             <Image
                                 src={Arrow}
                                 alt="Previous"
                                 className="rotate-[210deg] w-[67.5%] top-2 right-1 object-contain absolute"
-
                                 loading="lazy"
                             />
                         </div>
@@ -122,17 +182,20 @@ const AboutUspageSlider = () => {
                     <button
                         onClick={nextSlide}
                         disabled={isAnimating}
-                        className="absolute right-4 md:right-6 lg:right-8 bottom-4 xxl:-right-[5%] xl:right-[1%] md:top-1/2 md:-translate-y-1/2 dark:from-gray-800/90 dark:to-gray-800/70 dark:hover:to-gray-800 
-                        text-black dark:text-white w-10 h-10 md:w-12 md:h-12 flex justify-center items-center z-20 
+                        className={`absolute right-4 md:right-6 lg:right-8 bottom-4 xxl:-right-[5%] xl:right-[1%] md:top-1/2 md:-translate-y-1/2 
+                        w-10 h-10 md:w-12 md:h-12 flex justify-center items-center z-20 
                         shadow-lg transition-all duration-300 border-2 border-[#FF512F] dark:border-[#FF512F] 
-                        rounded-full dark:bg-gray-800 hover:scale-105 active:scale-95 group"
+                        rounded-full hover:scale-105 active:scale-95 group ${
+                            isDarkMode 
+                                ? 'text-white bg-gray-800 hover:bg-gray-700' 
+                                : 'text-black bg-white hover:bg-gray-50'
+                        }`}
                         aria-label="Next Slide">
                         <div className="flex items-center justify-center w-full h-full relative">
                             <Image
                                 src={Arrow}
                                 alt="Next"
                                 className="rotate-[28deg] w-[67.5%] bottom-2  left-[6px] object-contain absolute"
-
                                 loading="lazy"
                             />
                         </div>

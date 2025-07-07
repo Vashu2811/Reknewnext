@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Linkedin } from 'lucide-react';
 import muraliSajja from '../../../public/assets/MurliSir.jpg';
 import MariaMann from '../../../public/assets/maria.webp';
@@ -10,6 +10,57 @@ import Tommy from '../../../public/assets/Tommy.png'; // Assuming Tommy's image 
 import Image from 'next/image';
 
 const LeadershipTeam = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Listen for theme changes
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark =
+                document.documentElement.classList.contains("dark") ||
+                document.body.classList.contains("dark") ||
+                localStorage.getItem("theme") === "dark";
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (
+                    mutation.type === "attributes" &&
+                    mutation.attributeName === "class"
+                ) {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === "theme") {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+        window.addEventListener("themeChanged", checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("themeChanged", checkTheme);
+        };
+    }, []);
+
     const TeamMember = ({ name, role, tagline, bio, imageUrl, index, linkedIn }) => {
         const [isHovered, setIsHovered] = useState(false);
 
@@ -19,7 +70,7 @@ const LeadershipTeam = () => {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}>
                 {/* Background image with gradient overlay */}
-                <div className="absolute inset-0 w-full h-full bg-gray-100 dark:bg-gray-800">
+                <div className={`absolute inset-0 w-full h-full ${isDarkMode ? "bg-gray-800" : "bg-gray-100"}`}>
                     <Image
                         src={imageUrl}
                         alt={name}
@@ -130,7 +181,7 @@ const LeadershipTeam = () => {
         },
         {
             name: 'Kiran Batchu',
-            role: 'Designation',
+            role: 'Designation: Context Engineering Lead',
             bio: "Kiran is a seasoned software and cloud architecture leader with over 20 years of experience delivering scalable, real-time, and data-driven solutions across the financial services industry. He specializes in Modern Data Platforms, MLOps, and cross-platform engineering, with deep proficiency in technologies like Spark, Kafka, Snowflake, and AWS. Kiran has led the design and implementation of cloud-native platforms, real-time analytics frameworks, and regulatory AI models at organizations at leading financial institutions. Recognized for award-winning innovation and technical leadership, Kiran bridges business and technology to bring ideas to market.",
             imageUrl: KiranBatchu,
             linkedIn: ''
@@ -152,10 +203,10 @@ const LeadershipTeam = () => {
     ];
 
     return (
-        <div id="leadership" className="py-24 max-w-7xl mx-auto  dark:from-gray-900 dark:to-gray-800 relative">
+        <div id="leadership" className="py-24 max-w-7xl mx-auto relative">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-20">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+                    <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-6 ${isDarkMode ? "text-white" : "text-gray-900"}`}>
                         Fearless
                         <span className="relative inline-block mx-2">
                             <span className="relative z-10 text-[#FF512F]">Thinkers</span>
@@ -172,7 +223,7 @@ const LeadershipTeam = () => {
                         </span>
                     </h2>
 
-                    <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <p className={`text-base md:text-lg max-w-2xl mx-auto ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
                         Take a look beyond the code and algorithms at what makes ReKnew so effective – our people and our passion.
                     </p>
                 </div>

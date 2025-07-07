@@ -1,17 +1,17 @@
 import CanvasDots from '@/components/canvas';
 
-const LifeAtReknew = () => {
+const LifeAtReknew = ({ isDarkMode }) => {
     return (
         <>
             <div className="hidden sm:block">
                 <CanvasDots />
             </div>
-            <section className="py-32 relative overflow-hidden">
+            <section className={`py-32 relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-white"}`}>
                 {/* Background decoration */}
                 <div className="container mx-auto px-6">
-                    <div className="max-w-7xl  mx-auto">
+                    <div className="max-w-7xl mx-auto">
                         <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+                            <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-6${isDarkMode ? " text-white" : " text-gray-900"}`}>
                                 Life at
                                 <span className="relative inline-block mx-2">
                                     <span className="relative z-10 text-[#FF512F]">ReKnew</span>
@@ -21,7 +21,7 @@ const LifeAtReknew = () => {
                                 </span>
                             </h2>
 
-                            <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                            <p className={`text-base md:text-lg max-w-3xl mx-auto${isDarkMode ? " text-gray-400" : " text-gray-600"}`}>
                                 ReKnew provides an environment where talented professionals can grow, collaborate, and contribute meaningful work.
                             </p>
                         </div>
@@ -29,7 +29,7 @@ const LifeAtReknew = () => {
                         {/* Life at ReKnew Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {/* Benefits */}
-                            <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className={`bg-gradient-to-br rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300${isDarkMode ? " from-gray-800 to-gray-900" : " from-white to-gray-50"}`}>
                                 <div className="h-48 overflow-hidden relative">
                                     <img
                                         src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
@@ -40,7 +40,7 @@ const LifeAtReknew = () => {
                                     <h3 className="absolute bottom-4 left-6 text-lg font-bold text-white">Competitive Benefits</h3>
                                 </div>
                                 <div className="p-6">
-                                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+                                    <ul className={`space-y-2${isDarkMode ? " text-gray-300" : " text-gray-600"}`}>
                                         <li className="flex items-start gap-2">
                                             <span className="text-[#FF512F] text-2xl mt-0">•</span>
                                             <span className="text-base">Competitive salary with equity options</span>
@@ -58,7 +58,7 @@ const LifeAtReknew = () => {
                             </div>
 
                             {/* Culture */}
-                            <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className={`bg-gradient-to-br rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300${isDarkMode ? " from-gray-800 to-gray-900" : " from-white to-gray-50"}`}>
                                 <div className="h-48 overflow-hidden relative">
                                     <img
                                         src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
@@ -69,7 +69,7 @@ const LifeAtReknew = () => {
                                     <h3 className="absolute bottom-4 left-6 text-lg font-bold text-white">Vibrant Culture</h3>
                                 </div>
                                 <div className="p-6">
-                                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+                                    <ul className={`space-y-2${isDarkMode ? " text-gray-300" : " text-gray-600"}`}>
                                         <li className="flex items-start gap-2">
                                             <span className="text-[#FF512F] text-2xl mt-0">•</span>
                                             <span className="text-base">Innovation-focused environment where ideas thrive</span>
@@ -87,7 +87,7 @@ const LifeAtReknew = () => {
                             </div>
 
                             {/* Diversity and Inclusion */}
-                            <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className={`bg-gradient-to-br rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300${isDarkMode ? " from-gray-800 to-gray-900" : " from-white to-gray-50"}`}>
                                 <div className="h-48 overflow-hidden relative">
                                     <img
                                         src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
@@ -98,7 +98,7 @@ const LifeAtReknew = () => {
                                     <h3 className="absolute bottom-4 left-6 text-lg font-bold text-white">Diversity & Inclusion</h3>
                                 </div>
                                 <div className="p-6">
-                                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+                                    <ul className={`space-y-2${isDarkMode ? " text-gray-300" : " text-gray-600"}`}>
                                         <li className="flex items-start gap-2">
                                             <span className="text-[#FF512F] text-2xl mt-0">•</span>
                                             <span className="text-base">Commitment to building diverse teams and inclusive workplace</span>
@@ -116,7 +116,7 @@ const LifeAtReknew = () => {
                             </div>
 
                             {/* Flexible Work */}
-                            <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className={`bg-gradient-to-br rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300${isDarkMode ? " from-gray-800 to-gray-900" : " from-white to-gray-50"}`}>
                                 <div className="h-48 overflow-hidden relative">
                                     <img
                                         src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
@@ -127,7 +127,7 @@ const LifeAtReknew = () => {
                                     <h3 className="absolute bottom-4 left-6 text-lg font-bold text-white">Flexible Work</h3>
                                 </div>
                                 <div className="p-6">
-                                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+                                    <ul className={`space-y-2${isDarkMode ? " text-gray-300" : " text-gray-600"}`}>
                                         <li className="flex items-start gap-2">
                                             <span className="text-[#FF512F] text-2xl mt-0">•</span>
                                             <span className="text-base">
@@ -147,7 +147,7 @@ const LifeAtReknew = () => {
                             </div>
 
                             {/* Personal Development */}
-                            <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className={`bg-gradient-to-br rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300${isDarkMode ? " from-gray-800 to-gray-900" : " from-white to-gray-50"}`}>
                                 <div className="h-48 overflow-hidden relative">
                                     <img
                                         src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
@@ -158,7 +158,7 @@ const LifeAtReknew = () => {
                                     <h3 className="absolute bottom-4 left-6 text-lg font-bold text-white">Personal Development</h3>
                                 </div>
                                 <div className="p-6">
-                                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+                                    <ul className={`space-y-2${isDarkMode ? " text-gray-300" : " text-gray-600"}`}>
                                         <li className="flex items-start gap-2">
                                             <span className="text-[#FF512F] text-2xl mt-0">•</span>
                                             <span className="text-base">Mentorship programs and career path guidance</span>
@@ -172,7 +172,7 @@ const LifeAtReknew = () => {
                             </div>
 
                             {/* Health and Wellness */}
-                            <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className={`bg-gradient-to-br rounded-2xl overflow-hidden border border-[#FF512F]/20 shadow-lg hover:shadow-xl transition-all duration-300${isDarkMode ? " from-gray-800 to-gray-900" : " from-white to-gray-50"}`}>
                                 <div className="h-48 overflow-hidden relative">
                                     <img
                                         src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
@@ -183,7 +183,7 @@ const LifeAtReknew = () => {
                                     <h3 className="absolute bottom-4 left-6 text-lg font-bold text-white">Health & Wellness</h3>
                                 </div>
                                 <div className="p-6">
-                                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+                                    <ul className={`space-y-2${isDarkMode ? " text-gray-300" : " text-gray-600"}`}>
                                         <li className="flex items-start gap-2">
                                             <span className="text-[#FF512F] text-2xl mt-0">•</span>
                                             <span className="text-base">Monthly wellness stipend for fitness and mental health</span>

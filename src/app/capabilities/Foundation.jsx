@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Database, Cloud, Settings2, Users, ArrowBigRightDash } from 'lucide-react';
@@ -9,6 +9,52 @@ gsap.registerPlugin(ScrollTrigger);
 const Foundation = () => {
     const cardRefs = useRef([]);
     const [hoveredCard, setHoveredCard] = useState(null);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Listen for theme changes from navbar
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark = document.documentElement.classList.contains('dark') || 
+                          document.body.classList.contains('dark') ||
+                          localStorage.getItem('theme') === 'dark';
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === 'theme') {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        window.addEventListener('themeChanged', checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('themeChanged', checkTheme);
+        };
+    }, []);
 
     const handleCardHover = (index) => {
         setHoveredCard(index);
@@ -69,16 +115,19 @@ const Foundation = () => {
                         <div key={i} className="flex flex-col" onMouseEnter={() => handleCardHover(i)} onMouseLeave={handleCardLeave}>
                             <div
                                 ref={(el) => (cardRefs.current[i] = el)}
-                                className="group flex w-full justify-center flex-col lg:flex-row items-start lg:items-center gap-8 h-auto lg:h-auto p-8 md:p-10 
-                                bg-gradient-to-br from-white via-[#FFF8F6] to-[#FFF4F0] dark:from-gray-800 dark:via-gray-800/90 dark:to-gray-900
-                                border border-[#e5e7eb26] rounded-t-2xl shadow-xl transition-all duration-500 
-                                overflow-hidden relative cursor-pointer"
+                                className={`group flex w-full justify-center flex-col lg:flex-row items-start lg:items-center gap-8 h-auto lg:h-auto p-8 md:p-10 
+                                transition-all duration-500 overflow-hidden relative cursor-pointer rounded-t-2xl shadow-xl  ${
+                                    isDarkMode 
+                                        ? "bg-gradient-to-br border from-gray-800 via-gray-800/90 to-gray-900 border-gray-700" 
+                                        : "bg-transparent"
+                                }`}
                                 style={{
                                     borderBottomLeftRadius: hoveredCard === i ? '0' : '1rem',
                                     borderBottomRightRadius: hoveredCard === i ? '0' : '1rem'
                                 }}>
-                                <div className="absolute inset-0 bg-[linear-gradient(45deg,#FF512F05 1px,transparent 1px),linear-gradient(-45deg,#FF8A6305 1px,transparent 1px)] dark:bg-[linear-gradient(45deg,#FF512F05 1px,transparent 1px),linear-gradient(-45deg,#FF512F05 1px,transparent 1px)] bg-[size:20px_20px] opacity-70 will-change-transform pointer-events-none"></div>
-                                <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-white/50 dark:from-gray-900/50 dark:via-transparent dark:to-gray-900/50 will-change-transform pointer-events-none"></div>
+                                    {/* <div className="absolute inset-0 bg-[linear-gradient(45deg,#FF512F05 1px,transparent 1px),linear-gradient(-45deg,#FF8A6305 1px,transparent 1px)] dark:bg-[linear-gradient(45deg,#FF512F05 1px,transparent 1px),linear-gradient(-45deg,#FF512F05 1px,transparent 1px)] bg-[size:20px_20px] opacity-70 will-change-transform pointer-events-none"></div> */}
+                                {/* <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-white/50 dark:from-gray-900/50 dark:via-transparent dark:to-gray-900/50 will-change-transform pointer-events-none"></div> */}
+                               
 
                                 <div className="flex items-center gap-4 min-w-[240px] z-10">
                                     <div
@@ -90,13 +139,16 @@ const Foundation = () => {
                                     </div>
                                     <div>
                                         <p
-                                            className="text-lg md:text-xl font-semibold text-[#374151] dark:text-gray-100 
-                                        group-hover:text-[#FF512F] dark:group-hover:text-[#FF512F] transition-colors">
+                                            className={`text-lg md:text-xl font-semibold group-hover:text-[#FF512F] transition-colors ${
+                                                isDarkMode ? "text-gray-100" : "text-gray-800"
+                                            }`}>
                                             {item.title}
                                         </p>
                                         <div className="flex items-center gap-2">
                                             <span className="w-2 h-2 rounded-full bg-[#FF512F] dark:bg-[#FF512F]"></span>
-                                            <p className="text-base text-[#666666] dark:text-gray-400">{item.subtitle}</p>
+                                            <p className={`text-base ${
+                                                isDarkMode ? "text-gray-400" : "text-gray-600"
+                                            }`}>{item.subtitle}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -107,9 +159,10 @@ const Foundation = () => {
                                     {[item.engineeringType, item.readyState, 'Context Engineered'].map((text, index) => (
                                         <div key={index} className="flex items-center gap-3">
                                             <div
-                                                className="z-10 px-4 py-2.5 bg-[#FF512F08] dark:bg-[#FF512F]/10 
-                                            text-[#374151] dark:text-gray-200 rounded-lg text-base font-medium 
-                                            flex-1 will-change-transform flex flex-col items-center gap-1">
+                                                className={`z-10 px-4 py-2.5 bg-[#FF512F08] rounded-lg text-base font-medium 
+                                            flex-1 will-change-transform flex flex-col items-center gap-1 ${
+                                                isDarkMode ? "dark:bg-[#FF512F]/10 text-gray-200" : "text-gray-800"
+                                            }`}>
                                                 {index === 1 && <Image src={bridge} alt="Rocket" className="h-16 w-full object-contain" />}
                                                 {text}
                                             </div>
@@ -125,8 +178,9 @@ const Foundation = () => {
                                         {item.features.map((feature, index) => (
                                             <li
                                                 key={index}
-                                                className="flex items-center gap-3 text-base text-[#374151] dark:text-gray-300 
-                                                will-change-transform">
+                                                className={`flex items-center gap-3 text-base will-change-transform ${
+                                                    isDarkMode ? "text-gray-300" : "text-gray-800"
+                                                }`}>
                                                <span className="text-[#FF512F] text-2xl">•</span>
                                                 <span className="line-clamp-1">{feature}</span>
                                             </li>
@@ -137,8 +191,12 @@ const Foundation = () => {
 
                             {/* Description panel that slides down on hover */}
                             {hoveredCard === i && (
-                                <div className="w-full flex justify-center items-center text-center p-6 bg-[#FFF8F6] dark:bg-gray-800 border border-t-0 border-[#e5e7eb26] rounded-b-2xl shadow-xl animate-slideDown">
-                                    <p className="text-base md:text-lg text-[#374151] max-w-6xl dark:text-gray-200">{item.description}</p>
+                                <div className={`w-full flex justify-center items-center text-center p-6 border border-t-0 rounded-b-2xl shadow-xl animate-slideDown ${
+                                    isDarkMode ? "bg-gray-800 border-gray-700" : "bg-[#FFF8F6] border-gray-200"
+                                }`}>
+                                    <p className={`text-base md:text-lg max-w-6xl ${
+                                        isDarkMode ? "text-gray-200" : "text-gray-800"
+                                    }`}>{item.description}</p>
                                 </div>
                             )}
                         </div>

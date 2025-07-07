@@ -11,8 +11,8 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 import ReKnewModal from '../../model/ReKnewModal';
 
 const Ourservices = () => {
-    // eslint-disable-next-line no-unused-vars
     const [scrollProgress, setScrollProgress] = useState(0);
+    const [isDarkMode, setIsDarkMode] = useState(false);
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
         stiffness: 100,
@@ -21,6 +21,51 @@ const Ourservices = () => {
     });
 
     // const parallaxY = { y: 0 };
+
+    // Listen for theme changes from navbar
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark = document.documentElement.classList.contains('dark') || 
+                          document.body.classList.contains('dark') ||
+                          localStorage.getItem('theme') === 'dark';
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === 'theme') {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        window.addEventListener('themeChanged', checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('themeChanged', checkTheme);
+        };
+    }, []);
 
     useEffect(() => {
         document.title = 'Our Services | ReKnew';
@@ -145,7 +190,7 @@ const Ourservices = () => {
     // const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
     return (
-        <div className="text-gray-800 dark:text-gray-100 font-sans w-full min-h-screen overflow-x-hidden">
+        <div className={`font-sans w-full min-h-screen overflow-x-hidden ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
             <ReKnewModal isOpen={isModalOpen} onClose={closeModal} />
             {/* Progress Bar */}
             <motion.div
@@ -172,23 +217,23 @@ const Ourservices = () => {
                        
                         {/* How We Partner Section */}
                         <div className="mt-24 text-center">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-gray-800 dark:text-gray-100">
+                            <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-8 ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                                 How We
                                 <span className="relative inline-block">
-                                    <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F] pl-2">Partner</span>
+                                    <span className={`relative z-10 pl-2 ${isDarkMode ? 'text-[#FF512F]' : 'text-[#FF512F]'}`}>Partner</span>
                                     <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
                                         <path
                                             d="M0 5c30-5 70-5 100 0"
                                             stroke="currentColor"
                                             strokeWidth="2"
                                             fill="none"
-                                            className="text-[#FF512F] dark:text-[#FF512F] transition-all duration-300"
+                                            className={`${isDarkMode ? 'text-[#FF512F]' : 'text-[#FF512F]'} transition-all duration-300`}
                                         />
                                     </svg>
                                 </span>
                             </h2>
                         </div>
-                        <p className="text-base md:text-lg text-gray-800 dark:text-gray-100 max-w-3xl mx-auto">
+                        <p className={`text-base md:text-lg max-w-3xl mx-auto ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                             ReKnew's services are designed to partner with enterprises in modernizing data platforms, accelerating AI adoption, and implementing intelligent automation.
                         </p>
                     </div>

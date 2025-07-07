@@ -1,7 +1,11 @@
 "use client";
 import { motion } from 'framer-motion';
+import { useTheme } from "@/Context/ThemeContext";
 
 const SuccessStoryOne = () => {
+    const { theme } = useTheme();
+    const isDarkMode = theme === 'dark';
+
     const item = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 }
@@ -30,42 +34,54 @@ const SuccessStoryOne = () => {
     ];
 
     return (
-        <div className="dark:text-gray-100 relative overflow-hidden px-4">
+        <div className={`relative overflow-hidden px-4 ${isDarkMode ? 'text-gray-100' : 'text-gray-900'}`}>
             {/* Header Section */}
             <div className="container mx-auto max-w-7xl px-8 relative z-10">
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-16 pt-12 text-center">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-8 py-2 bg-clip-text text-transparent bg-gradient-to-r from-[#374151] to-[#374151]/80 dark:from-gray-100 dark:to-gray-100">
+                    <h2 className={`text-4xl md:text-5xl font-bold mb-8 py-2 ${
+                        isDarkMode 
+                            ? 'bg-gradient-to-r from-gray-100 to-gray-100 bg-clip-text text-transparent' 
+                            : 'bg-gradient-to-r from-[#374151] to-[#374151]/80 bg-clip-text text-transparent'
+                    }`}>
                         From Reports to
                         <span className="relative inline-block mx-3">
-                            <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F]">Real-Time</span>
+                            <span className="relative z-10 text-[#FF512F]">Real-Time</span>
                             <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
                                 <path
                                     d="M0 5c30-5 70-5 100 0"
                                     stroke="currentColor"
                                     strokeWidth="2"
                                     fill="none"
-                                    className="text-[#FF512F] dark:text-[#FF512F] transition-all duration-300"
+                                    className="text-[#FF512F] transition-all duration-300"
                                 />
                             </svg>
                         </span>
                         Engagement
                     </h2>
 
-                    <p className="text-[#374151] dark:text-gray-100 text-lg max-w-4xl mx-auto leading-relaxed mt-4">
+                    <p className={`text-lg max-w-4xl mx-auto leading-relaxed mt-4 ${isDarkMode ? 'text-gray-100' : 'text-[#374151]'}`}>
                         Our team enabled a large global financial institution to modernize its data infrastructure and analytics, transitioning from traditional
                         reporting to real-time customer engagement across omnichannel digital platforms.
                     </p>
                 </motion.div>
 
                 {/* Content Section - Responsive Layout */}
-                <div className="flex flex-col lg:flex-row gap-8 bg-white/30 dark:bg-slate-800/30 backdrop-blur-md p-2 rounded-2xl border border-gray-100 dark:border-slate-700">
+                <div className={`flex flex-col lg:flex-row gap-8 backdrop-blur-md p-6 rounded-2xl border ${
+                    isDarkMode 
+                        ? 'bg-slate-800/30 border-slate-700' 
+                        : 'bg-white/30 border-gray-200'
+                }`}>
                     {/* Left Column - Key Actions and Outcomes */}
                     <motion.div initial="hidden" animate="visible" variants={container} className="w-full lg:w-2/5">
                         <motion.div
                             variants={item}
-                            className="bg-white/50 dark:bg-slate-800/40 backdrop-blur-sm p-5 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 mb-4">
-                            <h3 className="text-lg font-semibold text-[#FF512F] dark:text-[#FF512F] mb-3">Key Actions:</h3>
-                            <ul className="text-sm md:text-lg text-slate-600 dark:text-slate-300 space-y-2 pl-5 list-disc mt-2">
+                            className={`backdrop-blur-sm p-5 rounded-xl shadow-sm border mb-4 ${
+                                isDarkMode 
+                                    ? 'bg-slate-800/40 border-slate-700' 
+                                    : 'bg-white/70 border-gray-200'
+                            }`}>
+                            <h3 className="text-lg font-semibold text-[#FF512F] mb-3">Key Actions:</h3>
+                            <ul className={`text-sm md:text-lg space-y-2 pl-5 list-disc mt-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                                 {keyActions.map((action, idx) => (
                                     <li key={idx} className="leading-relaxed">
                                         {action}
@@ -76,9 +92,13 @@ const SuccessStoryOne = () => {
 
                         <motion.div
                             variants={item}
-                            className="bg-white/50 dark:bg-slate-800/40 backdrop-blur-sm p-5 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700">
-                            <h3 className="text-lg font-semibold text-[#FF512F] dark:text-[#FF512F] mb-3">Outcomes:</h3>
-                            <ul className="text-sm md:text-lg text-slate-600 dark:text-slate-300 space-y-2 pl-5 list-disc mt-2">
+                            className={`backdrop-blur-sm p-5 rounded-xl shadow-sm border ${
+                                isDarkMode 
+                                    ? 'bg-slate-800/40 border-slate-700' 
+                                    : 'bg-white/70 border-gray-200'
+                            }`}>
+                            <h3 className="text-lg font-semibold text-[#FF512F] mb-3">Outcomes:</h3>
+                            <ul className={`text-sm md:text-lg space-y-2 pl-5 list-disc mt-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                                 {outcomes.map((outcome, idx) => (
                                     <li key={idx} className="leading-relaxed">
                                         {outcome}
@@ -100,7 +120,7 @@ const SuccessStoryOne = () => {
                             className="overflow-hidden">
                             {/* Responsive SVG Section */}
                             <svg
-                                className="text-black dark:text-gray-100 w-full h-auto"
+                                className={`w-full h-auto ${isDarkMode ? 'text-gray-100' : 'text-black'}`}
                                 viewBox="0 0 800 800"
                                 xmlns="http://www.w3.org/2000/svg"
                                 preserveAspectRatio="xMidYMid meet">

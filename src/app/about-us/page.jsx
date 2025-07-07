@@ -12,49 +12,67 @@ import LifeAtReknew from './LifeAtReknew';
 import { Lightbulb } from 'lucide-react';
 import Image from 'next/image';
 
-export const generateMetadata = () => ({
-  title: "About Us | ReKnew - Our Story & Leadership Team",
-  description:
-    "Learn about ReKnew's journey, mission, and leadership team. We bridge the gap between enterprises and AI transformation, helping organizations thrive in the digital age.",
-  metadataBase: new URL("https://next-meta-seo.vercel.app"),
-  alternates: {
-    canonical: "/about-us",
-  },
-  openGraph: {
-    title: "About Us | ReKnew - Our Story & Leadership Team",
-    description:
-      "Learn about ReKnew's journey, mission, and leadership team. We bridge the gap between enterprises and AI transformation, helping organizations thrive in the digital age.",
-    url: "https://reknew.ai/about-us",
-    siteName: "Health Wealth Safe",
-    type: "website",
-    locale: "en_US",
-    images: [
-      {
-        url: "https://opengraph.b-cdn.net/production/images/7b51162a-d886-4727-b920-6942b1bce177.jpg?token=h6uIKapL9RvEAZTxnfwWQiFT-B-wXH55jnK67eFe54o&height=800&width=1200&expires=33287797796",
-        width: 1200,
-        height: 630,
-        alt: "About Health Wealth Safe",
-        type: "image/jpeg",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@ReKnewAI",
-    title: "About Us | ReKnew - Our Story & Leadership Team",
-    description:
-      "Learn about ReKnew's journey, mission, and leadership team. We bridge the gap between enterprises and AI transformation, helping organizations thrive in the digital age.",
-    images: [
-      "https://opengraph.b-cdn.net/production/images/7b51162a-d886-4727-b920-6942b1bce177.jpg?token=h6uIKapL9RvEAZTxnfwWQiFT-B-wXH55jnK67eFe54o&height=800&width=1200&expires=33287797796",
-    ],
-  },
-});
-
-export default function  OurStory() {
+const OurStory = () => {
     useEffect(() => {
         document.title = 'About-us | ReKnew';
     }, []);
+ const [isDarkMode, setIsDarkMode] = useState(false);
 
+    // Listen for theme changes from navbar
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark =
+                document.documentElement.classList.contains("dark") ||
+                document.body.classList.contains("dark") ||
+                localStorage.getItem("theme") === "dark" ||
+                (localStorage.getItem("theme") === null && window.matchMedia("(prefers-color-scheme: dark)").matches);
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (
+                    mutation.type === "attributes" &&
+                    mutation.attributeName === "class"
+                ) {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === "theme") {
+                checkTheme();
+            }
+        };
+
+        const handleThemeChange = () => {
+            checkTheme();
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+        window.addEventListener("themeChanged", handleThemeChange);
+        document.addEventListener("themeChanged", handleThemeChange);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("themeChanged", handleThemeChange);
+            document.removeEventListener("themeChanged", handleThemeChange);
+        };
+    }, []);
     useMemo(
         () => ({
             hidden: { opacity: 0, y: 30 },
@@ -85,10 +103,10 @@ export default function  OurStory() {
             <AboutUspageSlider />
 
             {/* Our Journey Section - Company origin story */}
-            <section className="py-32 relative overflow-hidden">
+            <section className={`py-32 relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-white"}`}>
                 <div className="container mx-auto px-6">
                     <div className="max-w-7xl flex justify-center items-center flex-col mx-auto">
-                        <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+                        <h2 className={`text-4xl md:text-5xl font-bold mb-12 text-center ${isDarkMode ? "text-white" : "text-[#374151]"}`}>
                             The
                             <span className="relative inline-block mx-2">
                                 <span className="relative z-10 text-[#FF512F]">Spark</span>
@@ -115,14 +133,14 @@ export default function  OurStory() {
                                         </div>
 
                                         {/* Content Card */}
-                                        <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 border border-[#FF512F]/20 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden flex-1">
+                                        <div className={`bg-gradient-to-br rounded-2xl p-8 border border-[#FF512F]/20 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden flex-1${isDarkMode ? " from-gray-800 to-gray-900 text-gray-100" : " from-white to-gray-50 text-gray-900"}`}>
                                             <div className="absolute inset-0 bg-gradient-to-r from-[#FF512F]/5 to-[#FF8A63]/5 opacity-50"></div>
 
                                             <div className="relative">
-                                                <h3 className="text-2xl font-bold mb-6 text-[#374151] dark:text-gray-100 pb-3 border-b border-[#FF512F]/20">
+                                                <h3 className="text-2xl font-bold mb-6  pb-3 border-b border-[#FF512F]/20">
                                                     Our story began with a simple realization
                                                 </h3>
-                                                <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                                                <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
                                                     Enterprises today face unprecedented pressure to leverage AI and intelligent Agents for automation and
                                                     efficiency at scale. This technological shift is creating challenges across business, product, technology,
                                                     and data functions. The skills needed to build the future are scarce, while existing foundations require
@@ -142,21 +160,20 @@ export default function  OurStory() {
                                             {/* <div className="bg-gradient-to-br mt-[190px] from-[#FF512F] to-[#FF8A63] p-3 ml-[2px] rounded-full shadow-lg shadow-[#FF512F]/20 z-10">
                                                 <Lightbulb className="h-6 w-6 text-white" />
                                             </div> */}
-                                            <div className="bg-gradient-to-br  from-white to-gray-50 mt-[190px] p-3 ml-[2px] rounded-full shadow-lg shadow-[#FF512F]/20 z-10">
-                                                {/* <Lightbulb className="h-6 w-6 text-white" /> */}
-                                                <Image src={Arrow} alt="-" className="inline-block top-[2px] h-6 w-6 relative  object-contain" />
+                                            <div className={`bg-gradient-to-br mt-[190px] p-3 ml-[2px] rounded-full shadow-lg shadow-[#FF512F]/20 z-10${isDarkMode ? " from-gray-800 to-gray-900" : " from-white to-gray-50"}`}>
+                                                <Image src={Arrow} alt="-" className="inline-block top-[2px] h-6 w-6 relative object-contain" />
                                             </div>
                                         </div>
 
                                         {/* Content Card */}
-                                        <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 border border-[#FF512F]/20 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden flex-1">
+                                        <div className={`bg-gradient-to-br rounded-2xl p-8 border border-[#FF512F]/20 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden flex-1${isDarkMode ? " from-gray-800 to-gray-900 text-gray-100" : " from-white to-gray-50 text-gray-900"}`}>
                                             <div className="absolute inset-0 bg-gradient-to-r from-[#FF512F]/5 to-[#FF8A63]/5 opacity-50"></div>
 
                                             <div className="relative">
-                                                <h3 className="text-2xl font-bold mb-6 text-[#374151] dark:text-gray-100 pb-3 border-b border-[#FF512F]/20">
+                                                <h3 className="text-2xl font-bold mb-6  pb-3 border-b border-[#FF512F]/20">
                                                     ReKnew was founded to bridge this gap
                                                 </h3>
-                                                <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                                                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                                                     At ReKnew, we are partnering with enterprises to overcome these readiness challenges, revitalizing their core
                                                     capabilities and positioning them for success in this rapidly evolving landscape.
                                                 </p>
@@ -171,27 +188,27 @@ export default function  OurStory() {
             </section>
 
             {/* Strategic Acceleration Section - Core Principles */}
-            <StrategicAcceleration />
+            <StrategicAcceleration isDarkMode={isDarkMode} />
 
             {/* Leadership Team Section */}
-            <section className=" relative overflow-hidden">
-                <LeadershipTeam />
+            <section className={`relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-white"}`}>
+                <LeadershipTeam isDarkMode={isDarkMode} />
             </section>
 
             {/* Life at ReKnew Section */}
-            <LifeAtReknew />
+            <LifeAtReknew isDarkMode={isDarkMode} />
 
             {/* Career Opportunities Section - Current job openings */}
-            <CareerOpportunities openHiringModal={openModal} />
-
-            {/* Message from CEO Section - Personal company vision */}
+            <CareerOpportunities openHiringModal={openModal} isDarkMode={isDarkMode} />
 
             {/* Use the new HeadquartersHeader component */}
-            <HeadquartersHeader />
+            <HeadquartersHeader isDarkMode={isDarkMode} />
 
             {/* Use the new ContactInformation component */}
-            <ContactInformation />
+            <ContactInformation isDarkMode={isDarkMode} />
         </div>
     );
 };
 
+export default OurStory;
+                

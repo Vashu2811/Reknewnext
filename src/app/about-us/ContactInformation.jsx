@@ -1,10 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin, Mail, Phone } from 'lucide-react';
 
 const ContactInformation = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Listen for theme changes
+  useEffect(() => {
+    const checkTheme = () => {
+      const isDark =
+        document.documentElement.classList.contains("dark") ||
+        document.body.classList.contains("dark") ||
+        localStorage.getItem("theme") === "dark";
+      setIsDarkMode(isDark);
+    };
+
+    checkTheme();
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "class"
+        ) {
+          checkTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    const handleStorageChange = (e) => {
+      if (e.key === "theme") {
+        checkTheme();
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("themeChanged", checkTheme);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("themeChanged", checkTheme);
+    };
+  }, []);
+
   return (
-    <div className="text-[#374151] dark:text-gray-100 relative overflow-hidden">
-      <section className="relative w-full dark:from-gray-900/80 dark:via-gray-900/90 dark:to-gray-900/80 py-[50px] lg:py-[100px]">
+    <div className={`relative overflow-hidden ${isDarkMode ? "text-gray-100" : "text-[#374151]"}`}>
+      <section className="relative w-full py-[50px] lg:py-[100px]">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 justify-center max-w-7xl mx-auto gap-[52px] items-center">
             <div className="flex flex-col w-full gap-8">
@@ -31,22 +82,23 @@ const ContactInformation = () => {
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="relative flex items-start gap-4 p-6 rounded-xl bg-white dark:bg-gray-800 
-                        border border-[#FF512F]/10 dark:border-[#FF512F]/10">
+                    className={`relative flex items-start gap-4 p-6 rounded-xl border border-[#FF512F]/10 ${
+                      isDarkMode ? "bg-gray-800" : "bg-white"
+                    }`}>
                     <div className="relative flex-shrink-0">
                       <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} rounded-xl blur-xl`}></div>
                       <span
-                        className="relative flex items-center justify-center w-14 h-14 rounded-xl 
-                            bg-white dark:bg-gray-800 border border-[#FF512F]/20 dark:border-[#FF512F]/20
-                            shadow-[0_8px_20px_-6px_rgba(255,81,47,0.2)] dark:shadow-[0_8px_20px_-6px_rgba(255,157,119,0.2)]">
-                        <item.icon className="w-6 h-6 text-[#FF512F] dark:text-[#FF512F]" />
+                        className={`relative flex items-center justify-center w-14 h-14 rounded-xl border border-[#FF512F]/20 shadow-[0_8px_20px_-6px_rgba(255,81,47,0.2)] ${
+                          isDarkMode ? "bg-gray-800" : "bg-white"
+                        }`}>
+                        <item.icon className="w-6 h-6 text-[#FF512F]" />
                       </span>
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-lg font-semibold text-[#232323] dark:text-gray-100">{item.title}</h3>
+                      <h3 className={`text-lg font-semibold ${isDarkMode ? "text-gray-100" : "text-[#232323]"}`}>{item.title}</h3>
                       {item.content.map((line, i) => (
-                        <p key={i} className="text-base text-[#666666] dark:text-gray-300">
+                        <p key={i} className={`text-base ${isDarkMode ? "text-gray-300" : "text-[#666666]"}`}>
                           {line}
                         </p>
                       ))}
@@ -56,15 +108,17 @@ const ContactInformation = () => {
               </div>
 
               <div
-                className="relative mt-4 p-8 rounded-2xl overflow-hidden
-                    bg-gradient-to-br from-white to-white/50 dark:from-gray-800 dark:to-gray-800/50 backdrop-blur-sm
-                    border border-[#FF512F]/10 dark:border-[#FF512F]/10">
+                className={`relative mt-4 p-8 rounded-2xl overflow-hidden border border-[#FF512F]/10 ${
+                  isDarkMode 
+                    ? "bg-gradient-to-br from-gray-800 to-gray-800/50" 
+                    : "bg-gradient-to-br from-white to-white/50"
+                } backdrop-blur-sm`}>
                 <div className="relative">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-[#FF512F]/10 to-[#FF512F]/10 dark:from-[#FF512F]/10 dark:to-[#FF512F]/10">
+                    <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-[#FF512F]/10 to-[#FF512F]/10">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-5 h-5 text-[#FF512F] dark:text-[#FF512F]"
+                        className="w-5 h-5 text-[#FF512F]"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -73,40 +127,39 @@ const ContactInformation = () => {
                         <polyline points="12 6 12 12 16 14" />
                       </svg>
                     </span>
-                    <h3 className="text-xl font-semibold bg-gradient-to-r from-[#FF512F] to-[#FF512F] dark:from-[#FF512F] dark:to-[#FF512F] bg-clip-text text-transparent">
+                    <h3 className="text-xl font-semibold bg-gradient-to-r from-[#FF512F] to-[#FF512F] bg-clip-text text-transparent">
                       Business Hours
                     </h3>
                   </div>
 
-                  <div className="space-y-4">
-                    {[
-                      { day: 'Monday – Friday', hours: '9:00 AM – 6:00 PM', status: 'Open' },
-                      { day: 'Saturday & Sunday', hours: 'Closed', status: 'Closed' }
-                    ].map((schedule, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between p-4 rounded-xl bg-white/80 dark:bg-gray-800/80 
-                                border border-[#FF512F]/10 dark:border-[#FF512F]/10">
-                        <div className="flex flex-col">
-                          <span className="font-medium text-base text-[#232323] dark:text-gray-100">{schedule.day}</span>
-                          <span className="text-sm text-[#666666] dark:text-gray-300">{schedule.hours}</span>
-                        </div>
-                        <span
-                          className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            schedule.status === 'Open'
-                              ? 'bg-green-50 text-green-600 border border-green-100'
-                              : 'bg-red-50 text-red-600 border border-red-100'
-                          }`}>
-                          {schedule.status}
-                        </span>
+                  {[
+                    { day: 'Monday – Friday', hours: '9:00 AM – 6:00 PM', status: 'Open' },
+                    { day: 'Saturday & Sunday', hours: 'Closed', status: 'Closed' }
+                  ].map((schedule, index) => (
+                    <div
+                      key={index}
+                      className={`flex items-center justify-between p-4 rounded-xl border border-[#FF512F]/10 ${
+                        isDarkMode ? "bg-gray-800/80" : "bg-white/80"
+                      }`}>
+                      <div className="flex flex-col">
+                        <span className={`font-medium text-base ${isDarkMode ? "text-gray-100" : "text-[#232323]"}`}>{schedule.day}</span>
+                        <span className={`text-sm ${isDarkMode ? "text-gray-300" : "text-[#666666]"}`}>{schedule.hours}</span>
                       </div>
-                    ))}
-                  </div>
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${
+                          schedule.status === 'Open'
+                            ? 'bg-green-50 text-green-600 border border-green-100'
+                            : 'bg-red-50 text-red-600 border border-red-100'
+                        }`}>
+                        {schedule.status}
+                      </span>
+                    </div>
+                  ))}
 
-                  <div className="mt-4 flex items-start gap-2 text-sm text-[#666666] dark:text-gray-300">
+                  <div className={`mt-4 flex items-start gap-2 text-sm ${isDarkMode ? "text-gray-300" : "text-[#666666]"}`}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 text-[#FF512F] dark:text-[#FF512F] flex-shrink-0"
+                      className="w-5 h-5 text-[#FF512F] flex-shrink-0"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"

@@ -1,6 +1,58 @@
+import { useState, useEffect } from 'react';
 import CanvasDots from '../../components/canvas';
 
 const FirstPrinciple = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Listen for theme changes
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark =
+                document.documentElement.classList.contains("dark") ||
+                document.body.classList.contains("dark") ||
+                localStorage.getItem("theme") === "dark";
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (
+                    mutation.type === "attributes" &&
+                    mutation.attributeName === "class"
+                ) {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === "theme") {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+        window.addEventListener("themeChanged", checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("themeChanged", checkTheme);
+        };
+    }, []);
+
     return (
         <>
             <div className="hidden sm:block">
@@ -12,7 +64,7 @@ const FirstPrinciple = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl lg:text-5xl text-center font-bold mb-4">
-                            <span className="text-[#374151] dark:text-white">Our</span>
+                            <span className={isDarkMode ? "text-white" : "text-[#374151]"}>Our</span>
                             <span className="relative inline-block mx-3">
                                 <span className="relative z-10 text-[#FF512F]">First Principles</span>
                                 <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
@@ -24,7 +76,11 @@ const FirstPrinciple = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4">
                         {/* People-First Leadership */}
-                        <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-4 md:p-8 border border-[#FF512F]/20 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden group">
+                        <div className={`rounded-2xl p-4 md:p-8 border border-[#FF512F]/20 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden group ${
+                            isDarkMode 
+                                ? "bg-gradient-to-br from-gray-800 to-gray-900" 
+                                : "bg-gradient-to-br from-white to-gray-50"
+                        }`}>
                             <div className="absolute inset-0 bg-gradient-to-r from-[#FF512F]/5 to-[#FF8A63]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                             {/* Content wrapper with padding to prevent overlap */}
@@ -35,7 +91,9 @@ const FirstPrinciple = () => {
                                             <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                                         </svg>
                                     </div>
-                                    <h4 className="text-lg md:text-xl font-semibold text-[#374151] dark:text-gray-100">People-First Leadership</h4>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${
+                                        isDarkMode ? "text-gray-100" : "text-[#374151]"
+                                    }`}>People-First Leadership</h4>
                                 </div>
 
                                 <div className="w-full bg-gradient-to-r from-[#FF512F]/20 to-[#FF8A63]/20 mb-3 md:mb-6 h-[2px]" />
@@ -43,7 +101,9 @@ const FirstPrinciple = () => {
                                 {/* Two column layout for content and image */}
                                 <div className="flex flex-col md:flex-row gap-3 md:gap-6">
                                     <div className="flex-1">
-                                        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 pl-2 mb-2 md:mb-4">
+                                        <p className={`text-base md:text-lg pl-2 mb-2 md:mb-4 ${
+                                            isDarkMode ? "text-gray-400" : "text-gray-600"
+                                        }`}>
                                             Our leadership team is grounded in a deep commitment to the well-being of our employees, customers, and the
                                             communities we serve. We foster a culture built on empathy, respect, and long-term impact.
                                         </p>
@@ -69,7 +129,11 @@ const FirstPrinciple = () => {
                         </div>
 
                         {/* Entrepreneurial Execution */}
-                        <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-4 md:p-8 border border-[#FF512F]/20 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden group">
+                        <div className={`rounded-2xl p-4 md:p-8 border border-[#FF512F]/20 shadow-xl hover:shadow-2xl transition duration-300 relative overflow-hidden group ${
+                            isDarkMode 
+                                ? "bg-gradient-to-br from-gray-800 to-gray-900" 
+                                : "bg-gradient-to-br from-white to-gray-50"
+                        }`}>
                             <div className="absolute inset-0 bg-gradient-to-r from-[#FF512F]/5 to-[#FF8A63]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                             {/* Content wrapper with padding to prevent overlap */}
@@ -84,21 +148,23 @@ const FirstPrinciple = () => {
                                             />
                                             </svg>
                                     </div>
-                                    <h4 className="text-lg md:text-xl font-semibold text-[#374151] dark:text-gray-100">Entrepreneurial Execution</h4>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${
+                                        isDarkMode ? "text-gray-100" : "text-[#374151]"
+                                    }`}>Entrepreneurial Execution</h4>
                                 </div>
 
                                 <div className="w-full bg-gradient-to-r from-[#FF512F]/20 to-[#FF8A63]/20 mb-3 md:mb-6 h-[2px]" />
 
-                                {/* Two column layout for content and image */}
                                 <div className="flex flex-col md:flex-row gap-3 md:gap-6">
                                     <div className="flex-1">
-                                        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 pl- mb-2 md:mb-4">
+                                        <p className={`text-base md:text-lg pl- mb-2 md:mb-4 ${
+                                            isDarkMode ? "text-gray-400" : "text-gray-600"
+                                        }`}>
                                             We operate with a founder's mindset - agile, accountable, and driven to solve real-world problems. Our global teams
                                             are focused on delivering meaningful customer value and impactful careers for employees.
                                         </p>
                                     </div>
 
-                                    {/* Static image container without hover effects */}
                                     <div
                                         className="w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 
                                         border-2 border-[#FF512F]/20
@@ -117,13 +183,15 @@ const FirstPrinciple = () => {
                             </div>
                         </div>
 
-                        {/* Integrity in Action - Apply the same pattern */}
-                        <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-4 md:p-8 border border-[#FF512F]/20  transition duration-300 relative overflow-hidden group">
+                        {/* Integrity in Action */}
+                        <div className={`rounded-2xl p-4 md:p-8 border border-[#FF512F]/20 transition duration-300 relative overflow-hidden group ${
+                            isDarkMode 
+                                ? "bg-gradient-to-br from-gray-800 to-gray-900" 
+                                : "bg-gradient-to-br from-white to-gray-50"
+                        }`}>
                             <div className="absolute inset-0 bg-gradient-to-r from-[#FF512F]/5 to-[#FF8A63]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                            {/* Content wrapper */}
                             <div className="relative z-10">
-                                {/* ...existing header code... */}
                                 <div className="flex items-center gap-2 md:gap-4 mb-3 md:mb-6">
                                     <div className="bg-gradient-to-br from-[#FF512F]/20 to-[#FF8A63]/20 p-2 md:p-3 rounded-xl">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6 text-[#FF512F]" viewBox="0 0 20 20" fill="currentColor">
@@ -134,21 +202,23 @@ const FirstPrinciple = () => {
                                             />
                                         </svg>
                                     </div>
-                                    <h4 className="text-lg md:text-xl font-semibold text-[#374151] dark:text-gray-100">Integrity in Action</h4>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${
+                                        isDarkMode ? "text-gray-100" : "text-[#374151]"
+                                    }`}>Integrity in Action</h4>
                                 </div>
 
                                 <div className="w-full bg-gradient-to-r from-[#FF512F]/20 to-[#FF8A63]/20 mb-3 md:mb-6 h-[2px]" />
 
-                                {/* Two column layout */}
                                 <div className="flex flex-col md:flex-row gap-3 md:gap-6">
                                     <div className="flex-1">
-                                        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 pl-2 mb-2 md:mb-4">
+                                        <p className={`text-base md:text-lg pl-2 mb-2 md:mb-4 ${
+                                            isDarkMode ? "text-gray-400" : "text-gray-600"
+                                        }`}>
                                             We hold ourselves to the highest ethical standards. Trust is the foundation of everything we do - internally and
                                             externally. We believe in transparency, accountability, and doing what's right, even when it's not easy.
                                         </p>
                                     </div>
 
-                                    {/* Static image container without hover effects */}
                                     <div
                                         className="w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 
                                         border-2 border-[#FF512F]/20
@@ -167,34 +237,38 @@ const FirstPrinciple = () => {
                             </div>
                         </div>
 
-                        {/* Excellence Through Collaboration - Apply the same pattern */}
-                        <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-4 md:p-8 border border-[#FF512F]/20  transition duration-300 relative overflow-hidden group">
+                        {/* Excellence Through Collaboration */}
+                        <div className={`rounded-2xl p-4 md:p-8 border border-[#FF512F]/20 transition duration-300 relative overflow-hidden group ${
+                            isDarkMode 
+                                ? "bg-gradient-to-br from-gray-800 to-gray-900" 
+                                : "bg-gradient-to-br from-white to-gray-50"
+                        }`}>
                             <div className="absolute inset-0 bg-gradient-to-r from-[#FF512F]/5 to-[#FF8A63]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                            {/* Content wrapper */}
                             <div className="relative z-10">
-                                {/* ...existing header code... */}
                                 <div className="flex items-center gap-2 md:gap-4 mb-3 md:mb-6">
                                     <div className="bg-gradient-to-br from-[#FF512F]/20 to-[#FF8A63]/20 p-2 md:p-3 rounded-xl">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6 text-[#FF512F]" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
                                         </svg>
                                     </div>
-                                    <h4 className="text-lg md:text-xl font-semibold text-[#374151] dark:text-gray-100">Excellence through Collaboration</h4>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${
+                                        isDarkMode ? "text-gray-100" : "text-[#374151]"
+                                    }`}>Excellence through Collaboration</h4>
                                 </div>
 
                                 <div className="w-full bg-gradient-to-r from-[#FF512F]/20 to-[#FF8A63]/20 mb-3 md:mb-6 h-[2px]" />
 
-                                {/* Two column layout */}
                                 <div className="flex flex-col md:flex-row gap-3 md:gap-6">
                                     <div className="flex-1">
-                                        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 pl-2 mb-2 md:mb-4">
+                                        <p className={`text-base md:text-lg pl-2 mb-2 md:mb-4 ${
+                                            isDarkMode ? "text-gray-400" : "text-gray-600"
+                                        }`}>
                                             We collaborate with our customers in building cutting edge solutions. Our diverse, high-performing teams thrive on
                                             open communication, shared goals, and a relentless pursuit of operational excellence.
                                         </p>
                                     </div>
 
-                                    {/* Static image container without hover effects */}
                                     <div
                                         className="w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 
                                         border-2 border-[#FF512F]/20
