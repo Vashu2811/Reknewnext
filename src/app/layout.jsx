@@ -4,7 +4,8 @@ import Script from "next/script";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/Context/ThemeContext";
-// import Head from "next/head";
+import Image from "next/image";
+import color from "../../public/assets/logo-left-2.webp";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -14,20 +15,22 @@ const nunito = Nunito({
 
 export const metadata = {
   title: {
-    default: "ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation",
-    template: "%s | ReKnew"
+    default:
+      "ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation",
+    template: "%s | ReKnew",
   },
-  description: "Transform your enterprise with ReKnew's AI-powered solutions. We help businesses reduce inefficiencies, automate workflows, and unlock growth opportunities through intelligent automation and data-driven insights.",
+  description:
+    "Transform your enterprise with ReKnew's AI-powered solutions. We help businesses reduce inefficiencies, automate workflows, and unlock growth opportunities through intelligent automation and data-driven insights.",
   keywords: [
     "AI enterprise transformation",
-    "intelligent automation", 
+    "intelligent automation",
     "business process optimization",
     "workflow automation",
     "AI-powered solutions",
     "enterprise AI",
     "digital transformation",
     "business efficiency",
-    "ReKnew AI"
+    "ReKnew AI",
   ],
   authors: [{ name: "ReKnew" }],
   creator: "ReKnew",
@@ -38,17 +41,19 @@ export const metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://reknew.ai",
-    title: "ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation",
-    description: "Transform your enterprise with ReKnew's AI-powered solutions. We help businesses reduce inefficiencies, automate workflows, and unlock growth opportunities through intelligent automation and data-driven insights.",
+    title:
+      "ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation",
+    description:
+      "Transform your enterprise with ReKnew's AI-powered solutions. We help businesses reduce inefficiencies, automate workflows, and unlock growth opportunities through intelligent automation and data-driven insights.",
     siteName: "ReKnew",
     images: [
       {
@@ -61,8 +66,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation",
-    description: "Transform your enterprise with AI-powered solutions. Reduce inefficiencies, automate workflows, and unlock growth opportunities with ReKnew's intelligent automation platform.",
+    title:
+      "ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation",
+    description:
+      "Transform your enterprise with AI-powered solutions. Reduce inefficiencies, automate workflows, and unlock growth opportunities with ReKnew's intelligent automation platform.",
     creator: "@ReKnewAI",
     site: "@ReKnewAI",
     images: ["https://reknew.ai/assets/reknew-logo-white.png"],
@@ -77,8 +84,16 @@ export const metadata = {
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
-      { url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+      {
+        url: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        url: "/android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
     ],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
@@ -126,6 +141,27 @@ export default function RootLayout({ children }) {
       <body className={`${nunito.variable} font-sans`} suppressHydrationWarning>
         <ThemeProvider>
           <Navbar />
+          <>
+            <div className="fixed inset-0 pointer-events-none z-0">
+              <Image
+                src={color}
+                alt="color-sharp"
+                className="absolute w-[200px] top-36 md:top-60 right-0 lg:w-[350px] lg:top-28 lg:right-56"
+                style={{ zIndex: 1 }}
+                loading="lazy"
+              />
+            </div>
+            <div className="fixed inset-0 pointer-events-none z-0">
+              <div
+                className="absolute bottom-1 right-[10%] w-64 h-64 bg-gradient-to-br from-[#FF512F]/5 to-[#FF512F]/5 dark:from-[#FF512F]/5 dark:to-[#FF512F]/5 
+                rounded-full blur-3xl"
+              />
+              <div
+                className="absolute bottom-[30%] left-[5%] w-64 h-64 bg-gradient-to-br from-[#FF512F]/5 to-[#FF512F]/5 dark:from-[#FF512F]/5 dark:to-[#FF512F]/5 
+                rounded-full blur-3xl"
+              />
+            </div>
+          </>
           <main className="min-h-screen transition-colors duration-300 overflow-x-hidden">
             {children}
           </main>
