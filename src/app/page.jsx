@@ -2,9 +2,8 @@ import MyHome from "./pages/page";
 
 export default function MyApp() {
   return (
-    <div>
-     
+    <div className="overflow-x-hidden">
       <MyHome />
-      </div>
+    </div>
   );
 }

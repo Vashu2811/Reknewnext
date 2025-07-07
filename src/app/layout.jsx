@@ -3,6 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { ThemeProvider } from "@/Context/ThemeContext";
 // import Head from "next/head";
 
 const nunito = Nunito({
@@ -93,7 +94,22 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.classList.remove('light', 'dark');
+                document.documentElement.classList.add(theme);
+              } catch (e) {
+                document.documentElement.classList.add('dark');
+              }
+            `,
+          }}
+        />
+      </head>
       <Script
         strategy="lazyOnload"
         async
@@ -107,10 +123,14 @@ export default function RootLayout({ children }) {
           `}
       </Script>
 
-      <body className={nunito.variable}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+      <body className={`${nunito.variable} font-sans`} suppressHydrationWarning>
+        <ThemeProvider>
+          <Navbar />
+          <main className="min-h-screen transition-colors duration-300 overflow-x-hidden">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

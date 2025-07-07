@@ -110,6 +110,7 @@ export default function CanvasDots() {
         left: 0,
         width: "100%",
         height: "100%",
-        zIndex: 0, // Changed zIndex to 0
+        zIndex: 0, // Changed from 0 to -1 to ensure it's behind all content
+        pointerEvents: "none", // Ensure canvas doesn't capture mouse events
     }}></canvas>;
   }

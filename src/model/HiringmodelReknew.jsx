@@ -1,0 +1,252 @@
+/* eslint-disable no-unused-vars */
+import axios from 'axios';
+import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BsArrowUpLeftCircle } from 'react-icons/bs';
+
+const HiringModel = ({ isOpen, onClose }) => {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        position: '',
+        experience: '',
+        resume: null,
+        portfolio: '',
+        resumeFileName: '' // just this, no need for a separate useState
+    });
+
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+
+        if (files && files.length > 0) {
+            setFormData((prev) => ({
+                ...prev,
+                [name]: files[0],
+                resumeFileName: files[0].name
+            }));
+        } else {
+            setFormData((prev) => ({
+                ...prev,
+                [name]: value
+            }));
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { firstName, lastName, email, position, experience, portfolio, resume } = formData;
+
+        let base64Resume = '';
+        if (resume) {
+            try {
+                const reader = new FileReader();
+                reader.readAsDataURL(resume);
+                reader.onload = () => {
+                    base64Resume = reader.result;
+                    const base64Data = reader.result.split(',')[1];
+                    const payload = {
+                        subject: `New Job Application: ${firstName} ${lastName}`,
+                        message: `
+                    Name: ${firstName} ${lastName}
+                    Email: ${email}
+                    Position: ${position}
+                    Experience: ${experience}
+                    Portfolio: <a href="${portfolio}" target="_blank">${portfolio}</a>
+                `,
+                        to: ['talent@reknew.ai'],
+                        fileName: `${resume.name}`,
+                        fileContentBase64: base64Data,
+                        mimeType: 'text/plain'
+                    };
+
+                    axios
+                        .post('https://r621x20pve.execute-api.us-east-1.amazonaws.com/default/sendSuppportEmail', JSON.stringify(payload), {
+                            headers: {
+                                'Content-Type': 'text/plain; charset=utf-8'
+                            },
+                            withCredentials: false
+                        })
+                        .then((res) => {
+                            console.log('Response:', res.data);
+                            toast.success('Application submitted successfully!', {
+                                toastStyle: {
+                                    backgroundColor: '#FF512F',
+                                    color: '#fff'
+                                }
+                            });
+                            setFormData({
+                                firstName: '',
+                                lastName: '',
+                                email: '',
+                                position: '',
+                                experience: '',
+                                resume: null,
+                                portfolio: '',
+                                resumeFileName: ''
+                            });
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                            toast.error('Failed to submit application.', {
+                                toastStyle: {
+                                    backgroundColor: '#FF512F',
+                                    color: '#fff'
+                                }
+                            });
+                        });
+                };
+                reader.onerror = (error) => {
+                    console.log('Error: ', error);
+                };
+            } catch (error) {
+                console.error('Error reading file:', error);
+            }
+        }
+    };
+
+    if (!isOpen) return null;
+
+    return (
+        <>
+            <ToastContainer
+                toastClassName="custom-toast"
+                bodyClassName="custom-toast-body"
+                progressClassName="custom-toast-progress"
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+
+            <div className="fixed hiring-form inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+                <div className="bg-gradient-to-br from-white via-gray-100 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-3xl shadow-2xl p-10 w-full max-w-4xl  relative border border-gray-200 dark:border-gray-700 animate-fadeIn overflow-y-auto md:overflow-auto lg:overflow-hidden  max-h-[90vh]">
+                    <button
+                        onClick={onClose}
+                        className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-3xl transition-transform transform hover:scale-110">
+                        ✕
+                    </button>
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl text-center font-extrabold tracking-tight text-gray-800 dark:text-gray-100 mb-4">
+                        Join Our <span className="text-[#FF512F]">Team</span>
+                    </h2>
+                    <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 mb-10 md:mb-4 text-center max-w-2xl mx-auto leading-relaxed">
+                        If you are an engineer at heart and have deep work ethic, share your GitHub link.
+                    </p>
+                    <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {/* Basic Info */}
+                        <div className="flex flex-col">
+                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">First Name</label>
+                            <input
+                                type="text"
+                                name="firstName"
+                                value={formData.firstName}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                placeholder="Enter your first name"
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">Last Name</label>
+                            <input
+                                type="text"
+                                name="lastName"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                placeholder="Enter your last name"
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                placeholder="Enter your email address"
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">Position</label>
+                            <input
+                                type="text"
+                                name="position"
+                                value={formData.position}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                placeholder="Position applying for"
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">Years of Experience</label>
+                            <input
+                                type="number"
+                                name="experience"
+                                value={formData.experience}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                placeholder="Years of experience"
+                                min="0"
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">Github URL</label>
+                            <input
+                                type="url"
+                                name="portfolio"
+                                value={formData.portfolio}
+                                onChange={handleChange}
+                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                placeholder="https://your-github.com"
+                            />
+                        </div>
+
+                        <div className="flex flex-col md:col-span-2">
+                            <label htmlFor="resume" className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Upload Resume
+                            </label>
+                            <div className="relative">
+                                <input
+                                    id="resume"
+                                    type="file"
+                                    name="resume"
+                                    onChange={handleChange}
+                                    required
+                                    accept=".pdf,.doc,.docx"
+                                    className="peer hidden"
+                                />
+                                <label
+                                    htmlFor="resume"
+                                    className="w-full flex items-center justify-between px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-700 dark:text-white bg-white dark:bg-gray-800 cursor-pointer hover:border-[#FF512F] transition-colors">
+                                    <span className="truncate">{formData.resumeFileName || 'Choose a file (.pdf, .doc, .docx)'}</span>
+                                    <BsArrowUpLeftCircle className="w-5 h-5 text-[#FF512F] rotate-90" />
+                                </label>
+                            </div>
+                        </div>
+                        <div className="md:col-span-2 mt-10 md:mt-4 flex justify-center">
+                            <button
+                                type="submit"
+                                className="bg-gradient-to-r from-[#FF512F] to-[#FF8A63] hover:from-[#FF8A63] hover:to-[#FF512F] text-white px-10 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-2xl">
+                                Submit Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default HiringModel;
