@@ -6,6 +6,8 @@ import Footer from "@/components/footer";
 import { ThemeProvider } from "@/Context/ThemeContext";
 import Image from "next/image";
 import color from "../../public/assets/logo-left-2.webp";
+import ScrollToBottomButton from "@/components/scrollBottom";
+import ScrollToTopButton from "@/components/ScrollTop";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -141,6 +143,7 @@ export default function RootLayout({ children }) {
       <body className={`${nunito.variable} font-sans`} suppressHydrationWarning>
         <ThemeProvider>
           <Navbar />
+          <ScrollToBottomButton />
           <>
             <div className="fixed inset-0 pointer-events-none z-0">
               <Image
@@ -165,6 +168,7 @@ export default function RootLayout({ children }) {
           <main className="min-h-screen transition-colors duration-300 overflow-x-hidden">
             {children}
           </main>
+          <ScrollToTopButton />
           <Footer />
         </ThemeProvider>
       </body>
