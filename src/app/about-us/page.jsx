@@ -12,7 +12,45 @@ import LifeAtReknew from './LifeAtReknew';
 import { Lightbulb } from 'lucide-react';
 import Image from 'next/image';
 
-const OurStory = () => {
+export const generateMetadata = () => ({
+  title: "About Us | ReKnew - Our Story & Leadership Team",
+  description:
+    "Learn about ReKnew's journey, mission, and leadership team. We bridge the gap between enterprises and AI transformation, helping organizations thrive in the digital age.",
+  metadataBase: new URL("https://next-meta-seo.vercel.app"),
+  alternates: {
+    canonical: "/about-us",
+  },
+  openGraph: {
+    title: "About Us | ReKnew - Our Story & Leadership Team",
+    description:
+      "Learn about ReKnew's journey, mission, and leadership team. We bridge the gap between enterprises and AI transformation, helping organizations thrive in the digital age.",
+    url: "https://reknew.ai/about-us",
+    siteName: "Health Wealth Safe",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "https://opengraph.b-cdn.net/production/images/7b51162a-d886-4727-b920-6942b1bce177.jpg?token=h6uIKapL9RvEAZTxnfwWQiFT-B-wXH55jnK67eFe54o&height=800&width=1200&expires=33287797796",
+        width: 1200,
+        height: 630,
+        alt: "About Health Wealth Safe",
+        type: "image/jpeg",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@ReKnewAI",
+    title: "About Us | ReKnew - Our Story & Leadership Team",
+    description:
+      "Learn about ReKnew's journey, mission, and leadership team. We bridge the gap between enterprises and AI transformation, helping organizations thrive in the digital age.",
+    images: [
+      "https://opengraph.b-cdn.net/production/images/7b51162a-d886-4727-b920-6942b1bce177.jpg?token=h6uIKapL9RvEAZTxnfwWQiFT-B-wXH55jnK67eFe54o&height=800&width=1200&expires=33287797796",
+    ],
+  },
+});
+
+export default function  OurStory() {
     useEffect(() => {
         document.title = 'About-us | ReKnew';
     }, []);
@@ -157,4 +195,3 @@ const OurStory = () => {
     );
 };
 
-export default OurStory;
