@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import Link from 'next/link';
 
-const CareerOpportunities = ({ openHiringModal }) => {
+const CareerOpportunities = ({ openHiringModal, isDarkMode }) => {
     const JobModal = ({ job, onClose }) => {
         // Add effect to disable body scrolling when modal is open
         useEffect(() => {
@@ -24,17 +24,17 @@ const CareerOpportunities = ({ openHiringModal }) => {
         if (!job) return null;
         return (
             <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex justify-center items-center p-4 animate-fadeIn">
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-7xl h-[90vh] flex flex-col animate-scaleIn">
+                <div className={`rounded-xl shadow-2xl w-full max-w-7xl h-[90vh] flex flex-col animate-scaleIn${isDarkMode ? " bg-gray-800" : " bg-white"}`}>
                     {/* Header */}
-                    <div className="border-b border-gray-100 p-4 flex justify-between items-center flex-shrink-0">
-                        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{job.title}</h2>
-                        <button  onClick={handleClose} className="p-2 rounded-full hover:bg-gray-100 transition-colors" aria-label="Close modal">
-                            <X className="w-6 h-6 text-gray-600" />
+                    <div className={`border-b p-4 flex justify-between items-center flex-shrink-0${isDarkMode ? " border-gray-700" : " border-gray-100"}`}>
+                        <h2 className={`text-2xl font-bold${isDarkMode ? " text-gray-100" : " text-gray-900"}`}>{job.title}</h2>
+                        <button onClick={handleClose} className={`p-2 rounded-full transition-colors${isDarkMode ? " hover:bg-gray-700" : " hover:bg-gray-100"}`} aria-label="Close modal">
+                            <X className={`w-6 h-6${isDarkMode ? " text-gray-400" : " text-gray-600"}`} />
                         </button>
                     </div>
 
                     {/* Scrollable content */}
-                    <div className="p-6 whitespace-pre-line overflow-y-auto flex-1 max-h-[calc(90vh-150px)]" data-lenis-prevent>
+                    <div className={`p-6 whitespace-pre-line overflow-y-auto flex-1 max-h-[calc(90vh-150px)]${isDarkMode ? " text-gray-300" : " text-gray-900"}`} data-lenis-prevent>
                         <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
                             <div className="px-3 py-1.5 bg-[#FF512F] text-white rounded-full text-sm font-medium">{job.location}</div>
                             <div className="px-3 py-1.5 bg-[#FF512F] text-white rounded-full text-sm font-medium">{job.type}</div>
@@ -50,7 +50,7 @@ const CareerOpportunities = ({ openHiringModal }) => {
                     </div>
 
                     {/* Footer */}
-                    <div className="border-t border-gray-100 p-4 flex justify-end flex-shrink-0">
+                    <div className={`border-t p-4 flex justify-end flex-shrink-0${isDarkMode ? " border-gray-700" : " border-gray-100"}`}>
                         <Link
                             href={job.applyLink}
                             target="_blank"
@@ -72,10 +72,10 @@ const CareerOpportunities = ({ openHiringModal }) => {
                 transition={{ duration: 0.5, delay }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5, boxShadow: '0 10px 20px rgba(255, 81, 47, 0.1)' }}
-                className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 transition-all duration-300 hover:border-[#FF512F]/30 dark:hover:border-[#FF512F]/30">
-                <h5 className="font-semibold text-lg mb-2 text-[#374151] dark:text-gray-100">{title}</h5>
+                className={`rounded-lg border p-6 transition-all duration-300${isDarkMode ? " bg-gray-800 border-gray-700 hover:border-[#FF512F]/30" : " bg-white border-gray-200 hover:border-[#FF512F]/30"}`}>
+                <h5 className={`font-semibold text-lg mb-2${isDarkMode ? " text-gray-100" : " text-[#374151]"}`}>{title}</h5>
                 <div className="flex flex-col gap-2 mb-4">
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                    <div className={`flex items-center text-sm${isDarkMode ? " text-gray-400" : " text-gray-500"}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path
                                 strokeLinecap="round"
@@ -87,7 +87,7 @@ const CareerOpportunities = ({ openHiringModal }) => {
                         </svg>
                         {location}
                     </div>
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                    <div className={`flex items-center text-sm${isDarkMode ? " text-gray-400" : " text-gray-500"}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -118,12 +118,12 @@ const CareerOpportunities = ({ openHiringModal }) => {
         setSelectedJobb(null);
     };
     return (
-        <section className="relative py-32 text-[#374151] dark:text-gray-100 overflow-hidden">
+        <section className={`relative py-32 overflow-hidden${isDarkMode ? " bg-gray-900 text-gray-100" : " bg-transparent text-[#374151]"}`}>
             <div className="container mx-auto px-6 relative">
                 <div className="max-w-7xl mx-auto">
                     {/* Section Header */}
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 text-center">
+                        <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-12 text-center${isDarkMode ? " text-white" : " text-gray-900"}`}>
                             Bring your brilliance.
                             <span className="relative inline-block mx-2">
                                 <span className="relative z-10 text-[#FF512F]">Build what's next.</span>
@@ -132,7 +132,7 @@ const CareerOpportunities = ({ openHiringModal }) => {
                                 </svg>
                             </span>
                         </h2>
-                        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-5xl mx-auto">
+                        <p className={`text-base md:text-lg max-w-5xl mx-auto${isDarkMode ? " text-gray-400" : " text-gray-600"}`}>
                             ReKnew seeks curious minds, problem solvers, and engineers who want to work with cutting-edge technology. The company believes in
                             work-life balance for the team and fosters pride and belonging as they create value for customers.
                         </p>
@@ -147,7 +147,7 @@ const CareerOpportunities = ({ openHiringModal }) => {
 
                             {/* Engineering Department */}
                             <div className="mb-10">
-                                <h4 className="text-lg font-semibold mb-4 text-[#374151] dark:text-gray-200 border-b border-gray-200 dark:border-gray-700 pb-2">
+                                <h4 className={`text-lg font-semibold mb-4 border-b pb-2${isDarkMode ? " text-gray-200 border-gray-700" : " text-[#374151] border-gray-200"}`}>
                                     Engineering & Data
                                 </h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -367,11 +367,11 @@ If you're passionate about building intelligent data platforms that enable Enter
                     </div>
 
                     <div className="max-w-7xl mx-auto mt-2">
-                        <div className="bg-gradient-to-r from-[#FF512F]/10 to-[#FF8A63]/10 dark:from-[#FF512F]/20 dark:to-[#FF8A63]/20 rounded-xl p-3 border border-[#FF512F]/20">
-                            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-[#FF512F] dark:text-[#FF512F] text-center">
+                        <div className={`bg-gradient-to-r rounded-xl p-3 border border-[#FF512F]/20${isDarkMode ? " from-[#FF512F]/20 to-[#FF8A63]/20" : " from-[#FF512F]/10 to-[#FF8A63]/10"}`}>
+                            <h3 className={`text-lg md:text-xl lg:text-2xl font-semibold text-center${isDarkMode ? " text-[#FF512F]" : " text-[#FF512F]"}`}>
                                 Don't see a perfect fit
                             </h3>
-                            <p className="text-base md:text-lg lg:text-xl mt-4 text-center">
+                            <p className={`text-base md:text-lg lg:text-xl mt-4 text-center${isDarkMode ? " text-gray-300" : " text-gray-900"}`}>
                                 If you are an engineer at heart and have deep work ethic, share your GitHub link.
                                 <br></br>
                             </p>

@@ -6,7 +6,7 @@ const LifeAtReknew = ({ isDarkMode }) => {
             <div className="hidden sm:block">
                 <CanvasDots />
             </div>
-            <section className={`py-32 relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-white"}`}>
+            <section className={`py-32 relative overflow-hidden${isDarkMode ? " bg-gray-900" : "bg-transparent"}`}>
                 {/* Background decoration */}
                 <div className="container mx-auto px-6">
                     <div className="max-w-7xl mx-auto">

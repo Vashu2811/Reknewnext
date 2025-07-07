@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BsArrowUpLeftCircle } from 'react-icons/bs';
 
-const HiringModel = ({ isOpen, onClose }) => {
+const HiringModel = ({ isOpen, onClose, isDarkMode }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -126,95 +126,95 @@ const HiringModel = ({ isOpen, onClose }) => {
             />
 
             <div className="fixed hiring-form inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
-                <div className="bg-gradient-to-br from-white via-gray-100 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-3xl shadow-2xl p-10 w-full max-w-4xl  relative border border-gray-200 dark:border-gray-700 animate-fadeIn overflow-y-auto md:overflow-auto lg:overflow-hidden  max-h-[90vh]">
+                <div className={`bg-gradient-to-br rounded-3xl shadow-2xl p-10 w-full max-w-4xl relative border animate-fadeIn overflow-y-auto md:overflow-auto lg:overflow-hidden max-h-[90vh]${isDarkMode ? " from-gray-900 via-gray-800 to-gray-900 border-gray-700" : " from-white via-gray-100 to-white border-gray-200"}`}>
                     <button
                         onClick={onClose}
-                        className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-3xl transition-transform transform hover:scale-110">
+                        className={`absolute top-4 right-4 text-3xl transition-transform transform hover:scale-110${isDarkMode ? " text-gray-400 hover:text-gray-300" : " text-gray-400 hover:text-gray-700"}`}>
                         ✕
                     </button>
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl text-center font-extrabold tracking-tight text-gray-800 dark:text-gray-100 mb-4">
+                    <h2 className={`text-3xl md:text-4xl lg:text-5xl text-center font-extrabold tracking-tight mb-4${isDarkMode ? " text-gray-100" : " text-gray-800"}`}>
                         Join Our <span className="text-[#FF512F]">Team</span>
                     </h2>
-                    <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 mb-10 md:mb-4 text-center max-w-2xl mx-auto leading-relaxed">
+                    <p className={`text-base md:text-lg mb-10 md:mb-4 text-center max-w-2xl mx-auto leading-relaxed${isDarkMode ? " text-gray-300" : " text-gray-600"}`}>
                         If you are an engineer at heart and have deep work ethic, share your GitHub link.
                     </p>
                     <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Basic Info */}
                         <div className="flex flex-col">
-                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">First Name</label>
+                            <label className={`text-sm mb-2 font-medium${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>First Name</label>
                             <input
                                 type="text"
                                 name="firstName"
                                 value={formData.firstName}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                className={`w-full px-5 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] transition${isDarkMode ? " border-gray-600 text-white bg-gray-800 placeholder-gray-500" : " border-gray-300 text-gray-700 bg-white placeholder-gray-400"}`}
                                 placeholder="Enter your first name"
                             />
                         </div>
                         <div className="flex flex-col">
-                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">Last Name</label>
+                            <label className={`text-sm mb-2 font-medium${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>Last Name</label>
                             <input
                                 type="text"
                                 name="lastName"
                                 value={formData.lastName}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                className={`w-full px-5 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] transition${isDarkMode ? " border-gray-600 text-white bg-gray-800 placeholder-gray-500" : " border-gray-300 text-gray-700 bg-white placeholder-gray-400"}`}
                                 placeholder="Enter your last name"
                             />
                         </div>
                         <div className="flex flex-col">
-                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">Email</label>
+                            <label className={`text-sm mb-2 font-medium${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>Email</label>
                             <input
                                 type="email"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                className={`w-full px-5 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] transition${isDarkMode ? " border-gray-600 text-white bg-gray-800 placeholder-gray-500" : " border-gray-300 text-gray-700 bg-white placeholder-gray-400"}`}
                                 placeholder="Enter your email address"
                             />
                         </div>
                         <div className="flex flex-col">
-                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">Position</label>
+                            <label className={`text-sm mb-2 font-medium${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>Position</label>
                             <input
                                 type="text"
                                 name="position"
                                 value={formData.position}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                className={`w-full px-5 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] transition${isDarkMode ? " border-gray-600 text-white bg-gray-800 placeholder-gray-500" : " border-gray-300 text-gray-700 bg-white placeholder-gray-400"}`}
                                 placeholder="Position applying for"
                             />
                         </div>
                         <div className="flex flex-col">
-                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">Years of Experience</label>
+                            <label className={`text-sm mb-2 font-medium${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>Years of Experience</label>
                             <input
                                 type="number"
                                 name="experience"
                                 value={formData.experience}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                className={`w-full px-5 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] transition${isDarkMode ? " border-gray-600 text-white bg-gray-800 placeholder-gray-500" : " border-gray-300 text-gray-700 bg-white placeholder-gray-400"}`}
                                 placeholder="Years of experience"
                                 min="0"
                             />
                         </div>
                         <div className="flex flex-col">
-                            <label className="text-gray-700 dark:text-gray-300 text-sm mb-2 font-medium">Github URL</label>
+                            <label className={`text-sm mb-2 font-medium${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>Github URL</label>
                             <input
                                 type="url"
                                 name="portfolio"
                                 value={formData.portfolio}
                                 onChange={handleChange}
-                                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] text-gray-700 dark:text-white bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 transition"
+                                className={`w-full px-5 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF512F] transition${isDarkMode ? " border-gray-600 text-white bg-gray-800 placeholder-gray-500" : " border-gray-300 text-gray-700 bg-white placeholder-gray-400"}`}
                                 placeholder="https://your-github.com"
                             />
                         </div>
 
                         <div className="flex flex-col md:col-span-2">
-                            <label htmlFor="resume" className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label htmlFor="resume" className={`text-sm font-medium mb-2${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>
                                 Upload Resume
                             </label>
                             <div className="relative">
@@ -229,7 +229,7 @@ const HiringModel = ({ isOpen, onClose }) => {
                                 />
                                 <label
                                     htmlFor="resume"
-                                    className="w-full flex items-center justify-between px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-700 dark:text-white bg-white dark:bg-gray-800 cursor-pointer hover:border-[#FF512F] transition-colors">
+                                    className={`w-full flex items-center justify-between px-5 py-3 border rounded-xl cursor-pointer hover:border-[#FF512F] transition-colors${isDarkMode ? " border-gray-600 text-white bg-gray-800" : " border-gray-300 text-gray-700 bg-white"}`}>
                                     <span className="truncate">{formData.resumeFileName || 'Choose a file (.pdf, .doc, .docx)'}</span>
                                     <BsArrowUpLeftCircle className="w-5 h-5 text-[#FF512F] rotate-90" />
                                 </label>

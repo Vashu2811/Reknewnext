@@ -95,7 +95,7 @@ const OurStory = () => {
         <div className="text-[#374151] dark:text-gray-100 font-sans w-full min-h-screen overflow-x-hidden">
            
             
-            <HiringModel isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <HiringModel isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} isDarkMode={isDarkMode} />
             {/* Progress Bar - Animated scroll indicator */}
             <div className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF512F] to-[#FF512F] dark:from-[#FF512F] dark:to-[#FF512F] z-50" />
 
@@ -103,7 +103,7 @@ const OurStory = () => {
             <AboutUspageSlider />
 
             {/* Our Journey Section - Company origin story */}
-            <section className={`py-32 relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-white"}`}>
+            <section className={`py-32 relative overflow-hidden${isDarkMode ? " bg-gray-900" : "bg-transparent"}`}>
                 <div className="container mx-auto px-6">
                     <div className="max-w-7xl flex justify-center items-center flex-col mx-auto">
                         <h2 className={`text-4xl md:text-5xl font-bold mb-12 text-center ${isDarkMode ? "text-white" : "text-[#374151]"}`}>
@@ -191,7 +191,7 @@ const OurStory = () => {
             <StrategicAcceleration isDarkMode={isDarkMode} />
 
             {/* Leadership Team Section */}
-            <section className={`relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-white"}`}>
+            <section className={`relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-transparent"}`}>
                 <LeadershipTeam isDarkMode={isDarkMode} />
             </section>
 
@@ -211,4 +211,3 @@ const OurStory = () => {
 };
 
 export default OurStory;
-                
