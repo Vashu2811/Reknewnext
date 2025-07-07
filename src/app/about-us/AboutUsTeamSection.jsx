@@ -66,7 +66,7 @@ const LeadershipTeam = () => {
 
         return (
             <div
-                className="group relative rounded-xl overflow-hidden h-[400px] md:h-[500px] shadow-lg hover:shadow-xl transition-all duration-500"
+                className="group relative rounded-xl overflow-hidden h-[550px] md:h-[500px] shadow-lg hover:shadow-xl transition-all duration-500"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}>
                 {/* Background image with gradient overlay */}
