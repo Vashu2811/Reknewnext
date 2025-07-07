@@ -58,14 +58,14 @@ const Footer = () => {
                                     <a
                                         key={index}
                                         href={item.href}
-                                        className="group flex items-center gap-3 text-gray-600 dark:text-gray-300 py-1.5 px-2 rounded-lg transition-all duration-500 text-base hover:bg-gray-50 dark:hover:bg-gray-800"
+                                        className="group cursor-pointer flex items-center gap-3 text-gray-600 dark:text-gray-300 py-1.5 px-2 rounded-lg transition-all duration-500 text-base hover:bg-gray-50 dark:hover:bg-gray-800"
                                         target={item.href.startsWith('http') ? '_blank' : undefined}
                                         rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
                                         <item.icon
                                             size={20}
                                             className="text-[#ff7155] dark:text-[#FF512F] shrink-0 transition-all duration-500 ease-out group-hover:scale-110"
                                         />
-                                        <span className="select-all cursor-text transition-all hover:text-[#ff7155] dark:hover:text-[#FF512F] duration-500 group-hover:translate-x-1 text-gray-700 dark:text-gray-300">
+                                        <span className="cursor-pointer transition-all hover:text-[#ff7155] dark:hover:text-[#FF512F] duration-500 group-hover:translate-x-1 text-gray-700 dark:text-gray-300">
                                             {item.text}
                                         </span>
                                     </a>
