@@ -15,18 +15,10 @@ const nunito = Nunito({
 });
 
 
-export const metaData = {
-  "/about-us": {
-    title: "About Us | ReKnew",
-    description: "Learn about ReKnew's mission and team.",
-    image: "https://yourdomain.com/about-og-image.jpg"
-  },
-  "/contact": {
-    title: "Contact Us | ReKnew",
-    description: "Get in touch with us for support and queries.",
-    image: "https://yourdomain.com/contact-og-image.jpg"
-  },
-}
+export const metadata = {
+  title: "ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation",
+  description: "Transform your enterprise with ReKnew's AI-powered solutions. We help businesses reduce inefficiencies, automate workflows, and unlock growth opportunities through intelligent automation and data-driven insights.",
+};
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
