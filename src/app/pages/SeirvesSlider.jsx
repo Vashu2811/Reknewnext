@@ -69,7 +69,7 @@ const Ourservices = () => {
     }, []);
 
     useEffect(() => {
-        document.title = 'Our Services | ReKnew';
+       
 
         const handleScroll = () => {
             const winScroll = document.documentElement.scrollTop;

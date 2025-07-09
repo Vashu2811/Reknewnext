@@ -2,7 +2,7 @@ import { RiArrowRightDoubleLine } from 'react-icons/ri';
 
 const StrategicAcceleration = ({ isDarkMode }) => {
     return (
-        <section className={`py-32 relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-white"}`}>
+        <section className={`py-32 relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-transparent"}`}>
             {/* Background decoration */}
 
             <div className="container mx-auto px-4">
