@@ -86,7 +86,7 @@ const OurStory = ({ isDarkMode = false }) => {
                                             <div className="absolute inset-0 bg-gradient-to-r from-[#FF512F]/5 to-[#FF8A63]/5 opacity-50"></div>
 
                                             <div className="relative">
-                                                <h3 className="text-2xl font-bold mb-6  pb-3 border-b border-[#FF512F]/20">
+                                                <h3 className="text-2xl font-bold mb-6 pb-3 border-b border-[#FF512F]/20">
                                                     ReKnew was founded to bridge this gap
                                                 </h3>
                                                 <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -107,8 +107,8 @@ const OurStory = ({ isDarkMode = false }) => {
             <StrategicAcceleration isDarkMode={isDarkMode} />
 
             {/* Leadership Team Section */}
-            <section className={`relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-transparent"}`}>
-                <LeadershipTeam isDarkMode={isDarkMode} />
+            <section className={`relative overflow-hidden ${isDarkMode ? "bg-gray-900" : "bg-transparent"}`}>
+                <LeadershipTeam  />
             </section>
 
             {/* Life at ReKnew Section */}
@@ -116,16 +116,15 @@ const OurStory = ({ isDarkMode = false }) => {
 
             {/* Career Opportunities Section - Current job openings */}
             {/* Modal logic removed for SSR, pass a no-op function */}
-            <CareerOpportunities  isDarkMode={isDarkMode} />
+            <CareerOpportunities openHiringModal={undefined} isDarkMode={undefined} />
 
             {/* Use the new HeadquartersHeader component */}
             <HeadquartersHeader isDarkMode={isDarkMode} />
 
             {/* Use the new ContactInformation component */}
-            <ContactInformation isDarkMode={isDarkMode} />
+            <ContactInformation  />
         </div>
     );
 };
 
 export default OurStory;
-                                          
