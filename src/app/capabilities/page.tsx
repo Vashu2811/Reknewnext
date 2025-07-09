@@ -7,7 +7,7 @@ import small from '../../../public/assets/small logo.webp';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import ContextEngineeringDiagram from './ContextEngineeringDiagram';
 import ReknewSection from './reknew-section';
-import ReKnewModal from '@/model/ReKnewModal';
+import ReKnewModal from '../../model/ReKnewModal';
 import Image from 'next/image';
 import DataandAiVarticalSlider from './CapabilitiesSlideerSection';
 import CtaConsultation from './CtaSection';
@@ -143,7 +143,7 @@ function Capabilities() {
 
     return (
         <>
-            <ReKnewModal isOpen={isModalOpen} onClose={closeModal} />
+            <ReKnewModal isOpen={isModalOpen} onClose={closeModal} isDarkMode={undefined} />
             <div className={`font-sans w-full min-h-screen overflow-x-hidden ${
                 isDarkMode ? "text-white" : "text-[#374151]"
             }`}>

@@ -114,7 +114,7 @@ const Foundation = () => {
                     {cards.map((item, i) => (
                         <div key={i} className="flex flex-col" onMouseEnter={() => handleCardHover(i)} onMouseLeave={handleCardLeave}>
                             <div
-                                ref={(el) => (cardRefs.current[i] = el)}
+                                ref={(el) => { cardRefs.current[i] = el; }}
                                 className={`group flex w-full justify-center flex-col lg:flex-row items-start lg:items-center gap-8 h-auto lg:h-auto p-8 md:p-10 
                                 transition-all duration-500 overflow-hidden relative cursor-pointer rounded-t-2xl shadow-xl  ${
                                     isDarkMode 
