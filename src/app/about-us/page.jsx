@@ -1,52 +1,52 @@
-"use client";
 import OurStory from "./About-us";
-import Head from "next/head";
+
+export const metadata = {
+  title: "vashu Us - Woyce Avai",
+  description:
+    "vashu vashuvashuvashuvashuvashuvashuvashuvashuvashu more about Woyce Avai, our mission, vision, and the team behind our innovative solutions.",
+  keywords: [
+    "Woyce Avai",
+    "About Us",
+    "Company",
+    "Team",
+    "Mission",
+    "Vision",
+    "Story",
+  ],
+  authors: [{ name: "Woyce Avai Team" }],
+  openGraph: {
+    title: "About Us - Woyce Avai",
+    description: "Discover the story, mission, and team behind Woyce Avai.",
+    type: "website",
+    url: "https://yourdomain.com/about-us",
+    images: [
+      {
+        url: "https://yourdomain.com/images/about-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "About Us - Woyce Avai",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us - Woyce Avai",
+    description: "Discover the story, mission, and team behind Woyce Avai.",
+    images: ["https://yourdomain.com/images/about-og.jpg"],
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/about-us",
+  },
+};
 
 export default function MyApp() {
   return (
-    <>
-      <Head>
-        <title>About Us - Woyce Avai</title>
-        <meta
-          name="description"
-          content="Learn more about Woyce Avai, our mission, vision, and the team behind our innovative solutions."
-        />
-        <meta
-          name="keywords"
-          content="Woyce Avai, About Us, Company, Team, Mission, Vision, Story"
-        />
-        <meta name="author" content="Woyce Avai Team" />
-        {/* Open Graph / Facebook */}
-        <meta property="og:title" content="About Us - Woyce Avai" />
-        <meta
-          property="og:description"
-          content="Discover the story, mission, and team behind Woyce Avai."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/about-us" />
-        <meta
-          property="og:image"
-          content="https://yourdomain.com/images/about-og.jpg"
-        />
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About Us - Woyce Avai" />
-        <meta
-          name="twitter:description"
-          content="Discover the story, mission, and team behind Woyce Avai."
-        />
-        <meta
-          name="twitter:image"
-          content="https://yourdomain.com/images/about-og.jpg"
-        />
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://yourdomain.com/about-us" />
-      </Head>
-      <div className="overflow-x-hidden">
-        <OurStory />
-      </div>
-    </>
+    <div className="overflow-x-hidden">
+      <OurStory />
+    </div>
   );
 }
+

@@ -1,58 +1,7 @@
-import { useState, useEffect } from 'react';
 import CanvasDots from '../../components/canvas';
 
-const FirstPrinciple = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
-
-    // Listen for theme changes
-    useEffect(() => {
-        const checkTheme = () => {
-            const isDark =
-                document.documentElement.classList.contains("dark") ||
-                document.body.classList.contains("dark") ||
-                localStorage.getItem("theme") === "dark";
-            setIsDarkMode(isDark);
-        };
-
-        checkTheme();
-
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (
-                    mutation.type === "attributes" &&
-                    mutation.attributeName === "class"
-                ) {
-                    checkTheme();
-                }
-            });
-        });
-
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["class"],
-        });
-
-        observer.observe(document.body, {
-            attributes: true,
-            attributeFilter: ["class"],
-        });
-
-        const handleStorageChange = (e) => {
-            if (e.key === "theme") {
-                checkTheme();
-            }
-        };
-
-        window.addEventListener("storage", handleStorageChange);
-        window.addEventListener("themeChanged", checkTheme);
-
-        return () => {
-            observer.disconnect();
-            window.removeEventListener("storage", handleStorageChange);
-            window.removeEventListener("themeChanged", checkTheme);
-        };
-    }, []);
-
+// Accept isDarkMode as a prop (to be provided server-side)
+const FirstPrinciple = ({ isDarkMode }) => {
     return (
         <>
             <div className="hidden sm:block">
@@ -294,3 +243,4 @@ const FirstPrinciple = () => {
 };
 
 export default FirstPrinciple;
+                           

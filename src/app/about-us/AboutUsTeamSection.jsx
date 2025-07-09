@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Linkedin } from 'lucide-react';
 import muraliSajja from '../../../public/assets/MurliSir.jpg';
 import MariaMann from '../../../public/assets/maria.webp';
@@ -6,88 +5,27 @@ import les from '../../../public/assets/les.jpeg';
 import MuraliKashaboina from '../../../public/assets/Murali-New-Resized.webp';
 import KatiDiFazio from '../../../public/assets/KatiDiFazio.jpg';
 import KiranBatchu from '../../../public/assets/KiranBatchu.png'; 
-import Tommy from '../../../public/assets/Tommy.png'; // Assuming Tommy's image is available in the assets folder
+import Tommy from '../../../public/assets/Tommy.png';
 import Image from 'next/image';
 
+// Server component: no useState/useEffect
 const LeadershipTeam = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
-
-    // Listen for theme changes
-    useEffect(() => {
-        const checkTheme = () => {
-            const isDark =
-                document.documentElement.classList.contains("dark") ||
-                document.body.classList.contains("dark") ||
-                localStorage.getItem("theme") === "dark";
-            setIsDarkMode(isDark);
-        };
-
-        checkTheme();
-
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (
-                    mutation.type === "attributes" &&
-                    mutation.attributeName === "class"
-                ) {
-                    checkTheme();
-                }
-            });
-        });
-
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["class"],
-        });
-
-        observer.observe(document.body, {
-            attributes: true,
-            attributeFilter: ["class"],
-        });
-
-        const handleStorageChange = (e) => {
-            if (e.key === "theme") {
-                checkTheme();
-            }
-        };
-
-        window.addEventListener("storage", handleStorageChange);
-        window.addEventListener("themeChanged", checkTheme);
-
-        return () => {
-            observer.disconnect();
-            window.removeEventListener("storage", handleStorageChange);
-            window.removeEventListener("themeChanged", checkTheme);
-        };
-    }, []);
-
     const TeamMember = ({ name, role, tagline, bio, imageUrl, index, linkedIn }) => {
-        const [isHovered, setIsHovered] = useState(false);
-
+        // Remove hover state logic for SSR; show all info by default or keep static
         return (
             <div
                 className="group relative rounded-xl overflow-hidden h-[550px] md:h-[500px] shadow-lg hover:shadow-xl transition-all duration-500"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}>
+            >
                 {/* Background image with gradient overlay */}
-                <div className={`absolute inset-0 w-full h-full ${isDarkMode ? "bg-gray-800" : "bg-gray-100"}`}>
+                <div className="absolute inset-0 w-full h-full bg-gray-100 dark:bg-gray-800">
                     <Image
                         src={imageUrl}
                         alt={name}
                         width={500}
                         height={500}
-                        className="w-full h-full object-cover object-top transform transition-transform duration-700"
-                        style={{
-                            transform: isHovered ? 'scale(1.05)' : 'scale(1)'
-                        }}
+                        className="w-full h-full object-cover object-top"
                     />
-                    <div
-                        className={`absolute inset-0 transition-all duration-500 ${
-                            isHovered
-                                ? 'bg-gradient-to-t from-black via-black/80 to-black/50 opacity-95'
-                                : 'bg-gradient-to-t from-black via-black/50 to-transparent opacity-80'
-                        }`}
-                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 transition-all duration-500" />
                 </div>
 
                 {/* Content container */}
@@ -104,38 +42,20 @@ const LeadershipTeam = () => {
                         </a>
                     )}
 
-                    {/* Role badge */}
-
-                    {/* Name with animation */}
-                    <h3 className={`text-2xl font-bold text-white mb-2 transition-all duration-300 ${isHovered ? 'text-[#FF512F]' : ''}`}>{name}</h3>
-                    <div
-                        className={`inline-flex items-center px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-3 w-fit transition-all duration-300 ${
-                            isHovered ? 'bg-[#FF512F]/20 border-[#FF512F]/40' : ''
-                        }`}>
+                    {/* Name */}
+                    <h3 className="text-2xl font-bold text-white mb-2">{name}</h3>
+                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-3 w-fit">
                         <span className="text-white text-sm font-medium">{role}</span>
                     </div>
-                    {/* Content container - changes based on hover state */}
-                    <div className="overflow-hidden">
-                        {/* Expanded content (shown on hover) */}
-                        <div
-                            className={`transition-all duration-500 ease-in-out ${
-                                isHovered ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0 absolute'
-                            }`}>
-                            <h4 className="text-[#FF512F] font-semibold mb-2 transform transition-all">{tagline}</h4>
+                    {/* Tagline and bio always visible in SSR */}
+                    {tagline && (
+                        <>
+                            <h4 className="text-[#FF512F] font-semibold mb-2">{tagline}</h4>
                             <div className="h-[1px] w-16 bg-[#FF512F]/30 mb-3"></div>
-                            <p className="text-white/90 text-sm leading-relaxed mb-4 line-clamp-14">{bio}</p>
-                        </div>
-
-                        {/* Default content (shown when not hovered) */}
-                        <div className={`transition-all duration-300 ${isHovered ? 'opacity-0 absolute -z-10' : 'opacity-100'}`}>
-                            <p className="text-white/70 text-sm line-clamp-2">{tagline}</p>
-                        </div>
-                    </div>
-
-                    <div
-                        className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-[#FF512F] to-[#DD4124] transition-all duration-500 ease-out"
-                        style={{ width: isHovered ? '100%' : '25%' }}
-                    />
+                        </>
+                    )}
+                    <p className="text-white/90 text-sm leading-relaxed mb-4">{bio}</p>
+                    <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-[#FF512F] to-[#DD4124] w-full" />
                 </div>
             </div>
         );
@@ -206,7 +126,7 @@ const LeadershipTeam = () => {
         <div id="leadership" className="py-24 max-w-7xl mx-auto relative">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-20">
-                    <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-6 ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
                         Fearless
                         <span className="relative inline-block mx-2">
                             <span className="relative z-10 text-[#FF512F]">Thinkers</span>
@@ -222,12 +142,10 @@ const LeadershipTeam = () => {
                             </svg>
                         </span>
                     </h2>
-
-                    <p className={`text-base md:text-lg max-w-2xl mx-auto ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
+                    <p className="text-base md:text-lg max-w-2xl mx-auto text-gray-600 dark:text-gray-400">
                         Take a look beyond the code and algorithms at what makes ReKnew so effective – our people and our passion.
                     </p>
                 </div>
-
                 {/* Team grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {leaders.map((leader, index) => (
@@ -235,6 +153,7 @@ const LeadershipTeam = () => {
                             key={index}
                             name={leader.name}
                             role={leader.role}
+                            tagline={leader.tagline}
                             bio={leader.bio}
                             imageUrl={leader.imageUrl}
                             index={index}
@@ -248,3 +167,4 @@ const LeadershipTeam = () => {
 };
 
 export default LeadershipTeam;
+           

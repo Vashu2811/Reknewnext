@@ -1,77 +1,10 @@
 import { ChevronRight } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { X } from 'lucide-react';
 import Link from 'next/link';
 
 const CareerOpportunities = ({ openHiringModal, isDarkMode }) => {
-    const JobModal = ({ job, onClose }) => {
-        // Add effect to disable body scrolling when modal is open
-        useEffect(() => {
-            if (job) {
-                document.body.style.overflow = 'hidden';
-            }
-            
-            return () => {
-                document.body.style.overflow = 'auto';
-            };
-        }, [job]);
-
-        const handleClose = () => {
-            onClose();
-        };
-        
-        if (!job) return null;
+    const JobCard = ({ title, location, type, applyLink }) => {
         return (
-            <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex justify-center items-center p-4 animate-fadeIn">
-                <div className={`rounded-xl shadow-2xl w-full max-w-7xl h-[90vh] flex flex-col animate-scaleIn${isDarkMode ? " bg-gray-800" : " bg-white"}`}>
-                    {/* Header */}
-                    <div className={`border-b p-4 flex justify-between items-center flex-shrink-0${isDarkMode ? " border-gray-700" : " border-gray-100"}`}>
-                        <h2 className={`text-2xl font-bold${isDarkMode ? " text-gray-100" : " text-gray-900"}`}>{job.title}</h2>
-                        <button onClick={handleClose} className={`p-2 rounded-full transition-colors${isDarkMode ? " hover:bg-gray-700" : " hover:bg-gray-100"}`} aria-label="Close modal">
-                            <X className={`w-6 h-6${isDarkMode ? " text-gray-400" : " text-gray-600"}`} />
-                        </button>
-                    </div>
-
-                    {/* Scrollable content */}
-                    <div className={`p-6 whitespace-pre-line overflow-y-auto flex-1 max-h-[calc(90vh-150px)]${isDarkMode ? " text-gray-300" : " text-gray-900"}`} data-lenis-prevent>
-                        <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
-                            <div className="px-3 py-1.5 bg-[#FF512F] text-white rounded-full text-sm font-medium">{job.location}</div>
-                            <div className="px-3 py-1.5 bg-[#FF512F] text-white rounded-full text-sm font-medium">{job.type}</div>
-                        </div>
-
-                        <div className="prose prose-blue max-w-none">
-                            {job.description.split('\n').map((paragraph, index) => (
-                                <p key={index} className={paragraph.trim() === '' ? 'my-4' : ''}>
-                                    {paragraph}
-                                </p>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Footer */}
-                    <div className={`border-t p-4 flex justify-end flex-shrink-0${isDarkMode ? " border-gray-700" : " border-gray-100"}`}>
-                        <Link
-                            href={job.applyLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-6 py-2.5 bg-[#FF512F] text-white rounded-md hover:bg-[#FF512F]/80 transition-colors duration-200 font-medium">
-                            Apply for this position
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
-    const JobCard = ({ title, location, type, delay = 0, onViewDetails, applyLink }) => {
-        return (
-            <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5, boxShadow: '0 10px 20px rgba(255, 81, 47, 0.1)' }}
+            <div
                 className={`rounded-lg border p-6 transition-all duration-300${isDarkMode ? " bg-gray-800 border-gray-700 hover:border-[#FF512F]/30" : " bg-white border-gray-200 hover:border-[#FF512F]/30"}`}>
                 <h5 className={`font-semibold text-lg mb-2${isDarkMode ? " text-gray-100" : " text-[#374151]"}`}>{title}</h5>
                 <div className="flex flex-col gap-2 mb-4">
@@ -94,29 +27,19 @@ const CareerOpportunities = ({ openHiringModal, isDarkMode }) => {
                         {type}
                     </div>
                 </div>
-                <span
-                    onClick={onViewDetails}
-                    className="text-sm cursor-pointer font-medium text-[#FF512F] hover:text-[#FF8A63] flex items-center transition-colors duration-200">
-                    Learn More
+                <Link
+                    href={applyLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-[#FF512F] hover:text-[#FF8A63] flex items-center transition-colors duration-200"
+                >
+                    Apply Now
                     <ChevronRight className="ml-1 w-4 h-4" />
-                </span>
-            </motion.div>
+                </Link>
+            </div>
         );
     };
-    // eslint-disable-next-line no-unused-vars
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const [selectedJobb, setSelectedJobb] = useState(null);
-    const [isModalOpenn, setIsModalOpenn] = useState(false);
-
-    const handleViewDetailss = (job) => {
-        setSelectedJobb(job);
-        setIsModalOpenn(true);
-    };
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setSelectedJobb(null);
-    };
     return (
         <section className={`relative py-32 overflow-hidden${isDarkMode ? " bg-gray-900 text-gray-100" : " bg-transparent text-[#374151]"}`}>
             <div className="container mx-auto px-6 relative">
@@ -150,28 +73,28 @@ const CareerOpportunities = ({ openHiringModal, isDarkMode }) => {
                                 <h4 className={`text-lg font-semibold mb-4 border-b pb-2${isDarkMode ? " text-gray-200 border-gray-700" : " text-[#374151] border-gray-200"}`}>
                                     Engineering & Data
                                 </h4>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                    {[
-                                        // {
-                                        //     title: 'AI/ML Engineer',
-                                        //     location: 'Hyderabad / IND',
-                                        //     type: 'Full-time',
-                                        //     applyLink: 'https://www.linkedin.com/company/reknew-business-solutions?trk=public_jobs_topcard-org-name'
-                                        // },
-                                        // {
-                                        //     title: 'Gen AI - Agent Engineer',
-                                        //     location: 'Hyderabad / IND',
-                                        //     type: 'Full-time',
-                                        //     applyLink: 'https://www.linkedin.com/company/reknew-business-solutions?trk=public_jobs_topcard-org-name'
-                                        // },
-                                        // {
-                                        //     title: 'Data & AI Solutions Delivery Lead',
-                                        //     location: 'Dallas / United States',
-                                        //     type: 'Full-time',
-                                        //     applyLink:
-                                        //         'https://www.linkedin.com/jobs/search/?currentJobId=4228050954&f_C=107208988&geoId=92000000&origin=COMPANY_PAGE_JOBS_CLUSTER_EXPANSION&originToLandingJobPostings=4228908238%2C4228050985%2C4228050954%2C4227362486%2C4228913006&position=3&pageNum=0'
-                                        // }
-
+                                {/* Define jobs array outside JSX */}
+                                {(() => {
+                                    const jobs = [
+                                        {
+                                            title: 'AI/ML Engineer',
+                                            location: 'Hyderabad / IND',
+                                            type: 'Full-time',
+                                            applyLink: 'https://www.linkedin.com/company/reknew-business-solutions?trk=public_jobs_topcard-org-name'
+                                        },
+                                        {
+                                            title: 'Gen AI - Agent Engineer',
+                                            location: 'Hyderabad / IND',
+                                            type: 'Full-time',
+                                            applyLink: 'https://www.linkedin.com/company/reknew-business-solutions?trk=public_jobs_topcard-org-name'
+                                        },
+                                        {
+                                            title: 'Data & AI Solutions Delivery Lead',
+                                            location: 'Dallas / United States',
+                                            type: 'Full-time',
+                                            applyLink:
+                                                'https://www.linkedin.com/jobs/search/?currentJobId=4228050954&f_C=107208988&geoId=92000000&origin=COMPANY_PAGE_JOBS_CLUSTER_EXPANSION&originToLandingJobPostings=4228908238%2C4228050985%2C4228050954%2C4227362486%2C4228913006&position=3&pageNum=0'
+                                        },
                                         {
                                             title: ' AI/ML Engineer',
                                             location: 'Remote / IND',
@@ -349,19 +272,21 @@ If you're passionate about building intelligent data platforms that enable Enter
                                             applyLink:
                                                 'https://www.linkedin.com/jobs/search/?currentJobId=4228050954&f_C=107208988&geoId=92000000&origin=COMPANY_PAGE_JOBS_CLUSTER_EXPANSION&originToLandingJobPostings=4228908238%2C4228050985%2C4228050954%2C4227362486%2C4228913006&position=3&pageNum=0'
                                         }
-                                    ].map((job, index) => (
-                                        <JobCard
-                                            key={index}
-                                            title={job.title}
-                                            location={job.location}
-                                            type={job.type}
-                                            delay={index * 0.1}
-                                            applyLink={job.applyLink}
-                                            onViewDetails={() => handleViewDetailss(job)}
-                                        />
-                                    ))}
-                                </div>
-                                <JobModal isOpen={isModalOpenn} onClose={closeModal} job={selectedJobb} />
+                                    ];
+                                    return (
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                            {jobs.map((job, index) => (
+                                                <JobCard
+                                                    key={index}
+                                                    title={job.title}
+                                                    location={job.location}
+                                                    type={job.type}
+                                                    applyLink={job.applyLink}
+                                                />
+                                            ))}
+                                        </div>
+                                    );
+                                })()}
                             </div>
                         </div>
                     </div>
@@ -394,3 +319,4 @@ If you're passionate about building intelligent data platforms that enable Enter
 };
 
 export default CareerOpportunities;
+ 
