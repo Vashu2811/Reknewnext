@@ -53,7 +53,7 @@ const FoundersExperience = () => {
     // Define company logos array with online URLs
     const companyLogos = [
         {
-            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Logo_of_JPMorganChase_2024.svg/2880px-Logo_of_JPMorganChase_2024.svg.png ',
+            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Logo_of_JPMorganChase_2024.svg/2880px-Logo_of_JPMorganChase_2024.svg.png'.trim(),
             alt: 'JP Morgan Chase Logo'
         },
         {
@@ -68,16 +68,14 @@ const FoundersExperience = () => {
             src: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/KPMG_logo.svg',
             alt: 'KPMG Logo'
         },
-     
-         {
-            src: '   https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/2880px-Accenture.svg.png',
+        {
+            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/2880px-Accenture.svg.png'.trim(),
             alt: 'KPMG Logo'
         },
         {
             src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Bank_of_America_1998.svg/1920px-Bank_of_America_1998.svg.png',
             alt: 'Bank of America Logo'
         },
-        
         // Added Coca Cola logo
         {
             src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/2560px-Coca-Cola_logo.svg.png',
@@ -121,6 +119,8 @@ const FoundersExperience = () => {
                             className={`w-32 md:w-28 h-16 md:h-20 lg:h-24 flex items-center justify-center p-4 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md
                                 ${isDarkMode ? 'bg-white/90' : 'bg-white/90'}`}>
                             <Image
+                            width={120}
+                            height={40}
                                 src={logo.src}
                                 alt={logo.alt}
                                 className="max-w-full max-h-full object-cover filter hover:grayscale-0 transition-all duration-500"
