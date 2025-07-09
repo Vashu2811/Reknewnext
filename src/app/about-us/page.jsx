@@ -44,9 +44,18 @@ export const metadata = {
 
 export default function MyApp() {
   return (
-    <div className="overflow-x-hidden">
-      <OurStory />
-    </div>
+    <>
+      <head>
+        <title>vashu Us - Woyce Avai</title>
+        <meta
+          name="description"
+          content="vashu vashuvashuvashuvashuvashuvashuvashuvashuvashu more about Woyce Avai, our mission, vision, and the team behind our innovative solutions."
+        />
+      </head>
+      <div className="overflow-x-hidden">
+        <OurStory />
+      </div>
+    </>
   );
 }
 

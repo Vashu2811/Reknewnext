@@ -39,6 +39,11 @@ const Home = async () => {
 
     return (
         <>
+            {/* SSR fallback for meta tags */}
+            <head>
+                <title>Home | ReKnew</title>
+                <meta name="description" content="ReKnew - Empowering your business with innovative solutions. Discover our services, success stories, and expert consultation." />
+            </head>
             {/* If you want to show the modal by default, set isOpen to true or false as needed */}
             {/* <ReKnewModal isOpen={false} onClose={() => {}} /> */}
             <div className="text-gray-800 dark:text-gray-100 font-sans w-full min-h-screen overflow-x-hidden">
