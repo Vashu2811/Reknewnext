@@ -1,12 +1,14 @@
+import React, { ReactNode } from "react";
 import { Nunito } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import { ThemeProvider } from "@/Context/ThemeContext";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
+import { ThemeProvider } from "../Context/ThemeContext";
 import Image from "next/image";
+// @ts-ignore
 import color from "../../public/assets/logo-left-2.webp";
-import ScrollToBottomButton from "@/components/scrollBottom";
-import ScrollToTopButton from "@/components/ScrollTop";
+import ScrollToBottomButton from "../components/scrollBottom";
+import ScrollToTopButton from "../components/ScrollTop";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -14,12 +16,18 @@ const nunito = Nunito({
   weight: ["300", "400", "600", "700", "800"], // Add weights as needed
 });
 
-
 export const metadata = {
   title: "ReKnew - AI-Powered Enterprise Transformation & Intelligent Automation",
-  description: "Transform your enterprise with ReKnew's AI-powered solutions. We help businesses reduce inefficiencies, automate workflows, and unlock growth opportunities through intelligent automation and data-driven insights.",
+  description:
+    "Transform your enterprise with ReKnew's AI-powered solutions. We help businesses reduce inefficiencies, automate workflows, and unlock growth opportunities through intelligent automation and data-driven insights.",
 };
-export default function RootLayout({ children }) {
+
+// Add type for props
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${nunito.variable} font-sans`} suppressHydrationWarning>

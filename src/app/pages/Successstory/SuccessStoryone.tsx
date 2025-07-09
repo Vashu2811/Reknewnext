@@ -1,6 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
-import { useTheme } from "@/Context/ThemeContext";
+import { useTheme } from "../../../Context/ThemeContext";
 
 const SuccessStoryOne = () => {
     const { theme } = useTheme();

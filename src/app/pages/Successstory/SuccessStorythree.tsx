@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useTheme } from "@/Context/ThemeContext";
+import { useTheme } from "../../../Context/ThemeContext";
 
 const SuccessStoryThree = () => {
     const { theme } = useTheme();
@@ -67,7 +67,7 @@ const SuccessStoryThree = () => {
                     </h2>
                     
                     <p className={`text-lg max-w-4xl mx-auto leading-relaxed ${isDarkMode ? 'text-gray-100' : 'text-[#374151]'}`}>
-                        We optimized a large national financial institution's customer service division by deploying AI-powered models across digital channels,
+                        We optimized a large national financial institution&apos;s customer service division by deploying AI-powered models across digital channels,
                         ultimately reducing operational expenses, enhancing efficiency, and increasing client satisfaction.
                     </p>
                 </motion.div>

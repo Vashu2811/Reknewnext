@@ -4,7 +4,7 @@ import consulation from '../../../public/assets/Conversation-amico.png';
 import { ChevronRight } from 'lucide-react';
 import ReKnewModal from '../../model/ReKnewModal';
 import Image from 'next/image';
-import { useTheme } from "@/Context/ThemeContext";
+import { useTheme } from "../../Context/ThemeContext";
 
 const Consultation = () => {
     const consultationContent = useMemo(
@@ -81,7 +81,7 @@ const Consultation = () => {
                     </div>
                 </div>
             </div>
-            <ReKnewModal isOpen={isModalOpen} onClose={closeModal} />
+            <ReKnewModal isOpen={isModalOpen} onClose={closeModal} isDarkMode={undefined} />
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import CanvasDots from '@/components/canvas';
+import CanvasDots from '../../components/canvas';
 
 const LifeAtReknew = ({ isDarkMode }) => {
     return (

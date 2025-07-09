@@ -239,8 +239,7 @@ const LeadershipTeam = () => {
                             bio={leader.bio}
                             imageUrl={leader.imageUrl}
                             index={index}
-                            linkedIn={leader.linkedIn}
-                        />
+                            linkedIn={leader.linkedIn} tagline={undefined}                        />
                     ))}
                 </div>
             </div>
