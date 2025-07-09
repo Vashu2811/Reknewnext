@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
-import { useTheme } from '@/Context/ThemeContext';
+import { useTheme } from '../../Context/ThemeContext';
 import CanvasDots from '../../components/canvas';
 import Wisdom from '../../../public/assets/dark-Wisdom.png';
 import DarkWisdom from '../../../public/assets/White-Wisdom.png';
@@ -182,7 +182,7 @@ const DataandAiVarticalSlider = () => {
                             <p className={`mx-4 mt-[36px] text-base md:text-lg font-medium text-center ${
                                 isDarkMode ? "text-gray-100" : "text-gray-800"
                             }`}>
-                                ReKnew's approach delivers the rich contextual understanding needed for Enterprise Gen AI <br />
+                                ReKnew&apos;s approach delivers the rich contextual understanding needed for Enterprise Gen AI <br />
                                 to overcome data limitations and achieve its full potential
                             </p>
                         </header>

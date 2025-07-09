@@ -1,6 +1,6 @@
 import HexagonWhite from '../../../public/assets/white-hexagon.png';
 import HexagonBlack from '../../../public/assets/dark-hexagon.png';
-import { useTheme } from '@/Context/ThemeContext';
+import { useTheme } from '../../Context/ThemeContext';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
