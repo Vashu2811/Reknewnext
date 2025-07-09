@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import CanvasDots from '../../components/canvas';
 
 const LifeAtReknew = ({ isDarkMode }) => {

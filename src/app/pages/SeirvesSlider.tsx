@@ -192,7 +192,7 @@ const Ourservices = () => {
     const closeModal = () => setIsModalOpen(false);
     return (
         <div className={`font-sans w-full min-h-screen overflow-x-hidden ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
-            <ReKnewModal isOpen={isModalOpen} onClose={closeModal} />
+            <ReKnewModal isOpen={isModalOpen} onClose={closeModal} isDarkMode={undefined} />
             {/* Progress Bar */}
             <motion.div
                 className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF512F] to-[#FF512F] dark:from-[#FF512F] dark:to-[#FF512F] z-50"
@@ -235,7 +235,7 @@ const Ourservices = () => {
                             </h2>
                         </div>
                         <p className={`text-base md:text-lg max-w-3xl mx-auto ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
-                            ReKnew's services are designed to partner with enterprises in modernizing data platforms, accelerating AI adoption, and implementing intelligent automation.
+                            ReKnew&apos;s services are designed to partner with enterprises in modernizing data platforms, accelerating AI adoption, and implementing intelligent automation.
                         </p>
                     </div>
 

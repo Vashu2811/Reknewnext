@@ -20,7 +20,7 @@ const StrategicAcceleration = ({ isDarkMode }) => {
                         </h2>
 
                         <p className={`text-base md:text-lg max-w-3xl mx-auto${isDarkMode ? " text-gray-400" : " text-gray-600"}`}>
-                            ReKnew's comprehensive approach ensures enterprises get both expert consultation and accountable implementation partnership for true
+                            ReKnew&apos;s comprehensive approach ensures enterprises get both expert consultation and accountable implementation partnership for true
                             digital transformation.
                         </p>
                     </div>

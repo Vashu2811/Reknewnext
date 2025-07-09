@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const FoundersExperience = () => {
@@ -119,7 +120,7 @@ const FoundersExperience = () => {
                             key={index}
                             className={`w-32 md:w-28 h-16 md:h-20 lg:h-24 flex items-center justify-center p-4 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md
                                 ${isDarkMode ? 'bg-white/90' : 'bg-white/90'}`}>
-                            <img
+                            <Image
                                 src={logo.src}
                                 alt={logo.alt}
                                 className="max-w-full max-h-full object-cover filter hover:grayscale-0 transition-all duration-500"

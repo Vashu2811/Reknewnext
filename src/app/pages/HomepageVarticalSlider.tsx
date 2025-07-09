@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 "use client";
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
@@ -141,7 +141,7 @@ const HomepageVarticalSlider = () => {
                       isDarkMode ? "text-gray-100" : "text-gray-800"
                     }`}>
                 <p className="text-base md:text-lg font-medium text-center">
-                  ReKnew's pre-built accelerators enable rapid delivery of
+                  ReKnew&apos;s pre-built accelerators enable rapid delivery of
                   high-impact use cases - risk, compliance, fraud detection,
                   complaint resolution, etc. - while modernizing data
                   infrastructure to ensure secure, reliable AI adoption.
@@ -298,17 +298,17 @@ const HomepageVarticalSlider = () => {
                       isDarkMode ? "text-gray-100" : "text-gray-800"
                     }`}>
                 <p className="text-base md:text-lg relative font-medium text-center">
-                  ReKnew's Context Engineering™ approach helps enterprises adopt
+                  ReKnew&apos;s Context Engineering™ approach helps enterprises adopt
                   AI by closing the gaps across data, cloud,{" "}
                 </p>
                 <p className="text-base md:text-lg relative font-medium text-center">
                   workflows, and talent. ReKnew helps business groups mitigate{" "}
                   <span className="relative inline-block mt-1">
-                    "
+                    &quot;
                     <span className="relative z-10 text-[#FF512F] dark:text-[#FF512F]">
                       Context Chasm
                     </span>
-                    ".
+                    &quot;.
                     <svg
                       className="absolute -bottom-1 left-0 w-full"
                       height="8"
@@ -372,8 +372,8 @@ const HomepageVarticalSlider = () => {
                       isDarkMode ? "text-gray-400" : "text-gray-600"
                     }`}
                   >
-                    With our "Business Value as the Driver" approach and "Safe
-                    from the Start" architectural principles, we help
+                    With our &quot;Business Value as the Driver&quot; approach and &quot;Safe
+                    from the Start&quot; architectural principles, we help
                     enterprises deploy AI responsibly - turning innovation into
                     a force for good.
                   </p>
@@ -499,7 +499,7 @@ const HomepageVarticalSlider = () => {
                       />{" "}
                       Quad™ suite of accelerators enables rapid design and
                       deployment of intelligent agents - seamlessly integrating
-                      them across your enterprise's Data, Application, DevOps,
+                      them across your enterprise&apos;s Data, Application, DevOps,
                       and ERP layers.
                     </p>
                   </div>
@@ -552,7 +552,7 @@ const HomepageVarticalSlider = () => {
                         isDarkMode ? "text-gray-400" : "text-gray-600"
                       }`}
                     >
-                      ReKnew's pre-built knowledge graphs are designed to
+                      ReKnew&apos;s pre-built knowledge graphs are designed to
                       support data-driven decision-making for leaders across the
                       enterprise - including CFOs, CMOs, CROs, and CIOs -
                       accelerating insights and improving outcomes.

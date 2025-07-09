@@ -104,7 +104,6 @@ const CareerOpportunities = ({ openHiringModal, isDarkMode }) => {
             </motion.div>
         );
     };
-    // eslint-disable-next-line no-unused-vars
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [selectedJobb, setSelectedJobb] = useState(null);
@@ -127,7 +126,7 @@ const CareerOpportunities = ({ openHiringModal, isDarkMode }) => {
                         <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-12 text-center${isDarkMode ? " text-white" : " text-gray-900"}`}>
                             Bring your brilliance.
                             <span className="relative inline-block mx-2">
-                                <span className="relative z-10 text-[#FF512F]">Build what's next.</span>
+                                <span className="relative z-10 text-[#FF512F]">Build what&apos;s next.</span>
                                 <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
                                     <path d="M0 5c30-5 70-5 100 0" stroke="#FF512F" strokeWidth="2" fill="none" className="transition-all duration-300" />
                                 </svg>
@@ -362,7 +361,7 @@ If you're passionate about building intelligent data platforms that enable Enter
                                         />
                                     ))}
                                 </div>
-                                <JobModal isOpen={isModalOpenn} onClose={closeModal} job={selectedJobb} />
+                                <JobModal onClose={closeModal} job={selectedJobb} />
                             </div>
                         </div>
                     </div>
@@ -370,7 +369,7 @@ If you're passionate about building intelligent data platforms that enable Enter
                     <div className="max-w-7xl mx-auto mt-2">
                         <div className={`bg-gradient-to-r rounded-xl p-3 border border-[#FF512F]/20${isDarkMode ? " from-[#FF512F]/20 to-[#FF8A63]/20" : " from-[#FF512F]/10 to-[#FF8A63]/10"}`}>
                             <h3 className={`text-lg md:text-xl lg:text-2xl font-semibold text-center${isDarkMode ? " text-[#FF512F]" : " text-[#FF512F]"}`}>
-                                Don't see a perfect fit
+                                Don&apos;t see a perfect fit
                             </h3>
                             <p className={`text-base md:text-lg lg:text-xl mt-4 text-center${isDarkMode ? " text-gray-300" : " text-gray-900"}`}>
                                 If you are an engineer at heart and have deep work ethic, share your GitHub link.

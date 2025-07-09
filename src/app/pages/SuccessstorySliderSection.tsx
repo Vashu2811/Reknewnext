@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -101,6 +99,7 @@ const SuccessstorySliderSection = () => {
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeSlide, isAnimating]);
 
     // Auto-slide

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState, useEffect } from 'react';
 import CanvasDots from '../../components/canvas';
@@ -161,7 +162,7 @@ const FirstPrinciple = () => {
                                         <p className={`text-base md:text-lg pl- mb-2 md:mb-4 ${
                                             isDarkMode ? "text-gray-400" : "text-gray-600"
                                         }`}>
-                                            We operate with a founder's mindset - agile, accountable, and driven to solve real-world problems. Our global teams
+                                            We operate with a founder&apos;s mindset - agile, accountable, and driven to solve real-world problems. Our global teams
                                             are focused on delivering meaningful customer value and impactful careers for employees.
                                         </p>
                                     </div>
@@ -216,7 +217,7 @@ const FirstPrinciple = () => {
                                             isDarkMode ? "text-gray-400" : "text-gray-600"
                                         }`}>
                                             We hold ourselves to the highest ethical standards. Trust is the foundation of everything we do - internally and
-                                            externally. We believe in transparency, accountability, and doing what's right, even when it's not easy.
+                                            externally. We believe in transparency, accountability, and doing what&apos;s right, even when it&apos;s not easy.
                                         </p>
                                     </div>
 
