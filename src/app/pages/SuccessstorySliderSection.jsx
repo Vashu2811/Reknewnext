@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
+"use client";
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Arrow from '../../../public/assets/Arrow logo.png';

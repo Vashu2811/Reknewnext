@@ -1,3 +1,4 @@
+"use client";
 import { useMemo, useState } from 'react';
 import consulation from '../../../public/assets/Conversation-amico.png';
 import { ChevronRight } from 'lucide-react';

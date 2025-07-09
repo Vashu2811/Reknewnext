@@ -1,40 +1,72 @@
-import MyHome from "./pages/page";
-import Head from "next/head";
+import ReKnewModal from '../model/ReKnewModal';
+import HomepageVarticalSlider from './pages/HomepageVarticalSlider';
+import Ourservices from './pages/SeirvesSlider';
+import SuccessstorySliderSection from './pages/SuccessstorySliderSection';
+import FoundersExperience from './pages/FoundersExperience';
+import Consultation from './pages/Consultation';
 
-export default function MyApp() {
-  // Example: determine current page (replace with your actual logic)
-  // For demonstration, set page to "about" or other value
-  const page = ""; // e.g., "about" or "" or "home"
+export const metadata = {
+    title: 'Home | ReKnew',
+    description: 'ReKnew - Empowering your business with innovative solutions. Discover our services, success stories, and expert consultation.',
+    keywords: 'ReKnew, business, services, consultation, success stories, founders, innovation',
+    openGraph: {
+        title: 'Home | ReKnew',
+        description: 'Empowering your business with innovative solutions. Discover our services, success stories, and expert consultation.',
+        url: 'https://reknew.com/',
+        siteName: 'ReKnew',
+        images: [
+            {
+                url: 'https://reknew.com/og-image.jpg',
+                width: 1200,
+                height: 630,
+                alt: 'ReKnew Home Page',
+            },
+        ],
+        locale: 'en_US',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Home | ReKnew',
+        description: 'Empowering your business with innovative solutions. Discover our services, success stories, and expert consultation.',
+        images: ['https://reknew.com/og-image.jpg'],
+    },
+};
 
-  // Example dynamic meta data, replace with your logic as needed
-  const meta = {
-    title: "My Dynamic Page Title",
-    description: "This is a dynamic description for SEO.",
-    keywords: "dynamic, meta, tags, nextjs",
-  };
+// Convert to an async server component
+const Home = async () => {
+    // No useEffect, no client hooks
 
-  return (
-    <>
-      <Head>
-        {page === "about" ? (
-          // Do not change meta tags for about us page
-          <>
-            <title>About Us</title>
-            <meta name="description" content="Learn more about us." />
-            {/* ...other static meta tags for about us... */}
-          </>
-        ) : (
-          <>
-            <title>{meta.title}</title>
-            <meta name="description" content={meta.description} />
-            <meta name="keywords" content={meta.keywords} />
-            {/* Add more dynamic meta tags as needed */}
-          </>
-        )}
-      </Head>
-      <div className="overflow-x-hidden">
-        <MyHome />
-      </div>
-    </>
-  );
-}
+    return (
+        <>
+            {/* If you want to show the modal by default, set isOpen to true or false as needed */}
+            {/* <ReKnewModal isOpen={false} onClose={() => {}} /> */}
+            <div className="text-gray-800 dark:text-gray-100 font-sans w-full min-h-screen overflow-x-hidden">
+                {/* Remove Progress Bar (framer-motion is client-only) */}
+
+                <HomepageVarticalSlider />
+
+                {/* Founders Experience Section - Added directly after the slider */}
+                <FoundersExperience />
+
+                {/* Main Content */}
+                <div className="dark:text-gray-100 flex flex-col overflow-x-hidden">
+                    <Ourservices />
+
+                    <SuccessstorySliderSection />
+
+                    <div className="relative overflow-y-hidden overflow-x-hidden">
+                        <div className=" flex justify-center items-center relative">
+                            <div className="py-[100px]">
+                                {/* Remove Suspense (not needed for server components) */}
+                                <Consultation />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default Home;

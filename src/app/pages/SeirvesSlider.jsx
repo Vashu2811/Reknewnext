@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from 'react';
 import Aigraph from '../../../public/assets/slidericon-8.png';
 import Businessai from '../../../public/assets/slidericon-7.png';
