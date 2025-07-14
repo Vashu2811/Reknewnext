@@ -1,5 +1,5 @@
-import { GenerateStaticParams } from "./slug";
-
+import { fetchBlogPosts } from '../api';
+import BlogPostClient from './BlogPostClient';
 export const metadata = {
   title: "Context Is All You Need – ReKnew's Answer to Failing AI Projects",
   description:
@@ -51,12 +51,23 @@ export const metadata = {
   },
 };
 
-export default function MyApp() {
-  return (
-    <>
-      <div className="overflow-x-hidden">
-        <GenerateStaticParams />
-      </div>
-    </>
-  );
+
+// Required for static export - generates static params at build time
+export async function generateStaticParams() {
+    try {
+        // Fetch all blog posts to get their slugs
+        const posts = await fetchBlogPosts(1, 100); // Get a large number to cover all posts
+        
+        return posts.map((post) => ({
+            slug: post.slug,
+        }));
+    } catch (error) {
+        console.error('Error generating static params:', error);
+        // Return empty array if there's an error
+        return [];
+    }
+}
+
+export default function BlogPostPage({ params }) {
+    return <BlogPostClient slug={params.slug} />;
 }

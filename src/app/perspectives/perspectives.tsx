@@ -173,6 +173,8 @@ const BlogList = () => {
                                     {post.featuredImage && (
                                         <div className="aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
                                             <Image
+                                            width={1200}
+                                            height={630}
                                                 src={post.featuredImage}
                                                 alt={post.title}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
