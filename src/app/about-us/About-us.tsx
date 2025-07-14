@@ -24,10 +24,10 @@ const OurStory = ({ isDarkMode = false }) => {
             <AboutUspageSlider />
 
             
-            <ThesparkSection isDarkMode={isDarkMode} />
+            <ThesparkSection />
 
             {/* Strategic Acceleration Section - Core Principles */}
-            <StrategicAcceleration isDarkMode={isDarkMode} />
+            <StrategicAcceleration />
 
             {/* Leadership Team Section */}
             <section className={`relative overflow-hidden ${isDarkMode ? "bg-gray-900" : "bg-transparent"}`}>
@@ -35,14 +35,14 @@ const OurStory = ({ isDarkMode = false }) => {
             </section>
 
             {/* Life at ReKnew Section */}
-            <LifeAtReknew isDarkMode={isDarkMode} />
+            <LifeAtReknew  />
 
             {/* Career Opportunities Section - Current job openings */}
             {/* Modal logic removed for SSR, pass a no-op function */}
-            <CareerOpportunities openHiringModal={undefined} isDarkMode={undefined} />
+            <CareerOpportunities openHiringModal={undefined}  />
 
             {/* Use the new HeadquartersHeader component */}
-            <HeadquartersHeader isDarkMode={isDarkMode} />
+            <HeadquartersHeader  />
 
             {/* Use the new ContactInformation component */}
             <ContactInformation  />
