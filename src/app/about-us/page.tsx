@@ -1,44 +1,65 @@
 import OurStory from "./About-us";
 
 export const metadata = {
-  title: "vashu - Woyce Avai",
+  title: "About ReKnew | Meet Our Digital Experts & Creative Team",
   description:
-    "vashu vashuvashuvashuvashuvashuvashuvashuvashuvashu more about Woyce Avai, our mission, vision, and the team behind our innovative solutions.",
+    "Discover the talented team behind ReKnew. Learn about our mission, values, and expertise in web design, branding, and digital marketing for business growth.",
   keywords: [
-    "Woyce Avai",
-    "vashu",
-    "Company",
-    "Team",
+    "ReKnew",
+    "Digital Experts",
+    "Creative Team",
+    "Web Design",
+    "Branding",
+    "Digital Marketing",
+    "Business Growth",
     "Mission",
-    "Vision",
-    "Story",
+    "Values",
+    "About",
   ],
-  authors: [{ name: "Woyce Avai Team" }],
+  authors: [{ name: "ReKnew" }],
   openGraph: {
-    title: "vashu - Woyce Avai",
-    description: "Discover the story, mission, and team behind Woyce Avai.",
     type: "website",
-    url: "https://yourdomain.com/about-us",
+    url: "https://reknew.ai/about",
+    title: "About ReKnew | Meet Our Digital Experts & Creative Team",
+    description:
+      "Discover the talented team behind ReKnew. Learn about our mission, values, and expertise in web design, branding, and digital marketing for business growth.",
     images: [
       {
-        url: "https://yourdomain.com/images/about-og.jpg",
+        url: "https://reknew.ai/logo.png",
         width: 1200,
         height: 630,
-        alt: "vashu - Woyce Avai",
+        alt: "About ReKnew | Meet Our Digital Experts & Creative Team",
       },
     ],
+    siteName: "ReKnew",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "vashu - Woyce Avai",
-    description: "Discover the story, mission, and team behind Woyce Avai.",
-    images: ["https://yourdomain.com/images/about-og.jpg"],
+    url: "https://reknew.ai/about",
+    title: "About ReKnew | Meet Our Digital Experts & Creative Team",
+    description:
+      "Discover the talented team behind ReKnew. Learn about our mission, values, and expertise in web design, branding, and digital marketing for business growth.",
+    images: ["https://reknew.ai/logo.png"],
+    site: "@ReKnew",
+    creator: "@ReKnew",
   },
   icons: {
     icon: "/favicon.ico",
   },
   alternates: {
-    canonical: "https://yourdomain.com/about-us",
+    canonical: "https://reknew.ai/about",
+  },
+  robots: "index, follow",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#111827" },
+  ],
+  mobileWebAppCapable: "yes",
+  appleMobileWebAppCapable: "yes",
+  appleMobileWebAppStatusBarStyle: "default",
+  formatDetection: {
+    telephone: "no",
   },
 };
 
