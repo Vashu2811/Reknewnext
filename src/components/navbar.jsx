@@ -82,8 +82,8 @@ const Navbar = () => {
         scrolled 
           ? `fixed top-0 shadow-md backdrop-blur-sm border-b transition-all duration-500 ${
               isDark 
-                ? 'bg-gray-900/95 border-orange-500/20' 
-                : 'bg-white/95 border-orange-500/20'
+                ? 'border-orange-500/20' 
+                : 'border-orange-500/20'
             }` 
           : 'relative bg-transparent'
       } ease-in-out`}
@@ -182,8 +182,8 @@ const Navbar = () => {
               transition={{ duration: 0.3 }}
               className={`absolute top-full left-0 right-0 shadow-lg rounded-b-2xl py-4 px-6 md:hidden z-50 ${
                 isDark 
-                  ? 'bg-gray-900 border-t border-orange-500/20' 
-                  : 'bg-white border-t border-orange-500/20'
+                  ? 'border-t border-orange-500/20' 
+                  : 'border-t border-orange-500/20'
               }`}
             >
               <div className="flex flex-col space-y-4">
