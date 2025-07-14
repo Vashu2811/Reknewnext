@@ -49,13 +49,13 @@ html.lenis {
     height: auto;
 }
 ::selection {
-    color: #ff512f;
-    background: #fff0e6;
+    color: #fff;
+    background: #ff522fd6;
 }
 
 ::-moz-selection {
-    color: #ff512f;
-    background: #fff0e6;
+    color: #fff;
+    background: #ff522fd6;
 }
 .preloader {
     top: 0;

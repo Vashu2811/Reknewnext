@@ -1,13 +1,62 @@
 /* eslint-disable @next/next/no-img-element */
+'use client';
 import CanvasDots from '../../components/canvas';
+import { useEffect, useState } from 'react';
 
-const LifeAtReknew = ({ isDarkMode }) => {
+const LifeAtReknew = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark =
+                document.documentElement.classList.contains('dark') ||
+                document.body.classList.contains('dark') ||
+                localStorage.getItem('theme') === 'dark';
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class'],
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class'],
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === 'theme') {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        window.addEventListener('themeChanged', checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('themeChanged', checkTheme);
+        };
+    }, []);
+
     return (
         <>
             <div className="hidden sm:block">
                 <CanvasDots />
             </div>
-            <section className={`py-32 relative overflow-hidden${isDarkMode ? " bg-gray-900" : "bg-transparent"}`}>
+            <section className={`py-32 relative overflow-hidden`}>
                 {/* Background decoration */}
                 <div className="container mx-auto px-6">
                     <div className="max-w-7xl mx-auto">

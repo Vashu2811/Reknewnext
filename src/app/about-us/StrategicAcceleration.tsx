@@ -1,14 +1,66 @@
+'use client';
 import { RiArrowRightDoubleLine } from 'react-icons/ri';
+import { useEffect, useState } from 'react';
 
-const StrategicAcceleration = ({ isDarkMode }) => {
+const StrategicAcceleration = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+      useEffect(() => {
+        const checkTheme = () => {
+            const isDark =
+                document.documentElement.classList.contains("dark") ||
+                document.body.classList.contains("dark") ||
+                localStorage.getItem("theme") === "dark";
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (
+                    mutation.type === "attributes" &&
+                    mutation.attributeName === "class"
+                ) {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === "theme") {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+        window.addEventListener("themeChanged", checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("themeChanged", checkTheme);
+        };
+    }, []);
+
     return (
-        <section className={`py-32 relative overflow-hidden${isDarkMode ? " bg-gray-900" : " bg-transparent"}`}>
+        <section className={`py-32 relative overflow-hidden`}>
             {/* Background decoration */}
 
             <div className="container mx-auto px-4">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-6${isDarkMode ? " text-white" : " text-gray-900"}`}>
+                        <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-6 ${isDarkMode ? "text-white" : "text-[#374151]"}`}>
                             Core
                             <span className="relative inline-block mx-2">
                                 <span className="relative z-10 text-[#FF512F]">Principles</span>

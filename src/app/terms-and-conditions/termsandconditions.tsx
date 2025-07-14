@@ -75,7 +75,7 @@ const TermsAndConditions = () => {
             <section id={id} className="mb-8">
                 <div className={`flex justify-between items-center cursor-pointer py-3 border-b${isDarkMode ? " border-gray-700" : " border-gray-200"}`} onClick={() => setIsOpen(!isOpen)}>
                     <h2 className="text-xl font-semibold text-[#FF512F]">{title}</h2>
-                    <button
+                    <button 
                         className={`p-1 rounded-full transition-colors duration-200${isDarkMode ? " text-gray-400 hover:text-gray-300 hover:bg-gray-800" : " text-gray-500 hover:text-gray-700 hover:bg-gray-100"}`}
                         aria-expanded={isOpen}
                         aria-controls={`content-${id}`}>
@@ -154,8 +154,8 @@ const TermsAndConditions = () => {
                     <div className="lg:col-span-3">
                         <PolicySection id="Agreement" title="1. Agreement-to-terms" defaultOpen={true}>
                             <p className={`mb-4${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>
-                                These Terms and Conditions ("Terms") govern your use of the ReKnew website located at www.reknew.ai (the "Site") and your
-                                interaction with ReKnew Business Solutions Inc. ("ReKnew," "we," "us," "our"). By accessing the Site, you agree to be bound by
+                                These Terms and Conditions (&quot;Terms&quot;) govern your use of the ReKnew website located at www.reknew.ai (the &quot;Site&quot;) and your
+                                interaction with ReKnew Business Solutions Inc. (&quot;ReKnew,&quot; &quot;we,&quot; &quot;us,&quot; &quot;our&quot;). By accessing the Site, you agree to be bound by
                                 these Terms.
                             </p>
                             <p className={isDarkMode ? "text-gray-300" : "text-gray-700"}>If you do not agree with any part of these Terms, please do not access or use the Site.</p>

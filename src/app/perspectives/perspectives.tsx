@@ -4,6 +4,7 @@ import { Calendar, User, ChevronRight } from 'lucide-react';
 import { fetchBlogPosts } from './api';
 import CanvasDots from '../../components/canvas';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const BlogList = () => {
     const [posts, setPosts] = useState([]);
@@ -171,12 +172,13 @@ const BlogList = () => {
                                     {/* Featured Image */}
                                     {post.featuredImage && (
                                         <div className="aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
-                                            <img
+                                            <Image
                                                 src={post.featuredImage}
                                                 alt={post.title}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                                 onError={(e) => {
-                                                    e.target.style.display = 'none';
+                                                    const img = e.target as HTMLImageElement;
+                                                    img.style.display = 'none';
                                                 }}
                                             />
                                         </div>

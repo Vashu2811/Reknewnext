@@ -1,11 +1,73 @@
 "use client";
 import { ChevronRight } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import Link from 'next/link';
+import HiringModelClass from '../../model/HiringmodelReknew';
 
-const CareerOpportunities = ({ openHiringModal, isDarkMode }) => {
+// Helper to wrap the class as a React component
+const HiringModel = (props) => {
+    const instance = useRef(null);
+    if (!instance.current) {
+        instance.current = new HiringModelClass(props);
+    }
+    // Update props on every render
+    instance.current.props = props;
+    return instance.current.render();
+};
+
+const CareerOpportunities = ({ openHiringModal }) => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [selectedJobb, setSelectedJobb] = useState(null);
+    const [isModalOpenn, setIsModalOpenn] = useState(false);
+    const [isHiringModalOpen, setIsHiringModalOpen] = useState(false);
+
+    useEffect(() => {
+        const checkTheme = () => {
+            const isDark =
+                document.documentElement.classList.contains('dark') ||
+                document.body.classList.contains('dark') ||
+                localStorage.getItem('theme') === 'dark';
+            setIsDarkMode(isDark);
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    checkTheme();
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class'],
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class'],
+        });
+
+        const handleStorageChange = (e) => {
+            if (e.key === 'theme') {
+                checkTheme();
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        window.addEventListener('themeChanged', checkTheme);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('themeChanged', checkTheme);
+        };
+    }, []);
+
     const JobModal = ({ job, onClose }) => {
         // Add effect to disable body scrolling when modal is open
         useEffect(() => {
@@ -104,21 +166,25 @@ const CareerOpportunities = ({ openHiringModal, isDarkMode }) => {
             </motion.div>
         );
     };
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const [selectedJobb, setSelectedJobb] = useState(null);
-    const [isModalOpenn, setIsModalOpenn] = useState(false);
+    const openHiringModalHandler = useCallback(() => {
+        setIsHiringModalOpen(true);
+    }, []);
+
+    const closeHiringModalHandler = useCallback(() => {
+        setIsHiringModalOpen(false);
+    }, []);
 
     const handleViewDetailss = (job) => {
         setSelectedJobb(job);
         setIsModalOpenn(true);
     };
     const closeModal = () => {
-        setIsModalOpen(false);
+        setIsModalOpenn(false);
         setSelectedJobb(null);
     };
     return (
-        <section className={`relative py-32 overflow-hidden${isDarkMode ? " bg-gray-900 text-gray-100" : " bg-transparent text-[#374151]"}`}>
+        <section className={`relative py-32 overflow-hidden`}>
             <div className="container mx-auto px-6 relative">
                 <div className="max-w-7xl mx-auto">
                     {/* Section Header */}
@@ -377,8 +443,9 @@ If you're passionate about building intelligent data platforms that enable Enter
                             </p>
                             <div className="flex justify-center mt-4">
                                 <button
-                                    onClick={openHiringModal}
-                                    className="relative w-fit mx-auto group inline-flex items-center justify-center px-6 py-3 overflow-hidden rounded-lg bg-gradient-to-r from-[#FF512F] to-[#FF8A63] hover:from-[#FF8A63] hover:to-[#FF512F] transition-all duration-300 ease-out hover:scale-105 transform">
+                                    className="relative w-fit mx-auto group inline-flex items-center justify-center px-6 py-3 overflow-hidden rounded-lg bg-gradient-to-r from-[#FF512F] to-[#FF8A63] hover:from-[#FF8A63] hover:to-[#FF512F] transition-all duration-300 ease-out hover:scale-105 transform"
+                                    onClick={openHiringModalHandler}
+                                >
                                     <span className="relative flex justify-center items-center text-base font-semibold text-white tracking-wide">
                                         Join Our Team
                                         <ChevronRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
@@ -387,6 +454,12 @@ If you're passionate about building intelligent data platforms that enable Enter
                             </div>
                         </div>
                     </div>
+                    {/* HiringModel Modal */}
+                    <HiringModel
+                        isOpen={isHiringModalOpen}
+                        onClose={closeHiringModalHandler}
+                        isDarkMode={isDarkMode}
+                    />
                 </div>
             </div>
         </section>

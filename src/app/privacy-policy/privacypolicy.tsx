@@ -77,7 +77,7 @@ const PrivacyPolicy = () => {
                     <h2 className="text-lg md:text-xl font-semibold text-[#FF512F]">{title}</h2>
                     <button
                         className={`p-1 rounded-full transition-colors duration-200${isDarkMode ? " text-gray-400 hover:text-gray-300 hover:bg-gray-800" : " text-gray-500 hover:text-gray-700 hover:bg-gray-100"}`}
-                        aria-expanded={isOpen}
+                        aria-expanded={isOpen ? "true" : "false"}
                         aria-controls={`content-${id}`}>
                         {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                     </button>
@@ -155,14 +155,14 @@ const PrivacyPolicy = () => {
                         <div className="lg:col-span-3">
                             <PolicySection id="introduction" title="1. Introduction" defaultOpen={true}>
                                 <p className={`mb-4${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>
-                                    ReKnew Business Solutions Inc. ("ReKnew," "we," "us," or "our") values the privacy and confidentiality of our enterprise clients, prospects,
+                                    ReKnew Business Solutions Inc. (&quot;ReKnew,&quot; &quot;we,&ldquo; &quot;us,&quot; or &quot;our&quot;) values the privacy and confidentiality of our enterprise clients, prospects,
                                     and business users. This Privacy Policy describes how we collect, use, store, disclose, and safeguard the information you
-                                    provide to us through our website located at www.reknew.ai (the "Site"), and in the course of engaging with our business
+                                    provide to us through our website located at www.reknew.ai (the &quot;Site&quot;), and in the course of engaging with our business
                                     services.
                                 </p>
                                 <p className={isDarkMode ? "text-gray-300" : "text-gray-700"}>
-                                    This Policy is intended to comply with applicable U.S. privacy laws, including the California Consumer Privacy Act ("CCPA"),
-                                    and where relevant, the General Data Protection Regulation ("GDPR") for international data subjects. By accessing our Site
+                                    This Policy is intended to comply with applicable U.S. privacy laws, including the California Consumer Privacy Act (&quot;CCPA&quot;),
+                                    and where relevant, the General Data Protection Regulation (&quot;GDPR&quot;) for international data subjects. By accessing our Site
                                     or interacting with ReKnew, you acknowledge and accept the practices described herein.
                                 </p>
                             </PolicySection>
@@ -273,7 +273,7 @@ const PrivacyPolicy = () => {
                                 <p className={`mb-2${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>We may disclose your information when required to:</p>
                                 <ul className={`list-disc pl-6 mb-4 space-y-2${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>
                                     <li>Comply with applicable law, regulation, legal process, or governmental request</li>
-                                    <li>Enforce our legal agreements or protect ReKnew's legal rights</li>
+                                    <li>Enforce our legal agreements or protect ReKnew&apos;s legal rights</li>
                                 </ul>
 
                                 <h3 className={`text-lg font-semibold mb-2${isDarkMode ? " text-gray-300" : " text-gray-800"}`}>c. Business Transfers</h3>
@@ -342,7 +342,7 @@ const PrivacyPolicy = () => {
 
                             <PolicySection id="updates" title="12. Policy Updates">
                                 <p className={`mb-4${isDarkMode ? " text-gray-300" : " text-gray-700"}`}>
-                                    We may revise this Privacy Policy from time to time. The "Last Updated" date will reflect the most recent revision.
+                                    We may revise this Privacy Policy from time to time. The &quot;Last Updated&quot; date will reflect the most recent revision.
                                     Continued use of our Site constitutes your acceptance of the updated Policy.
                                 </p>
                             </PolicySection>

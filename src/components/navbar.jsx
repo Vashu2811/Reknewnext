@@ -13,7 +13,7 @@ import logoWhite from '../../public/assets/reknew-logo-white.png';
 const Navbar = () => {
   const pathname = usePathname();
   const { toggleTheme } = useTheme();
-  const { isDark, mounted, themeStyles, currentTheme } = useThemeStyles();
+  const { isDark, mounted, themeStyles } = useThemeStyles();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [,setOpenSubmenu] = useState(null);
   const [scrolled, setScrolled] = useState(false);
