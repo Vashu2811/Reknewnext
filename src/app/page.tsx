@@ -6,30 +6,46 @@ import FoundersExperience from './pages/FoundersExperience';
 import Consultation from './pages/Consultation';
 
 export const metadata = {
-    title: 'Home | ReKnew',
-    description: 'ReKnew - Empowering your business with innovative solutions. Discover our services, success stories, and expert consultation.',
-    keywords: 'ReKnew, business, services, consultation, success stories, founders, innovation',
+    title: 'ReKnew | Empowering Enterprises through Data and Digital Modernization',
+    description: 'ReKnew helps organizations reduce inefficiencies, automate workflows, and unlock growth opportunities. Transform your business operations with our innovative solutions.',
+    keywords: 'ReKnew, data modernization, digital transformation, workflow automation, business growth, enterprise solutions, AI, automation, innovation',
     openGraph: {
-        title: 'Home | ReKnew',
-        description: 'Empowering your business with innovative solutions. Discover our services, success stories, and expert consultation.',
-        url: 'https://reknew.com/',
-        siteName: 'ReKnew',
+        type: 'website',
+        url: 'https://reknew.ai/',
+        title: 'ReKnew | Empowering Enterprises through Data and Digital Modernization',
+        description: 'ReKnew helps organizations reduce inefficiencies, automate workflows, and unlock growth opportunities. Transform your business operations with our innovative solutions.',
         images: [
             {
-                url: 'https://reknew.com/og-image.jpg',
+                url: 'https://reknew.ai/logo.png',
                 width: 1200,
                 height: 630,
-                alt: 'ReKnew Home Page',
+                alt: 'ReKnew Logo',
             },
         ],
+        siteName: 'ReKnew',
         locale: 'en_US',
-        type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Home | ReKnew',
-        description: 'Empowering your business with innovative solutions. Discover our services, success stories, and expert consultation.',
-        images: ['https://reknew.com/og-image.jpg'],
+        url: 'https://reknew.ai/',
+        title: 'ReKnew | Empowering Enterprises through Data and Digital Modernization',
+        description: 'ReKnew helps organizations reduce inefficiencies, automate workflows, and unlock growth opportunities. Transform your business operations with our innovative solutions.',
+        images: ['https://reknew.ai/logo.png'],
+        site: '@ReKnew',
+        creator: '@ReKnew',
+    },
+    robots: 'index, follow',
+    authors: [{ name: 'ReKnew' }],
+    canonical: 'https://reknew.ai/',
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+        { media: '(prefers-color-scheme: dark)', color: '#111827' },
+    ],
+    mobileWebAppCapable: true,
+    appleMobileWebAppCapable: true,
+    appleMobileWebAppStatusBarStyle: 'default',
+    formatDetection: {
+        telephone: false,
     },
 };
 
@@ -70,4 +86,3 @@ const Home = async () => {
 };
 
 export default Home;
-    
